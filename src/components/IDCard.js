@@ -1,6 +1,9 @@
 import React, { useRef } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 import { toPng } from "html-to-image";
+import "../css/IDcard.css";
+
+
 
 const IDCard = ({ participant }) => {
   const cardRef = useRef();
@@ -18,16 +21,16 @@ const IDCard = ({ participant }) => {
   };
 
   return (
-    <div>
-      <div className="id-card" ref={cardRef}>
-        <h2>Symposium ID Card</h2>
-        <p><strong>Name:</strong> {participant.name}</p>
-        <p><strong>College:</strong> {participant.collegeName}</p>
-        <p><strong>Events:</strong> {participant.event}</p>
-        <p><strong>Food Preference:</strong> {participant.food}</p>
-        <img src={participant.passportPic} alt="Participant" />
-        <QRCodeCanvas value={JSON.stringify(participant)} />
-      </div>
+    <div className="id-card" ref={cardRef}>
+      <img src="/img/VEC.png" alt="Logo" className="logo" />
+      <h2>Velammal Engineering College</h2>
+      <h3>Electrowhiz 2k25 ID Card</h3>
+      <img src={participant.passportPic} alt="Participant" className="participant-photo" />
+      <p><strong>Name:</strong> {participant.name}</p>
+      <p><strong>College:</strong> {participant.collegeName}</p>
+      <p><strong>Food Preference:</strong> {participant.food}</p>
+      <QRCodeCanvas value={JSON.stringify(participant)} size={80} />
+      <br />
       <button onClick={handleDownload}>Download ID Card</button>
     </div>
   );
