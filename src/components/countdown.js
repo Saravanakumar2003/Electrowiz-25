@@ -1,9 +1,10 @@
 import React from "react";
 import Countdown from "react-countdown";
 import "../css/CountdownTimer.css";
+import axios from "axios";
 
 const CountdownTimer = () => {
-  const targetDate = new Date("2025-02-01T00:09:00+05:30")
+  const targetDate = new Date("2025-02-01T00:09:00")
 
   const renderer = ({ days, hours, minutes, seconds }) => {
     return (
