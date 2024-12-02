@@ -109,7 +109,7 @@ const RegistrationPage = () => {
   const sendConfirmationEmail = async (email, name, participant) => {
     try {
       const baseURL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
-      await axios.post(`${baseURL}/api/send-email`, { email, name, participant });
+      await axios.post(`${baseURL}/send-email`, { email, name, participant });
       console.log('Confirmation email sent');
     } catch (error) {
       console.error('Error sending confirmation email:', error);
