@@ -4,12 +4,20 @@
       {
         "src": "api/mail.js",
         "use": "@vercel/node"
+      },
+      {
+        "src": "public/index.html",
+        "use": "@vercel/static-build"
       }
     ],
     "routes": [
       {
         "src": "/send-email",
         "dest": "/api/mail.js"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/index.html"
       }
     ]
   }

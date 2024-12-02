@@ -31,7 +31,7 @@ const CountdownTimer = () => {
 
   return (
     <div className="countdown">
-      <h2>Time Left Until Symposium</h2>
+      <h2>Time Left Until Electrowhiz 2K25</h2>
       <Countdown date={targetDate} renderer={renderer} />
     </div>
   );
