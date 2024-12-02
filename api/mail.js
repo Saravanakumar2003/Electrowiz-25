@@ -1,18 +1,13 @@
-const express = require("express");
-const nodemailer = require("nodemailer");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const QRCode = require("qrcode");
-const puppeteer = require("puppeteer");
-require("dotenv").config();
+const nodemailer = require('nodemailer');
+const QRCode = require('qrcode');
+const puppeteer = require('puppeteer');
+require('dotenv').config();
 
-const app = express();
-const port = process.env.PORT || 5000;
+module.exports = async (req, res) => {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method Not Allowed' });
+  }
 
-app.use(cors());
-app.use(bodyParser.json());
-
-app.post("/send-email", async (req, res) => {
   const { email, name, participant } = req.body;
 
   try {
@@ -23,7 +18,7 @@ app.post("/send-email", async (req, res) => {
     const qrCodeDataUrl = await QRCode.toDataURL(participantString);
 
     // Generate ID card image using Puppeteer
-    const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     const page = await browser.newPage();
     await page.setContent(`
       <html>
@@ -38,78 +33,63 @@ app.post("/send-email", async (req, res) => {
               height: 100vh;
               background: #f0f0f0;
               font-family: Arial, sans-serif;
-  
-              .id-card {
-                width: 300px;
-                padding: 20px;
-                border: 1px solid #ccc;
-                border-radius: 10px;
-                background-color: #f9f9f9;
-                text-align: center;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                margin-top: 20px; /* Add top margin */
-              }
-              
-              .logo {
-                width: 80px;
-                height: auto;
-                margin-bottom:5px;
-              }
-              
-              .id-card h2 {
-                font-size: 18px;
-                margin-bottom: 5px;
-              }
-              
-              .id-card h3 {
-                font-size: 16px;
-                margin-bottom: 10px;
-              }
-              
-              .id-card p {
-                margin: 5px 0;
-              }
-              
-              .id-card ul {
-                list-style-type: none;
-                padding: 0;
-                margin: 5px 0;
-              }
-              
-              .id-card li {
-                margin: 3px 0;
-              }
-              
-              .participant-photo {
-                width: 100px;
-                height: 100px;
-                border-radius: 50%;
-                margin: 5px 0;
-              }
+            }
+            .id-card {
+              width: 500px;
+              height: 300px;
+              padding: 20px;
+              border: 1px solid #ccc;
+              border-radius: 10px;
+              background: linear-gradient(135deg, #e0e0e0 25%, #ffffff 25%, #ffffff 50%, #e0e0e0 50%, #e0e0e0 75%, #ffffff 75%, #ffffff 100%);
+              background-size: 28.28px 28.28px;
+              text-align: center;
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+            }
+            .logo {
+              width: 80px;
+              height: auto;
+              margin-bottom: 10px;
+            }
+            .participant-photo {
+              width: 100px;
+              height: 100px;
+              border-radius: 50%;
+              margin: 10px 0;
+              border: 2px solid #ccc;
+            }
+            .details {
+              text-align: left;
+              margin-top: 10px;
+            }
+            .details p {
+              margin: 5px 0;
+            }
           </style>
         </head>
         <body>
-        <div>
-        <div className="id-card" ref={cardRef}>
-        <h2>Velammal Engineering College</h2>
-        <h3>Electrowhiz 2k25 ID Card</h3>
-        <img src={participant.passportPic} alt="Participant" className="participant-photo" />
-        <p><strong>Name:</strong> {participant.name}</p>
-        <p><strong>College:</strong> {participant.collegeName}</p>
-        <p><strong>Food Preference:</strong> {participant.food}</p>
-        <QRCodeCanvas value={JSON.stringify(participant)} size={150} />
-        <br />
-      </div>
-      <button onClick={handleDownload}>Download ID Card</button>
-    </div>
+          <div class="id-card">
+            <img src="data:image/png;base64,${participant.passportPic}" alt="Participant" class="participant-photo" />
+            <h2>Velammal Engineering College</h2>
+            <h3>Electrowhiz 2k25 ID Card</h3>
+            <div class="details">
+              <p><strong>Name:</strong> ${participant.name}</p>
+              <p><strong>College:</strong> ${participant.collegeName}</p>
+              <p><strong>Food Preference:</strong> ${participant.food}</p>
+            </div>
+            <img src="${qrCodeDataUrl}" alt="QR Code" />
+          </div>
         </body>
       </html>
     `);
-    const idCardDataUrl = await page.screenshot({ encoding: "base64" });
+    const idCardDataUrl = await page.screenshot({ encoding: 'base64' });
     await browser.close();
 
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      service: 'gmail',
       auth: {
         user: process.env.EMAIL,
         pass: process.env.EMAIL_PASSWORD,
@@ -119,30 +99,26 @@ app.post("/send-email", async (req, res) => {
     const mailOptions = {
       from: process.env.EMAIL,
       to: email,
-      subject: "Registration Confirmation - Electrowhiz 2k25",
+      subject: 'Registration Confirmation - Electrowhiz 2k25',
       text: `Dear ${name},\n\nThank you for registering for the symposium. Your registration is successful.\n\nBest regards,\nElectrowhiz 2k25 Team`,
       attachments: [
         {
-          filename: "IDCard.png",
+          filename: 'IDCard.png',
           content: idCardDataUrl,
-          encoding: "base64",
+          encoding: 'base64',
         },
         {
-          filename: "QRCode.png",
-          content: qrCodeDataUrl.split("base64,")[1],
-          encoding: "base64",
+          filename: 'QRCode.png',
+          content: qrCodeDataUrl.split('base64,')[1],
+          encoding: 'base64',
         },
       ],
     };
 
     await transporter.sendMail(mailOptions);
-    res.status(200).send("Confirmation email sent");
+    res.status(200).send('Confirmation email sent');
   } catch (error) {
-    console.error("Error sending confirmation email:", error);
-    res.status(500).send("Error sending confirmation email");
+    console.error('Error sending confirmation email:', error);
+    res.status(500).send('Error sending confirmation email');
   }
-});
-
-app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
-});
+};
