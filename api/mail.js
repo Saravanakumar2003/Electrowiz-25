@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const QRCode = require('qrcode');
-const puppeteer = require('puppeteer');
+const chromium = require('chrome-aws-lambda');
 require('dotenv').config();
 
 module.exports = async (req, res) => {
@@ -18,7 +18,12 @@ module.exports = async (req, res) => {
     const qrCodeDataUrl = await QRCode.toDataURL(participantString);
 
     // Generate ID card image using Puppeteer
-    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+    const browser = await chromium.puppeteer.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath,
+      headless: chromium.headless,
+    });
     const page = await browser.newPage();
     await page.setContent(`
       <html>
@@ -32,27 +37,20 @@ module.exports = async (req, res) => {
               align-items: center;
               height: 100vh;
               background: #f0f0f0;
-              font-family: Arial, sans-serif;
             }
             .id-card {
-              width: 500px;
-              height: 300px;
+              width: 300px;
               padding: 20px;
               border: 1px solid #ccc;
               border-radius: 10px;
-              background: linear-gradient(135deg, #e0e0e0 25%, #ffffff 25%, #ffffff 50%, #e0e0e0 50%, #e0e0e0 75%, #ffffff 75%, #ffffff 100%);
-              background-size: 28.28px 28.28px;
+              background-color: #f9f9f9;
               text-align: center;
               box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
             }
             .logo {
               width: 80px;
               height: auto;
-              margin-bottom: 10px;
+              margin-bottom: 5px;
             }
             .participant-photo {
               width: 100px;

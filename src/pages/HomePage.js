@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <div className="homepage">
       <header>
-        <h1>Welcome to the Symposium</h1>
+        <h1>Welcome to the Electrowhiz 2K25</h1>
       </header>
       <CountdownTimer />
       <div className="links">
