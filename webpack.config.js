@@ -1,12 +1,21 @@
-const path = require('path');
-
 module.exports = {
   resolve: {
     fallback: {
-      "path": require.resolve("path-browserify"),
-      "crypto": require.resolve("crypto-browserify"),
-      "querystring": require.resolve("querystring-es3"),
-      "url": require.resolve("url/")
-    }
-  }
-};
+      "fs": false,
+      "tls": false,
+      "net": false,
+      "path": false,
+      "zlib": false,
+      "http": false,
+      "https": false,
+      "stream": false,
+      "crypto": false,
+      "crypto-browserify": false, //if you want to use this module also don't forget npm i crypto-browserify 
+    } 
+  },
+  // node: {
+  //   fs: 'empty',
+  //   net: 'empty',
+  //   tls: 'empty'
+  // },
+}
