@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Cloudinary } from '@cloudinary/url-gen';
 import { db } from '../utils/firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import axios from 'axios';
@@ -27,12 +26,6 @@ const RegistrationPage = () => {
   const [uploadingSignature, setUploadingSignature] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const navigate = useNavigate();
-
-  const cloudinary = new Cloudinary({
-    cloud: {
-      cloudName: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
-    },
-  });
 
   const handleChange = (e) => {
     const { name, value, type, selectedOptions } = e.target;
