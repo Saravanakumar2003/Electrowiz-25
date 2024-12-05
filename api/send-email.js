@@ -9,6 +9,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Set Puppeteer cache directory (For Vercel, /tmp is used as the filesystem is ephemeral)
+process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer-cache';
+
+// Main POST handler for sending email
 app.post('/send-email', async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method Not Allowed' });
@@ -25,10 +29,12 @@ app.post('/send-email', async (req, res) => {
 
     // Generate ID card image using Puppeteer
     const browser = await puppeteer.launch({
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
       headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'], // Necessary for Vercel
     });
     const page = await browser.newPage();
+
+    // Set HTML content for the ID card
     await page.setContent(`
       <html>
         <head>
@@ -87,9 +93,12 @@ app.post('/send-email', async (req, res) => {
         </body>
       </html>
     `);
+    
+    // Take screenshot of the ID card as a base64 image
     const idCardDataUrl = await page.screenshot({ encoding: 'base64' });
     await browser.close();
 
+    // Create a transporter for Nodemailer
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -98,6 +107,7 @@ app.post('/send-email', async (req, res) => {
       },
     });
 
+    // Setup email options
     const mailOptions = {
       from: process.env.EMAIL,
       to: email,
@@ -117,10 +127,11 @@ app.post('/send-email', async (req, res) => {
       ],
     };
 
+    // Send the email
     await transporter.sendMail(mailOptions);
     res.status(200).send('Confirmation email sent');
   } catch (error) {
-    console.error('Error sending confirmation email:', error);
+    console.error('Error sending confirmation email:', error.message, error.stack);
     res.status(500).send('Error sending confirmation email');
   }
 });
