@@ -24,7 +24,10 @@ app.post('/send-email', async (req, res) => {
     const qrCodeDataUrl = await QRCode.toDataURL(participantString);
 
     // Generate ID card image using Puppeteer
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'], // Necessary for Vercel
+    });
     const page = await browser.newPage();
     await page.setContent(`
       <html>
