@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 const QRCode = require('qrcode');
 const puppeteer = require('puppeteer-core');
-const chromium = require('@sparticuz/chrome-aws-lambda');
+const chromium = require('@sparticuz/chromium');
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
