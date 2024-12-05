@@ -17,10 +17,6 @@
     {
       "src": "/send-email",
       "dest": "/api/mail.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/build/$1"
     }, 
     {
       "src": "/",

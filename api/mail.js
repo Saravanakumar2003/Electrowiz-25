@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const app = express();
 app.use(cors());
-app.use(express.json()); 
+app.use(express.json());
 
 app.post('/send-email', async (req, res) => {
   if (req.method !== 'POST') {
@@ -25,10 +25,12 @@ app.post('/send-email', async (req, res) => {
 
     // Generate ID card image using Puppeteer
     const browser = await chromium.puppeteer.launch({
-      args: chromium.args,
+      args: [...chromium.args, '--hide-scrollbars', '--disable-web-security'],
       defaultViewport: chromium.defaultViewport,
       executablePath: await chromium.executablePath,
       headless: chromium.headless,
+      ignoreHTTPSErrors: true,
+      ignoreDefaultArgs: ['--disable-extensions'],
     });
     const page = await browser.newPage();
     await page.setContent(`
