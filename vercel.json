@@ -18,11 +18,5 @@
       "src": "/send-email",
       "dest": "/api/send-email.js"
     } 
-  ],
-  "functions": {
-    "api/*": {
-      "memory": 1024,
-      "maxDuration": 10
-    }
-  }
+  ]
 }
