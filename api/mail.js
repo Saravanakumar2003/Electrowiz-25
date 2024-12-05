@@ -2,10 +2,12 @@ const nodemailer = require('nodemailer');
 const QRCode = require('qrcode');
 const chromium = require('chrome-aws-lambda');
 const cors = require('cors');
+const express = require('express');
 require('dotenv').config();
 
-const app = require('express')();
+const app = express();
 app.use(cors());
+app.use(express.json()); 
 
 app.post('/send-email', async (req, res) => {
   if (req.method !== 'POST') {
