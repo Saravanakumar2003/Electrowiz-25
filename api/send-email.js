@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 const QRCode = require('qrcode');
 const puppeteer = require('puppeteer-core');
+const chromium = require('@sparticuz/chrome-aws-lambda');
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
@@ -25,14 +26,13 @@ app.post('/send-email', async (req, res) => {
 
     // Generate ID card image using Puppeteer
     const browser = await puppeteer.launch({
-      headless: true,  // Use headless mode
-      executablePath: '/usr/bin/chromium-browser',  // The path to the Chromium executable
+      headless: chromium.headless,
       args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-gpu',  // Disable GPU for better performance in serverless environments
-        '--disable-dev-shm-usage',
+        ...chromium.args,
+        '--disable-dev-shm-usage',  // Fix for serverless environments
+        '--no-sandbox',             // Disable sandboxing in serverless
       ],
+      executablePath: await chromium.executablePath, // Use the executable path from chrome-aws-lambda
     });
 
     const page = await browser.newPage();
