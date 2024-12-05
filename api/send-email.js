@@ -1,7 +1,6 @@
 const nodemailer = require('nodemailer');
 const QRCode = require('qrcode');
 const puppeteer = require('puppeteer-core');
-const chromeLambda = require('chrome-aws-lambda');
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
@@ -26,9 +25,9 @@ app.post('/send-email', async (req, res) => {
 
     // Generate ID card image using Puppeteer
     const browser = await puppeteer.launch({
-      args: chromeLambda.args,
-      executablePath: await chromeLambda.executablePath,
-      headless: chromeLambda.headless,
+      ignoreDefaultArgs: ['--disable-extensions'],  // Remove the --disable-extensions flag
+      headless: true,  // Set headless mode (can be false if you need to see the browser)
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],  // Optional: for additional compatibility on Windows
     });
 
     const page = await browser.newPage();
