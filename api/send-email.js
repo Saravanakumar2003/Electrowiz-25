@@ -1,18 +1,20 @@
 const nodemailer = require('nodemailer');
 const QRCode = require('qrcode');
-const puppeteer = require('puppeteer');
-const cors = require('cors');
+const puppeteer = require('puppeteer-core');
 const express = require('express');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Set Puppeteer cache directory (For Vercel, /tmp is used as the filesystem is ephemeral)
-process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer-cache';
+// Set Puppeteer cache directory (Vercel environment variable)
+process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer-cache'; // Vercel temporary directory
 
-// Main POST handler for sending email
+// Use the correct executable path for Puppeteer in serverless environment
+const executablePath = process.env.CHROME_EXECUTABLE_PATH || '/opt/render/project/.vercel/chrome-linux/chrome'; // Adjust path for Vercel
+
 app.post('/send-email', async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method Not Allowed' });
@@ -30,11 +32,11 @@ app.post('/send-email', async (req, res) => {
     // Generate ID card image using Puppeteer
     const browser = await puppeteer.launch({
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      headless: true,
+      executablePath: executablePath,
+      headless: true, // Headless mode required for serverless
     });
-    const page = await browser.newPage();
 
-    // Set HTML content for the ID card
+    const page = await browser.newPage();
     await page.setContent(`
       <html>
         <head>
@@ -93,12 +95,10 @@ app.post('/send-email', async (req, res) => {
         </body>
       </html>
     `);
-    
-    // Take screenshot of the ID card as a base64 image
+
     const idCardDataUrl = await page.screenshot({ encoding: 'base64' });
     await browser.close();
 
-    // Create a transporter for Nodemailer
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -107,7 +107,6 @@ app.post('/send-email', async (req, res) => {
       },
     });
 
-    // Setup email options
     const mailOptions = {
       from: process.env.EMAIL,
       to: email,
@@ -127,11 +126,10 @@ app.post('/send-email', async (req, res) => {
       ],
     };
 
-    // Send the email
     await transporter.sendMail(mailOptions);
     res.status(200).send('Confirmation email sent');
   } catch (error) {
-    console.error('Error sending confirmation email:', error.message, error.stack);
+    console.error('Error sending confirmation email:', error);
     res.status(500).send('Error sending confirmation email');
   }
 });
