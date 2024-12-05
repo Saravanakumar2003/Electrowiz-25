@@ -21,7 +21,12 @@
     {
       "src": "/",
       "dest": "/build/index.html"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
     }
+    
   ],
   "build": {
     "env": {
