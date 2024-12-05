@@ -18,10 +18,5 @@
       "src": "/send-email",
       "dest": "/api/send-email.js"
     } 
-  ],
-  "build": {
-    "env": {
-      "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD": "true"
-    }
-  }
+  ]
 }
