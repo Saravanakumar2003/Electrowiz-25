@@ -1,9 +1,13 @@
 const nodemailer = require('nodemailer');
 const QRCode = require('qrcode');
 const chromium = require('chrome-aws-lambda');
+const cors = require('cors');
 require('dotenv').config();
 
-module.exports = async (req, res) => {
+const app = require('express')();
+app.use(cors());
+
+app.post('/send-email', async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method Not Allowed' });
   }
@@ -119,4 +123,6 @@ module.exports = async (req, res) => {
     console.error('Error sending confirmation email:', error);
     res.status(500).send('Error sending confirmation email');
   }
-};
+});
+
+module.exports = app;

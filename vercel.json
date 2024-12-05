@@ -1,29 +1,35 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "api/mail.js",
-        "use": "@vercel/node"
-      },
-      {
-        "src": "package.json",
-        "use": "@vercel/static-build",
-        "config": {
-          "distDir": "build"
-        }
-      }
-    ],
-    "routes": [
-      {
-        "src": "/send-email",
-        "dest": "/api/mail.js"
-      }
-    ],
-    "build": {
-      "env": {
-        "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD": "true",
-        "PUPPETEER_EXECUTABLE_PATH": "/usr/bin/chromium-browser"
-
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/mail.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
       }
     }
+  ],
+  "routes": [
+    {
+      "src": "/send-email",
+      "dest": "/api/mail.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/build/$1"
+    }, 
+    {
+      "src": "/",
+      "dest": "/build/index.html"
+    }
+  ],
+  "build": {
+    "env": {
+      "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD": "true"
+    }
   }
+}
