@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 const QRCode = require('qrcode');
 const puppeteer = require('puppeteer-core');
+const chromeLambda = require('chrome-aws-lambda');
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
@@ -8,12 +9,6 @@ require('dotenv').config();
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-// Set Puppeteer cache directory (Vercel environment variable)
-process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer-cache'; // Vercel temporary directory
-
-// Use the correct executable path for Puppeteer in serverless environment
-const executablePath = process.env.CHROME_EXECUTABLE_PATH || '/opt/render/project/.vercel/chrome-linux/chrome'; // Adjust path for Vercel
 
 app.post('/send-email', async (req, res) => {
   if (req.method !== 'POST') {
@@ -31,9 +26,9 @@ app.post('/send-email', async (req, res) => {
 
     // Generate ID card image using Puppeteer
     const browser = await puppeteer.launch({
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      executablePath: executablePath,
-      headless: true, // Headless mode required for serverless
+      args: chromeLambda.args,
+      executablePath: await chromeLambda.executablePath,
+      headless: chromeLambda.headless,
     });
 
     const page = await browser.newPage();
