@@ -25,9 +25,14 @@ app.post('/send-email', async (req, res) => {
 
     // Generate ID card image using Puppeteer
     const browser = await puppeteer.launch({
-      ignoreDefaultArgs: ['--disable-extensions'],  // Remove the --disable-extensions flag
-      headless: true,  // Set headless mode (can be false if you need to see the browser)
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],  // Optional: for additional compatibility on Windows
+      headless: true,  // Use headless mode
+      executablePath: '/usr/bin/chromium-browser',  // The path to the Chromium executable
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-gpu',  // Disable GPU for better performance in serverless environments
+        '--disable-dev-shm-usage',
+      ],
     });
 
     const page = await browser.newPage();
