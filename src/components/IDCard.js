@@ -3,7 +3,7 @@ import { QRCodeCanvas } from "qrcode.react";
 import html2canvas from "html2canvas";
 import "../css/IDcard.css";
 
-const IDCard = ({ participant, qrCodeURL }) => {
+const IDCard = ({ participant }) => {
   const cardRef = useRef();
 
   const handleDownload = async () => {
@@ -33,7 +33,7 @@ const IDCard = ({ participant, qrCodeURL }) => {
         <p><strong>Name:</strong> {participant.name}</p>
         <p><strong>College:</strong> {participant.collegeName}</p>
         <p><strong>Food Preference:</strong> {participant.food}</p>
-        <QRCodeCanvas value={qrCodeURL} size={150} />
+        <QRCodeCanvas value={JSON.stringify(participant)} size={150} />
         <br />
       </div>
       <button onClick={handleDownload}>Download ID Card</button>

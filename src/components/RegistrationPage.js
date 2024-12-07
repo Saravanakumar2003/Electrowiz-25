@@ -4,7 +4,6 @@ import { db } from '../utils/firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import axios from 'axios';
 import QRCode from 'qrcode';
-import SibApiV3Sdk from '@sendinblue/client';
 import '../css/RegistrationPage.css';
 
 const RegistrationPage = () => {
@@ -106,64 +105,87 @@ const RegistrationPage = () => {
     return qrCodeURL;
   };
 
-  const sendConfirmationEmail = async (email, name, participant) => {
+  const dataURLtoFile = (dataurl, filename) => {
+    const arr = dataurl.split(',');
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+  };
+
+  const sendConfirmationEmail = async (email, name, formData) => {
     try {
-      // Generate the QR code URL
-      const qrCodeURL = await generateQRCodeURL(participant);
-
-      // Convert the QR code URL to a base64 string
-      const qrCodeResponse = await axios.get(qrCodeURL, { responseType: 'blob' });
-      const reader = new FileReader();
-      reader.readAsDataURL(qrCodeResponse.data);
-      const qrCodeBase64 = await new Promise((resolve, reject) => {
-        reader.onloadend = () => {
-          resolve(reader.result.split(',')[1]); // Remove the prefix (data:image/png;base64,)
-        };
-        reader.onerror = reject;
-      });
-
-      // Configure Sendinblue API client
-      const defaultClient = new SibApiV3Sdk.ApiClient();
-      defaultClient.authentications['api-key'].apiKey = process.env.REACT_APP_BREVO_API_KEY;
-
-      const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-      const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
-
-      sendSmtpEmail.to = [{ email, name }];
-      sendSmtpEmail.subject = 'Symposium Registration Confirmation - ElectroWhiz2K25';
-      sendSmtpEmail.htmlContent = `
-        <h1>Dear ${name},</h1>
-        <p>Thank you for registering for the symposium! Your participation details:</p>
-        <ul>
-          <li>Name: ${name}</li>
-          <li>Event(s): ${participant.events.join(', ')}</li>
-          <li>Food Preference: ${participant.food}</li>
-          <li>College: ${participant.collegeName}</li>
-        </ul>
-        <strong>Kindly, read the following instructions:</strong>
-        <p>1. Make sure to carry your ID card and this email to the event.</p>
-        <p>2. The event will start at 9:00 AM on 15th October 2025.</p>
-        <p>3. The venue is Velammal Engineering College, Chennai.</p>
-        <p>4. If you have any questions, please contact us at 
-          <a href="mailto:electrowhiz2k25@gmail.com"></a>
-        </p>
-        <p>We look forward to seeing you at the event!</p>
-        <p>Best regards,<br>ElectroWhiz2K25 Team</p>
-
-        <p></p><strong>Note:</strong> If you lose this email, you cannot participate in the event. Please keep this email safe.</p>
-      `;
-      sendSmtpEmail.attachment = [
-        {
-          content: qrCodeBase64,
-          name: 'QR_Code.png',
-          type: 'image/png',
-        }
-      ];
-
-      await apiInstance.sendTransacEmail(sendSmtpEmail);
-      console.log('Confirmation email sent');
+      const qrCodeURL = await generateQRCodeURL(formData);
+      const qrCodeFile = dataURLtoFile(qrCodeURL, 'qrcode.png');
+      const qrCodeBase64 = qrCodeURL.split(',')[1]; // Extract base64 content
+  
+      const data = {
+        sender: {
+          name: "Electrowhiz2K25 Team",
+          email: "saravanakumar.testmail@gmail.com"
+        },
+        to: [
+          {
+            email: email,
+            name: name
+          }
+        ],
+        subject: "Registration Confirmation - ElectoWhiz2K25",
+        htmlContent: `
+          <h1>Registration Confirmation</h1>
+          <p>Dear ${name},</p>
+          <p>Thank you for registering for the symposium. Here are your details:</p>
+          <ul>
+            <li>Name: ${formData.name}</li>
+            <li>Email: ${formData.email}</li>
+            <li>Phone: ${formData.phone}</li>
+            <li>Gender: ${formData.gender}</li>
+            <li>Food Preference: ${formData.food}</li>
+            <li>College Name: ${formData.collegeName}</li>
+            <li>Degree: ${formData.degree}</li>
+            <li>Department: ${formData.department}</li>
+            <li>Year of Study: ${formData.yearOfStudy}</li>
+            <li>Events: ${formData.events.join(', ')}</li>
+          </ul>
+          <br>
+          <strong>Kindly, read the following instructions:</strong>
+          <p>1. Make sure to carry your ID card and this email to the event.</p>
+          <p>2. The event will start at 9:00 AM on 15th October 2025.</p>
+          <p>3. The venue is Velammal Engineering College, Chennai.</p>
+          <br>
+          <p>We look forward to seeing you at the event!</p>
+          <br>
+          <p>Best regards,</p>
+          <p>ElectroWhiz2K25 Team</p>
+          <br>
+          <p><strong>Note:</strong> If you lose this email, you cannot participate in the event. Please keep this email safe.</p><p>Attached is your QR Code for the event.</p>
+        `,
+        attachment: [
+          {
+            content: qrCodeBase64,
+            name: 'qrcode.png',
+            type: 'image/png'
+          }
+        ]
+      };
+  
+      const headers = {
+        'accept': 'application/json',
+        'api-key': process.env.REACT_APP_BREVO_API_KEY,
+        'content-type': 'application/json'
+      };
+  
+      const response = await axios.post('https://api.brevo.com/v3/smtp/email', data, { headers });
+      console.log('Confirmation email sent successfully:', response.data);
     } catch (error) {
       console.error('Error sending confirmation email:', error);
+      if (error.response) {
+        console.error('Error response data:', error.response.data);
+      }
     }
   };
 
