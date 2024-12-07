@@ -12,7 +12,7 @@ app.use(express.json());
 // Set Puppeteer cache directory
 process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer-cache';
 
-app.post('/send-email', async (req, res) => {
+app.post('api/send-email', async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method Not Allowed' });
   }
