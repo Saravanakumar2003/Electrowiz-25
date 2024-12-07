@@ -4,6 +4,7 @@ import { db } from '../utils/firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import axios from 'axios';
 import QRCode from 'qrcode';
+import SibApiV3Sdk from 'sib-api-v3-sdk';
 import '../css/RegistrationPage.css';
 
 const RegistrationPage = () => {
@@ -121,45 +122,45 @@ const RegistrationPage = () => {
         reader.onerror = reject;
       });
 
-      const response = await axios.post('https://api.brevo.com/v3/emailCampaigns', {
-        sender: { name: 'ElectroWhiz2K25 Team', email: 'saravanakumar.testmail@gmail.com' },
-        subject: 'Symposium Registration Confirmation - ElectroWhiz2K25',
-        htmlContent: `
-          <h1>Dear ${name},</h1>
-          <p>Thank you for registering for the symposium! Your participation details:</p>
-          <ul>
-            <li>Name: ${name}</li>
-            <li>Event(s): ${participant.events.join(', ')}</li>
-            <li>Food Preference: ${participant.food}</li>
-            <li>College: ${participant.collegeName}</li>
-          </ul>
-          <strong>Kindly, read the following instructions:</strong>
-          <p>1. Make sure to carry your ID card and this email to the event.</p>
-          <p>2. The event will start at 9:00 AM on 15th October 2025.</p>
-          <p>3. The venue is Velammal Engineering College, Chennai.</p>
-          <p>4. If you have any questions, please contact us at 
-            <a href="mailto:electrowhiz2k25@gmail.com"></a>
-          </p>
-          <p>We look forward to seeing you at the event!</p>
-          <p>Best regards,<br>ElectroWhiz2K25 Team</p>
+      // Configure Brevo API client
+      const defaultClient = SibApiV3Sdk.ApiClient.instance;
+      const apiKey = defaultClient.authentications['api-key'];
+      apiKey.apiKey = process.env.REACT_APP_BREVO_API_KEY;
 
-          <p></p><strong>Note:</strong> If you lose this email, you cannot participate in the event. Please keep this email safe.</p>
-        `,
-        attachments: [
-          {
-            content: qrCodeBase64,
-            name: 'QR_Code.png',  // The name of the file
-            type: 'image/png',    // The type of the file
-          }
-        ]
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-          'api-key': process.env.REACT_APP_BREVO_API_KEY  // Your Brevo API key
+      const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+      const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
+
+      sendSmtpEmail.to = [{ email, name }];
+      sendSmtpEmail.subject = 'Symposium Registration Confirmation - ElectroWhiz2K25';
+      sendSmtpEmail.htmlContent = `
+        <h1>Dear ${name},</h1>
+        <p>Thank you for registering for the symposium! Your participation details:</p>
+        <ul>
+          <li>Name: ${name}</li>
+          <li>Event(s): ${participant.events.join(', ')}</li>
+          <li>Food Preference: ${participant.food}</li>
+          <li>College: ${participant.collegeName}</li>
+        </ul>
+        <strong>Kindly, read the following instructions:</strong>
+        <p>1. Make sure to carry your ID card and this email to the event.</p>
+        <p>2. The event will start at 9:00 AM on 15th October 2025.</p>
+        <p>3. The venue is Velammal Engineering College, Chennai.</p>
+        <br>
+        <p>We look forward to seeing you at the event!</p>
+        <p>Best regards,<br>ElectroWhiz2K25 Team</p>
+
+        <p></p><strong>Note:</strong> If you lose this email, you cannot participate in the event. Please keep this email safe.</p>
+      `;
+      sendSmtpEmail.attachment = [
+        {
+          content: qrCodeBase64,
+          name: 'QR_Code.png',
+          type: 'image/png',
         }
-      });
+      ];
 
-      console.log('Confirmation email sent:', response.data);
+      await apiInstance.sendTransacEmail(sendSmtpEmail);
+      console.log('Confirmation email sent');
     } catch (error) {
       console.error('Error sending confirmation email:', error);
     }
