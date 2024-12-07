@@ -1,7 +1,6 @@
 const nodemailer = require('nodemailer');
 const QRCode = require('qrcode');
-const puppeteer = require('puppeteer-core');
-const chromium = require('@sparticuz/chromium');
+const puppeteer = require('puppeteer');
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
@@ -9,6 +8,9 @@ require('dotenv').config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// Set Puppeteer cache directory
+process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer-cache';
 
 app.post('/send-email', async (req, res) => {
   if (req.method !== 'POST') {
@@ -26,15 +28,9 @@ app.post('/send-email', async (req, res) => {
 
     // Generate ID card image using Puppeteer
     const browser = await puppeteer.launch({
-      headless: chromium.headless,
-      args: [
-        ...chromium.args,
-        '--disable-dev-shm-usage',  // Fix for serverless environments
-        '--no-sandbox',             // Disable sandboxing in serverless
-      ],
-      executablePath: await chromium.executablePath, // Use the executable path from chrome-aws-lambda
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'], // Necessary for Vercel
     });
-
     const page = await browser.newPage();
     await page.setContent(`
       <html>
@@ -94,7 +90,6 @@ app.post('/send-email', async (req, res) => {
         </body>
       </html>
     `);
-
     const idCardDataUrl = await page.screenshot({ encoding: 'base64' });
     await browser.close();
 
