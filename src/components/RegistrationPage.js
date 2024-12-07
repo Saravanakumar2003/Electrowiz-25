@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { db } from '../utils/firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import axios from 'axios';
+import QRCode from 'qrcode';
 import '../css/RegistrationPage.css';
 
 const RegistrationPage = () => {
@@ -99,25 +100,29 @@ const RegistrationPage = () => {
     }
   };
 
-  const sendConfirmationEmail = async (email, name, participant, qrCodeUrl) => {
+  const generateQRCodeURL = async (participant) => {
+    const qrCodeURL = await QRCode.toDataURL(JSON.stringify(participant));
+    return qrCodeURL;
+  };
+
+  const sendConfirmationEmail = async (email, name, participant) => {
     try {
-      // Fetch the QR code image as a Blob
-      const qrCodeResponse = await axios.get(qrCodeUrl, { responseType: 'blob' });
-  
-      // Convert the Blob to a base64 string using FileReader
+      // Generate the QR code URL
+      const qrCodeURL = await generateQRCodeURL(participant);
+
+      // Convert the QR code URL to a base64 string
+      const qrCodeResponse = await axios.get(qrCodeURL, { responseType: 'blob' });
       const reader = new FileReader();
       reader.readAsDataURL(qrCodeResponse.data);
-  
-      // Promise to resolve when the reader finishes
       const qrCodeBase64 = await new Promise((resolve, reject) => {
         reader.onloadend = () => {
           resolve(reader.result.split(',')[1]); // Remove the prefix (data:image/png;base64,)
         };
         reader.onerror = reject;
-      });  
-  
+      });
+
       const response = await axios.post('https://api.brevo.com/v3/smtp/email', {
-        sender: { email: 'saravanakumar.testmail@gmail.com' }, 
+        sender: { email: 'saravanakumar.testmail@gmail.com' },
         subject: 'Symposium Registration Confirmation - ElectroWhiz2K25',
         htmlContent: `
           <h1>Dear ${name},</h1>
@@ -153,7 +158,7 @@ const RegistrationPage = () => {
           'api-key': process.env.REACT_APP_BREVO_API_KEY  // Your Brevo API key
         }
       });
-  
+
       console.log('Confirmation email sent:', response.data);
     } catch (error) {
       console.error('Error sending confirmation email:', error);
@@ -162,26 +167,26 @@ const RegistrationPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     try {
       const docRef = await addDoc(collection(db, "registrations"), formData);
       console.log('Form data submitted:', formData);
       alert('Registration successful!');
       navigate(`/id-card/${docRef.id}`);
-  
+
       // Get a new access token
       const accessToken = await getAccessToken();
-  
+
       // Send data to Google Sheets
       const spreadsheetId = process.env.REACT_APP_SHEET;
       const range = 'Registrations!A2';
       const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=RAW`;
-  
+
       const headers = {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`
       };
-  
+
       const values = [
         [
           formData.name,
@@ -199,10 +204,10 @@ const RegistrationPage = () => {
           formData.paymentReceipt,
         ],
       ];
-  
+
       await axios.post(url, { values }, { headers });
       console.log('Data added to Google Sheets');
-  
+
       // Send confirmation email
       await sendConfirmationEmail(formData.email, formData.name, formData);
     } catch (error) {
