@@ -101,8 +101,20 @@ const RegistrationPage = () => {
 
   const sendConfirmationEmail = async (email, name, participant, qrCodeUrl) => {
     try {
-      const qrCodeResponse = await axios.get(qrCodeUrl, { responseType: 'arraybuffer' });
-      const qrCodeBase64 = Buffer.from(qrCodeResponse.data, 'binary').toString('base64');
+      // Fetch the QR code image as a Blob
+      const qrCodeResponse = await axios.get(qrCodeUrl, { responseType: 'blob' });
+  
+      // Convert the Blob to a base64 string using FileReader
+      const reader = new FileReader();
+      reader.readAsDataURL(qrCodeResponse.data);
+  
+      // Promise to resolve when the reader finishes
+      const qrCodeBase64 = await new Promise((resolve, reject) => {
+        reader.onloadend = () => {
+          resolve(reader.result.split(',')[1]); // Remove the prefix (data:image/png;base64,)
+        };
+        reader.onerror = reject;
+      });  
   
       const response = await axios.post('https://api.brevo.com/v3/smtp/email', {
         sender: { email: 'saravanakumar.testmail@gmail.com' }, 
