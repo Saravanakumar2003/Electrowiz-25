@@ -1,18 +1,9 @@
 const nodemailer = require('nodemailer');
 const QRCode = require('qrcode');
 const puppeteer = require('puppeteer');
-const express = require('express');
-const cors = require('cors');
 require('dotenv').config();
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-// Set Puppeteer cache directory
-process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer-cache';
-
-app.post('api/send-email', async (req, res) => {
+module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method Not Allowed' });
   }
@@ -54,11 +45,6 @@ app.post('api/send-email', async (req, res) => {
               text-align: center;
               box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
-            .logo {
-              width: 80px;
-              height: auto;
-              margin-bottom: 5px;
-            }
             .participant-photo {
               width: 100px;
               height: 100px;
@@ -93,6 +79,7 @@ app.post('api/send-email', async (req, res) => {
     const idCardDataUrl = await page.screenshot({ encoding: 'base64' });
     await browser.close();
 
+    // Configure Nodemailer
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -101,6 +88,7 @@ app.post('api/send-email', async (req, res) => {
       },
     });
 
+    // Prepare email with attachments
     const mailOptions = {
       from: process.env.EMAIL,
       to: email,
@@ -120,12 +108,11 @@ app.post('api/send-email', async (req, res) => {
       ],
     };
 
+    // Send email
     await transporter.sendMail(mailOptions);
     res.status(200).send('Confirmation email sent');
   } catch (error) {
     console.error('Error sending confirmation email:', error);
     res.status(500).send('Error sending confirmation email');
   }
-});
-
-module.exports = app;
+};

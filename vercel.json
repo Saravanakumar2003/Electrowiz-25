@@ -1,15 +1,3 @@
 {
-  "version": 2,
-  "functions": {
-    "api/send-email.js": {
-      "memory": 1024,
-      "maxDuration": 10
-    }
-  },
-  "routes": [
-    {
-      "src": "/api/send-email",
-      "dest": "/api/send-email.js"
-    }
-  ]
+  "version": 2
 }
