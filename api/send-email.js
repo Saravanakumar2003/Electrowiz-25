@@ -1,7 +1,12 @@
-const nodemailer = require('nodemailer');
+const brevo = require('@sendinblue/client');
 const QRCode = require('qrcode');
-const puppeteer = require('puppeteer');
-require('dotenv').config();
+
+// Brevo API client setup
+const apiKey = process.env.BREVO_API_KEY; // API key stored in environment variable
+const client = brevo.ApiClient.instance;
+client.authentications['api-key'].apiKey = apiKey;
+
+const transactionalEmailsApi = new brevo.TransactionalEmailsApi();
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
@@ -17,13 +22,8 @@ module.exports = async (req, res) => {
     // Generate QR code
     const qrCodeDataUrl = await QRCode.toDataURL(participantString);
 
-    // Generate ID card image using Puppeteer
-    const browser = await puppeteer.launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'], // Necessary for Vercel
-    });
-    const page = await browser.newPage();
-    await page.setContent(`
+    // Prepare the HTML content for the email
+    const htmlContent = ` 
       <html>
         <head>
           <style>
@@ -75,41 +75,32 @@ module.exports = async (req, res) => {
           </div>
         </body>
       </html>
-    `);
-    const idCardDataUrl = await page.screenshot({ encoding: 'base64' });
-    await browser.close();
+    `;
 
-    // Configure Nodemailer
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL,
-        pass: process.env.EMAIL_PASSWORD,
+    // Send email with Brevo
+    const sendSmtpEmail = new brevo.SendSmtpEmail();
+    sendSmtpEmail.subject = 'Registration Confirmation - Electrowhiz 2k25';
+    sendSmtpEmail.htmlContent = htmlContent;
+    sendSmtpEmail.sender = { email: 'saravanakumar.testmail@gmail.com', name: 'Electrowhiz2K25 Team' };
+    sendSmtpEmail.to = [{ email }];
+    
+    // Attachments: ID Card and QR Code images
+    sendSmtpEmail.attachment = [
+      {
+        name: 'IDCard.png',
+        content: qrCodeDataUrl.split('base64,')[1], // Base64-encoded image content for ID Card
+        contentType: 'image/png',
       },
-    });
+      {
+        name: 'QRCode.png',
+        content: qrCodeDataUrl.split('base64,')[1], // Base64-encoded QR Code image content
+        contentType: 'image/png',
+      },
+    ];
 
-    // Prepare email with attachments
-    const mailOptions = {
-      from: process.env.EMAIL,
-      to: email,
-      subject: 'Registration Confirmation - Electrowhiz 2k25',
-      text: `Dear ${name},\n\nThank you for registering for the symposium. Your registration is successful.\n\nBest regards,\nElectrowhiz 2k25 Team`,
-      attachments: [
-        {
-          filename: 'IDCard.png',
-          content: idCardDataUrl,
-          encoding: 'base64',
-        },
-        {
-          filename: 'QRCode.png',
-          content: qrCodeDataUrl.split('base64,')[1],
-          encoding: 'base64',
-        },
-      ],
-    };
-
-    // Send email
-    await transporter.sendMail(mailOptions);
+    // Send the email via Brevo
+    const result = await transactionalEmailsApi.sendTransacEmail(sendSmtpEmail);
+    console.log('Email sent successfully:', result);
     res.status(200).send('Confirmation email sent');
   } catch (error) {
     console.error('Error sending confirmation email:', error);
