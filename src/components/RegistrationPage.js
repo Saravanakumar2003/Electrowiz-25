@@ -99,16 +99,55 @@ const RegistrationPage = () => {
     }
   };
 
-  const sendConfirmationEmail = async (email, name, participant) => {
+  const sendConfirmationEmail = async (email, name, participant, qrCodeUrl) => {
     try {
-      const baseURL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
-      await axios.post(`${baseURL}/send-email`, { email, name, participant });
-      console.log('Confirmation email sent');
+      const qrCodeResponse = await axios.get(qrCodeUrl, { responseType: 'arraybuffer' });
+      const qrCodeBase64 = Buffer.from(qrCodeResponse.data, 'binary').toString('base64');
+  
+      const response = await axios.post('https://api.brevo.com/v3/smtp/email', {
+        sender: { email: 'saravanakumar.testmail@gmail.com' }, 
+        subject: 'Symposium Registration Confirmation - ElectroWhiz2K25',
+        htmlContent: `
+          <h1>Dear ${name},</h1>
+          <p>Thank you for registering for the symposium! Your participation details:</p>
+          <ul>
+            <li>Name: ${name}</li>
+            <li>Event(s): ${participant.events.join(', ')}</li>
+            <li>Food Preference: ${participant.food}</li>
+            <li>College: ${participant.collegeName}</li>
+          </ul>
+          <strong>Kindly, read the following instructions:</strong>
+          <p>1. Make sure to carry your ID card and this email to the event.</p>
+          <p>2. The event will start at 9:00 AM on 15th October 2025.</p>
+          <p>3. The venue is Velammal Engineering College, Chennai.</p>
+          <p>4. If you have any questions, please contact us at 
+            <a href="mailto:electrowhiz2k25@gmail.com"></a>
+          </p>
+          <p>We look forward to seeing you at the event!</p>
+          <p>Best regards,<br>ElectroWhiz2K25 Team</p>
+
+          <p></p><strong>Note:</strong> If you lose this email, you cannot participate in the event. Please keep this email safe.</p>
+        `,
+        attachments: [
+          {
+            content: qrCodeBase64,
+            name: 'QR_Code.png',  // The name of the file
+            type: 'image/png',    // The type of the file
+          }
+        ]
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'api-key': process.env.REACT_APP_BREVO_API_KEY  // Your Brevo API key
+        }
+      });
+  
+      console.log('Confirmation email sent:', response.data);
     } catch (error) {
       console.error('Error sending confirmation email:', error);
     }
   };
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
   
