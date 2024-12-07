@@ -4,7 +4,7 @@ import { db } from '../utils/firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import axios from 'axios';
 import QRCode from 'qrcode';
-import SibApiV3Sdk from 'sib-api-v3-sdk';
+import SibApiV3Sdk from '@sendinblue/client';
 import '../css/RegistrationPage.css';
 
 const RegistrationPage = () => {
@@ -122,10 +122,9 @@ const RegistrationPage = () => {
         reader.onerror = reject;
       });
 
-      // Configure Brevo API client
-      const defaultClient = SibApiV3Sdk.ApiClient.instance;
-      const apiKey = defaultClient.authentications['api-key'];
-      apiKey.apiKey = process.env.REACT_APP_BREVO_API_KEY;
+      // Configure Sendinblue API client
+      const defaultClient = new SibApiV3Sdk.ApiClient();
+      defaultClient.authentications['api-key'].apiKey = process.env.REACT_APP_BREVO_API_KEY;
 
       const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
       const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
@@ -145,7 +144,9 @@ const RegistrationPage = () => {
         <p>1. Make sure to carry your ID card and this email to the event.</p>
         <p>2. The event will start at 9:00 AM on 15th October 2025.</p>
         <p>3. The venue is Velammal Engineering College, Chennai.</p>
-        <br>
+        <p>4. If you have any questions, please contact us at 
+          <a href="mailto:electrowhiz2k25@gmail.com"></a>
+        </p>
         <p>We look forward to seeing you at the event!</p>
         <p>Best regards,<br>ElectroWhiz2K25 Team</p>
 
