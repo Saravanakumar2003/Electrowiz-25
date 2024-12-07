@@ -121,8 +121,8 @@ const RegistrationPage = () => {
         reader.onerror = reject;
       });
 
-      const response = await axios.post('https://api.brevo.com/v3/smtp/email', {
-        sender: { email: 'saravanakumar.testmail@gmail.com' },
+      const response = await axios.post('https://api.brevo.com/v3/emailCampaigns', {
+        sender: { name: 'ElectroWhiz2K25 Team', email: 'saravanakumar.testmail@gmail.com' },
         subject: 'Symposium Registration Confirmation - ElectroWhiz2K25',
         htmlContent: `
           <h1>Dear ${name},</h1>
