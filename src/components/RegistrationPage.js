@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../utils/firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import axios from 'axios';
 import QRCode from 'qrcode';
+import $ from 'jquery';
 import '../css/RegistrationPage.css';
+import 'jquery.easing';
+
 
 const RegistrationPage = () => {
   const [formData, setFormData] = useState({
@@ -27,6 +30,87 @@ const RegistrationPage = () => {
   const [uploadingSignature, setUploadingSignature] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    $(document).ready(function() {
+      var current_fs, next_fs, previous_fs; //fieldsets
+      var left, opacity, scale; //fieldset properties which we will animate
+      var animating; //flag to prevent quick multi-click glitches
+
+      $(".next").click(function () {
+        if (animating) return false;
+        animating = true;
+
+        current_fs = $(this).parent();
+        next_fs = $(this).parent().next();
+
+        //activate next step on progressbar using the index of next_fs
+        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+        //show the next fieldset
+        next_fs.show();
+        //hide the current fieldset with style
+        current_fs.animate({ opacity: 0 }, {
+          step: function (now, mx) {
+            //as the opacity of current_fs reduces to 0 - stored in "now"
+            //1. scale current_fs down to 80%
+            scale = 1 - (1 - now) * 0.2;
+            //2. bring next_fs from the right(50%)
+            left = (now * 50) + "%";
+            //3. increase opacity of next_fs to 1 as it moves in
+            opacity = 1 - now;
+            current_fs.css({
+              'transform': 'scale(' + scale + ')',
+              'position': 'absolute'
+            });
+            next_fs.css({ 'left': left, 'opacity': opacity });
+          },
+          duration: 800,
+          complete: function () {
+            current_fs.hide();
+            animating = false;
+          },
+          //this comes from the custom easing plugin
+          easing: 'easeInOutBack'
+        });
+      });
+
+      $(".previous").click(function () {
+        if (animating) return false;
+        animating = true;
+
+        current_fs = $(this).parent();
+        previous_fs = $(this).parent().prev();
+
+        //de-activate current step on progressbar
+        $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+        //show the previous fieldset
+        previous_fs.show();
+        //hide the current fieldset with style
+        current_fs.animate({ opacity: 0 }, {
+          step: function (now, mx) {
+            //as the opacity of current_fs reduces to 0 - stored in "now"
+            //1. scale previous_fs from 80% to 100%
+            scale = 0.8 + (1 - now) * 0.2;
+            //2. take current_fs to the right(50%) - from 0%
+            left = ((1 - now) * 50) + "%";
+            //3. increase opacity of previous_fs to 1 as it moves in
+            opacity = 1 - now;
+            current_fs.css({ 'left': left });
+            previous_fs.css({ 'transform': 'scale(' + scale + ')', 'opacity': opacity });
+          },
+          duration: 800,
+          complete: function () {
+            current_fs.hide();
+            animating = false;
+          },
+          //this comes from the custom easing plugin
+          easing: 'easeInOutBack'
+        });
+      });
+    });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, selectedOptions } = e.target;
@@ -122,7 +206,7 @@ const RegistrationPage = () => {
       const qrCodeURL = await generateQRCodeURL(formData);
       const qrCodeFile = dataURLtoFile(qrCodeURL, 'qrcode.png');
       const qrCodeBase64 = qrCodeURL.split(',')[1]; // Extract base64 content
-  
+
       const data = {
         sender: {
           name: "Electrowhiz2K25 Team",
@@ -172,13 +256,13 @@ const RegistrationPage = () => {
           }
         ]
       };
-  
+
       const headers = {
         'accept': 'application/json',
         'api-key': process.env.REACT_APP_BREVO_API_KEY,
         'content-type': 'application/json'
       };
-  
+
       const response = await axios.post('https://api.brevo.com/v3/smtp/email', data, { headers });
       console.log('Confirmation email sent successfully:', response.data);
     } catch (error) {
@@ -255,116 +339,101 @@ const RegistrationPage = () => {
 
   return (
     <div className="registration-form">
-      <h1>Symposium Registration</h1>
-      <form onSubmit={handleSubmit}>
-        {currentStep === 1 && (
-          <div className="form-section">
-            <h3>Personal Details</h3>
-            <label>Name: *</label>
-            <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+      <form onSubmit={handleSubmit} id="msform">
+        <ul id="progressbar">
+          <li className="active">Personal <br /> Details</li>
+          <li>Academic<br /> Details</li>
+          <li>Event <br />Selection</li>
+          <li>Payment</li>
+        </ul>
 
-            <label>Email: *</label>
-            <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+        <fieldset>
+          <h3 className="fs-title">Personal Details</h3>
+          <label>Name:</label>
+          <input type="text" name="name" value={formData.name} onChange={handleChange} required />
 
-            <label>Phone: *</label>
-            <input type="text" name="phone" value={formData.phone} onChange={handleChange} required />
+          <label>Email:</label>
+          <input type="email" name="email" value={formData.email} onChange={handleChange} required />
 
-            <label>Gender: *</label>
-            <select name="gender" value={formData.gender} onChange={handleChange} required>
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-            </select>
+          <label>Phone: </label>
+          <input type="text" name="phone" value={formData.phone} onChange={handleChange} required />
 
-            <label>Food Preference: *</label>
-            <select name="food" value={formData.food} onChange={handleChange} required>
-              <option value="">Select Food</option>
-              <option value="veg">Veg</option>
-              <option value="non-veg">Non-Veg</option>
-            </select>
+          <label>Gender:</label>
+          <select name="gender" value={formData.gender} onChange={handleChange} required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
 
-            <button type="button" onClick={nextStep}>Next</button>
-          </div>
-        )}
+          <label>Food Preference:</label>
+          <select name="food" value={formData.food} onChange={handleChange} required>
+            <option value="">Select Food</option>
+            <option value="veg">Veg</option>
+            <option value="non-veg">Non-Veg</option>
+          </select>
 
-        {currentStep === 2 && (
-          <div className="form-section">
-            <h3>Academic Details</h3>
-            <label>College Name: *</label>
-            <input type="text" name="collegeName" value={formData.collegeName} onChange={handleChange} required />
+          <label>Passport Size Pic (Max 1MB): *</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => handleImageUpload(e, 'passportPic')}
+            required
+          />
+          {uploadingPassport && <p>Uploading Passport Picture...</p>}
 
-            <label>Degree: *</label>
-            <input type="text" name="degree" value={formData.degree} onChange={handleChange} required />
+          <label>Signature Pic (Max 1MB): *</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => handleImageUpload(e, 'signaturePic')}
+            required
+          />
+          {uploadingSignature && <p>Uploading Signature Picture...</p>}
+          <input type="button" name="next" className="next action-button" value="Next" />
+        </fieldset>
 
-            <label>Department: *</label>
-            <input type="text" name="department" value={formData.department} onChange={handleChange} required />
+        <fieldset>
+          <h3 className="fs-title">Academic Details</h3>
+          <label>College Name: </label>
+          <input type="text" name="collegeName" value={formData.collegeName} onChange={handleChange} required />
 
-            <label>Year of Study: *</label>
-            <input type="text" name="yearOfStudy" value={formData.yearOfStudy} onChange={handleChange} required />
+          <label>Degree: </label>
+          <input type="text" name="degree" value={formData.degree} onChange={handleChange} required />
 
-            <button type="button" onClick={prevStep}>Previous</button>
-            <button type="button" onClick={nextStep}>Next</button>
-          </div>
-        )}
+          <label>Department: </label>
+          <input type="text" name="department" value={formData.department} onChange={handleChange} required />
 
-        {currentStep === 3 && (
-          <div className="form-section">
-            <h3>Event Selection</h3>
-            <label>Select the events you want to participate in: *</label>
-            <select name="events" value={formData.events} onChange={handleChange} multiple required>
-              <option value="Paper presentation">Paper Presentation</option>
-              <option value="Error404">Error404</option>
-              <option value="Workshop">Workshop</option>
-            </select>
+          <label>Year of Study: </label>
+          <input type="text" name="yearOfStudy" value={formData.yearOfStudy} onChange={handleChange} required />
+          <input type="button" name="previous" className="previous action-button" value="Previous" />
+          <input type="button" name="next" className="next action-button" value="Next" />
+        </fieldset>
 
-            <button type="button" onClick={prevStep}>Previous</button>
-            <button type="button" onClick={nextStep}>Next</button>
-          </div>
-        )}
+        <fieldset>
+          <h3 className="fs-title">Event Selection</h3>
+          <label>Select the events you want to participate in: </label>
+          <select name="events" value={formData.events} onChange={handleChange} multiple required>
+            <option value="Paper presentation">Paper Presentation</option>
+            <option value="Error404">Error404</option>
+            <option value="Workshop">Workshop</option>
+          </select>
+          <input type="button" name="previous" className="previous action-button" value="Previous" />
+          <input type="button" name="next" className="next action-button" value="Next" />
+        </fieldset>
 
-        {currentStep === 4 && (
-          <div className="form-section">
-            <h3>Upload Documents</h3>
-            <label>Passport Size Pic (Max 1MB): *</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => handleImageUpload(e, 'passportPic')}
-              required
-            />
-            {uploadingPassport && <p>Uploading Passport Picture...</p>}
+        <fieldset>
+          <h3 className="fs-title">Payment Gateway</h3>
+          <label>Registration Fee: ₹150</label>
+          <br /><br />
+          <label>Payment Reference Number:</label>
+          <input type="text" name="paymentQRCode" value={formData.paymentQRCode} onChange={handleChange} />
 
-            <label>Signature Pic (Max 1MB): *</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => handleImageUpload(e, 'signaturePic')}
-              required
-            />
-            {uploadingSignature && <p>Uploading Signature Picture...</p>}
+          <label>Upload Payment Receipt (Max 1MB):</label>
+          <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'paymentReceipt')} />
 
-            <button type="button" onClick={prevStep}>Previous</button>
-            <button type="button" onClick={nextStep}>Next</button>
-          </div>
-        )}
-
-        {currentStep === 5 && (
-          <div className="form-section">
-            <h3>Payment Gateway</h3>
-            <label>Registration Fee: ₹150</label>
-            <p>Scan the QR code below to make the payment:</p>
-            <img src="/img/electrowhiz2k25.png" alt="Google Pay QR Code" />
-            <label>Payment Reference Number:</label>
-            <input type="text" name="paymentQRCode" value={formData.paymentQRCode} onChange={handleChange} />
-
-            <label>Upload Payment Receipt (Max 1MB):</label>
-            <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'paymentReceipt')} />
-
-            <button type="button" onClick={prevStep}>Previous</button>
-            <button type="submit">Submit Registration</button>
-          </div>
-        )}
+          <input type="button" name="previous" className="previous action-button" value="Previous" />
+          <button type="submit" className="submit action-button">Submit</button>
+        </fieldset>
       </form>
     </div>
   );

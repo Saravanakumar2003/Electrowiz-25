@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import RegistrationPage from "./pages/RegistrationPage";
 import EventDetailsPage from "./pages/EventDetailsPage";
 import IDCardPage from "./pages/IDCardPage";
+import "./index.css";
 
 function App() {
   return (
