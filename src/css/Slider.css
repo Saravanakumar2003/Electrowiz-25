@@ -1,8 +1,10 @@
- .scroll{
-    display: flex;
-    overflow: hidden;
-    position: relative;
-    background: #CCFF00;
+  .slider{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: #CCFF00;
   }
   
   .scroll div{

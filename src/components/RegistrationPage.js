@@ -286,7 +286,7 @@ const RegistrationPage = () => {
     }
   };
 
-  const handleSubmit = async (event) => {
+  const handlePaymentSuccess = async (event) => {
     event.preventDefault();
   
     // Extract the values from the selected event objects
@@ -348,9 +348,38 @@ const RegistrationPage = () => {
     }
   };
 
+  const handlePayment = async () => {
+    const orderResponse = await axios.post('/create-order', { amount: 15000 }); // Amount in paise
+    const { amount, id: order_id, currency } = orderResponse.data;
+
+    const options = {
+      key: process.env.REACT_APP_RAZORPAY_KEY_ID,
+      amount: amount.toString(),
+      currency: currency,
+      name: 'Electrowiz\'25',
+      description: 'Event Registration Fee',
+      order_id: order_id,
+      handler: handlePaymentSuccess,
+      prefill: {
+        name: formData.name,
+        email: formData.email,
+        contact: formData.phone
+      },
+      notes: {
+        address: 'Electrowiz 2K25 Office'
+      },
+      theme: {
+        color: '#F37254'
+      }
+    };
+
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
+
   return (
     <div className="registration-form">
-      <form onSubmit={handleSubmit} id="msform">
+      <form id="msform">
         <ul id="progressbar">
           <li className="active">Personal <br /> Details</li>
           <li>Academic<br /> Details</li>
@@ -459,18 +488,12 @@ const RegistrationPage = () => {
         </fieldset>
 
         <fieldset>
-          <h3 className="fs-title">Payment Gateway</h3>
-          <label>Registration Fee: ₹150</label>
-          <br /><br />
-          <label>Payment Reference Number:</label>
-          <input type="text" name="paymentQRCode" value={formData.paymentQRCode} onChange={handleChange} />
-
-          <label>Upload Payment Receipt (Max 1MB):</label>
-          <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'paymentReceipt')} />
-
-          <input type="button" name="previous" className="previous action-button" value="Previous" />
-          <button type="submit" className="submit action-button">Submit</button>
-        </fieldset>
+        <h3 className="fs-title">Payment Gateway</h3>
+        <label>Registration Fee: ₹150</label>
+        <br /><br />
+        <input type="button" name="previous" className="previous action-button" value="Previous" />
+        <button type="button" className="submit action-button" onClick={handlePayment}>Pay Now</button>
+      </fieldset>
       </form>
     </div>
   );

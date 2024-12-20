@@ -1,4 +1,5 @@
 #msform {
+  top: 80px;
   width: 100%;
   max-width: 500px;
   margin: 50px auto;
@@ -74,8 +75,6 @@
 }
 
 
-
-
 /*buttons*/
 #msform .action-button {
   width: 100px;
@@ -96,7 +95,7 @@
 
 /*progressbar*/
 #progressbar {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   overflow: hidden;
   /*CSS counters to number the steps*/
   counter-reset: step;
@@ -129,7 +128,7 @@
   height: 2px;
   background: white;
   position: absolute;
-  left: -50%;
+  left: -40%;
   top: 9px;
   z-index: -1; /*put it behind the numbers*/
 }
@@ -146,7 +145,7 @@
 
 @media (max-width: 600px) {
   #msform {
-    width: 90%;
+    width: 85%;
   }
 
   #msform fieldset {
