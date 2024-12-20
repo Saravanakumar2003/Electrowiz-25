@@ -1,0 +1,43 @@
+ .scroll{
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    background: #CCFF00;
+  }
+  
+  .scroll div{
+    color: #000;
+    font-size: 1.5em;
+    white-space: nowrap;
+    font-weight: 500;
+    text-transform: uppercase;
+    animation: animate 30s linear infinite;
+    animation-delay: -40s;
+  }
+  
+  
+  .scroll div span{
+    margin-left: 5px;
+    margin-right: 5px;
+    -webkit-text-stroke: 1px #000;
+    color: transparent;
+  }
+  
+  @keyframes animate{
+    0%{
+      transform: translateX(100%);
+    }
+    100%{
+      transform: translateX(-100%);
+    }
+  }
+  
+  @keyframes animate2{
+    0%{
+      transform: translateX(0);
+    }
+    100%{
+      transform: translateX(-200%);
+    }
+  }
+  

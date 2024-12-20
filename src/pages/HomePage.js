@@ -1,15 +1,13 @@
 import React from "react";
 import CountdownTimer from "../components/countdown";
 import SliderNotification from "../components/SlideNotification"
+import Slider2 from "../components/Slider2";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
     <div className="homepage">
-      <SliderNotification />
-      <header>
-        <h1>Welcome to the Electrowhiz 2K25</h1>
-      </header>
+      <Slider2 />
       <CountdownTimer />
       <div className="links">
         <Link to="/events" className="button">View Events</Link>

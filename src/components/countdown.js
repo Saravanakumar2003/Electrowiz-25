@@ -3,26 +3,46 @@ import Countdown from "react-countdown";
 import "../css/CountdownTimer.css";
 
 const CountdownTimer = () => {
-  const targetDate = new Date("2025-02-01T00:09:00")
+  // Target date for countdown
+  const targetDate = new Date("2025-02-11T00:00:00");
 
+  // Renderer for the countdown timer
   const renderer = ({ days, hours, minutes, seconds }) => {
     return (
-      <div className="countdown-timer">
-        <div className="countdown-item">
-          <span className="countdown-number">{days}</span>
-          <span className="countdown-label">Days</span>
+      <div>
+        <div className="homeText">
+          Welcome to Electrowhiz 2K25!
         </div>
-        <div className="countdown-item">
-          <span className="countdown-number">{hours}</span>
-          <span className="countdown-label">Hours</span>
-        </div>
-        <div className="countdown-item">
-          <span className="countdown-number">{minutes}</span>
-          <span className="countdown-label">Minutes</span>
-        </div>
-        <div className="countdown-item">
-          <span className="countdown-number">{seconds}</span>
-          <span className="countdown-label">Seconds</span>
+
+        <div className="flip-clock">
+          <div className="flip-clock__piece">
+            <span className="flip-clock__card flip-card">
+              <b className="flip-card__top">{String(days).padStart(2, "0")}</b>
+              <b className="flip-card__bottom">{String(days).padStart(2, "0")}</b>
+            </span>
+            <span className="flip-clock__slot">Days</span>
+          </div>
+          <div className="flip-clock__piece">
+            <span className="flip-clock__card flip-card">
+              <b className="flip-card__top">{String(hours).padStart(2, "0")}</b>
+              <b className="flip-card__bottom">{String(hours).padStart(2, "0")}</b>
+            </span>
+            <span className="flip-clock__slot">Hours</span>
+          </div>
+          <div className="flip-clock__piece">
+            <span className="flip-clock__card flip-card">
+              <b className="flip-card__top">{String(minutes).padStart(2, "0")}</b>
+              <b className="flip-card__bottom">{String(minutes).padStart(2, "0")}</b>
+            </span>
+            <span className="flip-clock__slot">Minutes</span>
+          </div>
+          <div className="flip-clock__piece">
+            <span className="flip-clock__card flip-card">
+              <b className="flip-card__top">{String(seconds).padStart(2, "0")}</b>
+              <b className="flip-card__bottom">{String(seconds).padStart(2, "0")}</b>
+            </span>
+            <span className="flip-clock__slot">Seconds</span>
+          </div>
         </div>
       </div>
     );
@@ -30,7 +50,6 @@ const CountdownTimer = () => {
 
   return (
     <div className="countdown">
-      <h2>Time Left Until Electrowhiz 2K25</h2>
       <Countdown date={targetDate} renderer={renderer} />
     </div>
   );

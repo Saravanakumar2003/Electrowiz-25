@@ -7,6 +7,20 @@ import QRCode from 'qrcode';
 import $ from 'jquery';
 import '../css/RegistrationPage.css';
 import 'jquery.easing';
+import Select from 'react-select';
+
+const eventOptions = [
+  { value: 'Idea ignition', label: 'Idea ignition' },
+  { value: 'Imaginarium', label: 'Imaginarium' },
+  { value: 'Quiztronics', label: 'Quiztronics' },
+  { value: 'Byte and breakthrough', label: 'Byte and breakthrough' },
+  { value: 'Infinity squad', label: 'Infinity squad' },
+  { value: 'Linked up', label: 'Linked up' },
+  { value: 'Melody madness', label: 'Melody madness' },
+  { value: 'Pixel perfect', label: 'Pixel perfect' },
+  { value: 'Mystery matters', label: 'Mystery matters' },
+  { value: 'Workshop', label: 'Workshop' }
+];
 
 
 const RegistrationPage = () => {
@@ -28,11 +42,11 @@ const RegistrationPage = () => {
 
   const [uploadingPassport, setUploadingPassport] = useState(false);
   const [uploadingSignature, setUploadingSignature] = useState(false);
-  const [currentStep, setCurrentStep] = useState(1);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    $(document).ready(function() {
+    $(document).ready(function () {
       var current_fs, next_fs, previous_fs; //fieldsets
       var left, opacity, scale; //fieldset properties which we will animate
       var animating; //flag to prevent quick multi-click glitches
@@ -111,21 +125,20 @@ const RegistrationPage = () => {
       });
     });
   }, []);
+  
+  const handleMultiChange = (selectedOptions) => {
+    setFormData({
+      ...formData,
+      events: selectedOptions
+    });
+  };
 
   const handleChange = (e) => {
-    const { name, value, type, selectedOptions } = e.target;
-    if (type === 'select-multiple') {
-      const values = Array.from(selectedOptions, option => option.value);
-      setFormData({
-        ...formData,
-        [name]: values
-      });
-    } else {
+    const { name, value } = e.target;
       setFormData({
         ...formData,
         [name]: value
       });
-    }
   };
 
   const handleImageUpload = (e, type) => {
@@ -209,8 +222,8 @@ const RegistrationPage = () => {
 
       const data = {
         sender: {
-          name: "Electrowhiz2K25 Team",
-          email: "saravanakumar.testmail@gmail.com"
+          name: "Electrowiz'25 Team",
+          email: "team@electrowiz.info"
         },
         to: [
           {
@@ -218,11 +231,11 @@ const RegistrationPage = () => {
             name: name
           }
         ],
-        subject: "Registration Confirmation - ElectoWhiz2K25",
+        subject: "Registration Confirmation - Electrowiz'25",
         htmlContent: `
           <h1>Registration Confirmation</h1>
           <p>Dear ${name},</p>
-          <p>Thank you for registering for the symposium. Here are your details:</p>
+          <p>Thank you for registering for the Electrowiz'25. Here are your details:</p>
           <ul>
             <li>Name: ${formData.name}</li>
             <li>Email: ${formData.email}</li>
@@ -238,13 +251,13 @@ const RegistrationPage = () => {
           <br>
           <strong>Kindly, read the following instructions:</strong>
           <p>1. Make sure to carry your ID card and this email to the event.</p>
-          <p>2. The event will start at 9:00 AM on 15th October 2025.</p>
+          <p>2. The event will start at 9:00 AM on 1st Feburary 2025.</p>
           <p>3. The venue is Velammal Engineering College, Chennai.</p>
           <br>
           <p>We look forward to seeing you at the event!</p>
           <br>
           <p>Best regards,</p>
-          <p>ElectroWhiz2K25 Team</p>
+          <p>Electrowiz'25 Team</p>
           <br>
           <p><strong>Note:</strong> If you lose this email, you cannot participate in the event. Please keep this email safe.</p><p>Attached is your QR Code for the event.</p>
         `,
@@ -275,26 +288,32 @@ const RegistrationPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
+    // Extract the values from the selected event objects
+    const events = formData.events.map(event => event.value);
+  
     try {
-      const docRef = await addDoc(collection(db, "registrations"), formData);
+      const docRef = await addDoc(collection(db, "registrations"), {
+        ...formData,
+        events
+      });
       console.log('Form data submitted:', formData);
       alert('Registration successful!');
       navigate(`/id-card/${docRef.id}`);
-
+  
       // Get a new access token
       const accessToken = await getAccessToken();
-
+  
       // Send data to Google Sheets
       const spreadsheetId = process.env.REACT_APP_SHEET;
       const range = 'Registrations!A2';
       const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=RAW`;
-
+  
       const headers = {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`
       };
-
+  
       const values = [
         [
           formData.name,
@@ -306,18 +325,18 @@ const RegistrationPage = () => {
           formData.degree,
           formData.department,
           formData.yearOfStudy,
-          formData.events.join(', '),
+          events.join(', '), // Join the event values into a string
           formData.passportPic,
           formData.signaturePic,
           formData.paymentReceipt,
         ],
       ];
-
+  
       await axios.post(url, { values }, { headers });
       console.log('Data added to Google Sheets');
-
+  
       // Send confirmation email
-      await sendConfirmationEmail(formData.email, formData.name, formData);
+      await sendConfirmationEmail(formData.email, formData.name, { ...formData, events });
     } catch (error) {
       console.error('Error adding document: ', error);
       if (error.response) {
@@ -327,14 +346,6 @@ const RegistrationPage = () => {
         }
       }
     }
-  };
-
-  const nextStep = () => {
-    setCurrentStep(prevStep => prevStep + 1);
-  };
-
-  const prevStep = () => {
-    setCurrentStep(prevStep => prevStep - 1);
   };
 
   return (
@@ -350,29 +361,29 @@ const RegistrationPage = () => {
         <fieldset>
           <h3 className="fs-title">Personal Details</h3>
           <label>Name:</label>
-          <input type="text" name="name" value={formData.name} onChange={handleChange} required />
-
+          <input className="inputText" type="text" name="name" value={formData.name} onChange={handleChange} required />
+          <br />
           <label>Email:</label>
           <input type="email" name="email" value={formData.email} onChange={handleChange} required />
-
+          <br />
           <label>Phone: </label>
           <input type="text" name="phone" value={formData.phone} onChange={handleChange} required />
-
+          <br />
           <label>Gender:</label>
           <select name="gender" value={formData.gender} onChange={handleChange} required>
             <option value="">Select Gender</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
-
+          <br />
           <label>Food Preference:</label>
           <select name="food" value={formData.food} onChange={handleChange} required>
             <option value="">Select Food</option>
             <option value="veg">Veg</option>
             <option value="non-veg">Non-Veg</option>
           </select>
-
-          <label>Passport Size Pic (Max 1MB): *</label>
+          <br />
+          <label>Passport Size Pic (Max 1MB):</label>
           <input
             type="file"
             accept="image/*"
@@ -380,8 +391,8 @@ const RegistrationPage = () => {
             required
           />
           {uploadingPassport && <p>Uploading Passport Picture...</p>}
-
-          <label>Signature Pic (Max 1MB): *</label>
+          <br />
+          <label>Signature Pic (Max 1MB):</label>
           <input
             type="file"
             accept="image/*"
@@ -389,6 +400,7 @@ const RegistrationPage = () => {
             required
           />
           {uploadingSignature && <p>Uploading Signature Picture...</p>}
+          <br />
           <input type="button" name="next" className="next action-button" value="Next" />
         </fieldset>
 
@@ -396,15 +408,36 @@ const RegistrationPage = () => {
           <h3 className="fs-title">Academic Details</h3>
           <label>College Name: </label>
           <input type="text" name="collegeName" value={formData.collegeName} onChange={handleChange} required />
-
+          <br />
           <label>Degree: </label>
-          <input type="text" name="degree" value={formData.degree} onChange={handleChange} required />
-
+          <select type="text" name="degree" value={formData.degree} onChange={handleChange} required>
+            <option value="">Select Degree</option>
+            <option value="B.E">B.E</option>
+            <option value="BTech">BTech</option>
+          </select>
+          <br />
           <label>Department: </label>
-          <input type="text" name="department" value={formData.department} onChange={handleChange} required />
-
+          <select type="text" name="department" value={formData.department} onChange={handleChange} required>
+            <option value="">Select Department</option>
+            <option value="ece">ECE</option>
+            <option value="cse">CSE</option>
+            <option value="eee">EEE</option>
+            <option value="mech">Mech</option>
+            <option value="civil">Civil</option>
+            <option value="it">IT</option>
+            <option value="ai&ds">AI&DS</option>
+            <option value="other">Other</option>
+          </select>
+          <br />
           <label>Year of Study: </label>
-          <input type="text" name="yearOfStudy" value={formData.yearOfStudy} onChange={handleChange} required />
+          <select type="text" name="yearOfStudy" value={formData.yearOfStudy} onChange={handleChange} required>
+            <option value="">Select Year</option>
+            <option value="1">1st</option>
+            <option value="2">2nd</option>
+            <option value="3">3rd</option>
+            <option value="4">4th</option>
+          </select>
+          <br />
           <input type="button" name="previous" className="previous action-button" value="Previous" />
           <input type="button" name="next" className="next action-button" value="Next" />
         </fieldset>
@@ -412,11 +445,15 @@ const RegistrationPage = () => {
         <fieldset>
           <h3 className="fs-title">Event Selection</h3>
           <label>Select the events you want to participate in: </label>
-          <select name="events" value={formData.events} onChange={handleChange} multiple required>
-            <option value="Paper presentation">Paper Presentation</option>
-            <option value="Error404">Error404</option>
-            <option value="Workshop">Workshop</option>
-          </select>
+          <Select
+            name="events"
+            value={formData.events}
+            onChange={handleMultiChange}
+            options={eventOptions}
+            isMulti
+            required
+          />
+          <br />
           <input type="button" name="previous" className="previous action-button" value="Previous" />
           <input type="button" name="next" className="next action-button" value="Next" />
         </fieldset>

@@ -1,26 +1,57 @@
-/*custom font*/
-@import url(https://fonts.googleapis.com/css?family=Montserrat);
-/*form styles*/
 #msform {
-  width: 400px;
-  margin-left: 20px;
-  margin-right: 20px;
+  width: 100%;
+  max-width: 500px;
+  margin: 50px auto;
   text-align: center;
   position: relative;
-
+  align-self: stretch;
+  border: none;
 }
+
 #msform fieldset {
-  background: white;
-  border: 0 none;
-  border-radius: 3px;
-  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
-  padding: 20px 30px;
+  width: 100%;
+  border: none;
+}
+
+#msform h3{
+  color: #FFF;
+  font-family: "Jersey 10";
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 2.12px;
+  text-align: center;
+}
+
+#msform label {
+  color: var(--Title-Color, rgba(255, 255, 255, 0.60));
+  font-family: "Space Grotesk";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: normal;
+  letter-spacing: 1.06px;
+  text-align: left;
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+#msform select {
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(12px);
+  padding: 15px;
+  margin-bottom: 10px;
+  width: 100%;
   box-sizing: border-box;
-  width: 90%;
-  margin: 0 10%;
-  
-  /*stacking fieldsets above each other*/
-  position: relative;
+  color: var(--Input-Color, #FFF);
+}
+
+#msform option {
+  background: rgba(255, 255, 255, 0.90);
+  color: var(--Input-Color, #000);
 }
 /*Hide all except first fieldset*/
 #msform fieldset:not(:first-of-type) {
@@ -29,15 +60,22 @@
 /*inputs*/
 #msform input, #msform textarea {
   padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
   margin-bottom: 10px;
   width: 100%;
   box-sizing: border-box;
-  font-family: montserrat;
-  color: #2C3E50;
+  border-radius: 8px;
+  color: var(--Input-Color, #FFF);
+  border: 1px solid var(--Glass-Stroke, rgba(255, 255, 255, 0.20));
+  background: var(--Glass-Fill, linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, rgba(255, 255, 255, 0.06) 100%), rgba(255, 255, 255, 0.01));
+  /* Glass */
+  box-shadow: 0px 5px 9px 0px rgba(255, 255, 255, 0.08) inset;
+  backdrop-filter: blur(60px);
   font-size: 13px;
 }
+
+
+
+
 /*buttons*/
 #msform .action-button {
   width: 100px;
@@ -55,19 +93,7 @@
 #msform .action-button:hover, #msform .action-button:focus {
   box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
 }
-/*headings*/
-.fs-title {
-  font-size: 15px;
-  text-transform: uppercase;
-  color: #2C3E50;
-  margin-bottom: 10px;
-}
-.fs-subtitle {
-  font-weight: normal;
-  font-size: 13px;
-  color: #666;
-  margin-bottom: 20px;
-}
+
 /*progressbar*/
 #progressbar {
   margin-bottom: 30px;
@@ -116,4 +142,14 @@
 #progressbar li.active:before,  #progressbar li.active:after{
   background: #27AE60;
   color: white;
+}
+
+@media (max-width: 600px) {
+  #msform {
+    width: 90%;
+  }
+
+  #msform fieldset {
+    width: 100%;
+  }
 }
