@@ -1,11 +1,17 @@
 import React from "react";
-import Contact from "../components/Contact";
+import "../css/Contact.css";
 
 const ContactPage = () => {
     return (
-        <div className="contactpage">
-        <Contact />
-        </div>
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="heading text-center">
+                    <h2>Contact
+                        <span> Us </span></h2>
+                    <p>Feel free to contact us</p>
+                </div>
+            </div>
+        </section>
     );
 }
 
