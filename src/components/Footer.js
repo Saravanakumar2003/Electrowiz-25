@@ -5,6 +5,7 @@ import "../css/Footer.css";
 const Footer = () => {
   return (
     <footer className="footer">
+      <hr />
       <div className="footer-content">
         <div className="footer-links">
           <Link to="/privacy-policy" className="footer-link">Privacy Policy</Link>

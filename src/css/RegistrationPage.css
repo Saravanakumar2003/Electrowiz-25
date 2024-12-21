@@ -1,5 +1,4 @@
 #msform {
-  top: 80px;
   width: 100%;
   max-width: 500px;
   margin: 50px auto;
@@ -7,6 +6,8 @@
   position: relative;
   align-self: stretch;
   border: none;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 #msform fieldset {

@@ -4,7 +4,7 @@ import "../css/Events.css";
 const EventsPage = () => {
   const events = [
     { name: "Paper Presentation", description: "Showcase your research and ideas." },
-    { name: "Error404", description: "Debugging and problem-solving challenge." },
+    { name: "Error 404", description: "Debugging and problem-solving challenge." },
     { name: "Workshop", description: "Hands-on learning sessions." },
   ];
 
