@@ -5,7 +5,7 @@ import HomePage from "./pages/HomePage";
 import RegistrationPage from "./pages/RegistrationPage";
 import Events from "./pages/Events";
 import IDCardPage from "./pages/IDCardPage";
-import ContactPage from "./pages/Contact";
+import ContactPage from "./pages/ContactPage";
 import Header from "./components/Header";
 import Slider from "./components/Slider";
 import "./index.css";
