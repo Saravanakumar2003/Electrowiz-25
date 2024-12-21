@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jersey+10&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jersey+10&family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
-.hero{
+.hero {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -9,11 +9,14 @@
   align-items: center;
   text-align: center;
   gap: 100px;
+  padding: 20px;
 }
-.links{
+
+.links {
   display: flex;
   gap: 20px;
 }
+
 .homeText {
   color: #fff;
   font-family: "Jersey 10";
@@ -24,6 +27,7 @@
   letter-spacing: 5.28px;
   align-items: flex-start;
 }
+
 .countdown {
   text-align: center;
   margin: 20px 0;
@@ -64,4 +68,57 @@
   font-family: K2D;
   font-size: 28px;
   color: #48FFD5;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .hero {
+    gap: 50px;
+    padding: 10px;
+  }
+
+  .homeText {
+    font-size: 32px;
+    letter-spacing: 3px;
+  }
+
+  .countdown h2 {
+    font-size: 20px;
+  }
+
+  .countdown-number {
+    font-size: 48px;
+    width: 80px;
+    height: 80px;
+  }
+
+  .countdown-label {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    gap: 30px;
+    padding: 5px;
+  }
+
+  .homeText {
+    font-size: 24px;
+    letter-spacing: 2px;
+  }
+
+  .countdown h2 {
+    font-size: 18px;
+  }
+
+  .countdown-number {
+    font-size: 36px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .countdown-label {
+    font-size: 16px;
+  }
 }

@@ -6,8 +6,12 @@ import RegistrationPage from "./pages/RegistrationPage";
 import Events from "./pages/Events";
 import IDCardPage from "./pages/IDCardPage";
 import ContactPage from "./pages/ContactPage";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfUse from "./pages/TermsOfUse";
+import RefundPolicy from "./pages/RefundPolicy";
 import Header from "./components/Header";
 import Slider from "./components/Slider";
+import Footer from "./components/Footer";
 import "./index.css";
 
 function App() {
@@ -21,7 +25,11 @@ function App() {
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/id-card/:id" element={<IDCardPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-use" element={<TermsOfUse />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
       </Routes>
+      <Footer />
       <Analytics />
     </Router>
   );
