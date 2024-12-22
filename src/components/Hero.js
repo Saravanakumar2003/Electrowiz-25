@@ -11,6 +11,10 @@ const CountdownTimer = () => {
   const renderer = ({ days, hours, minutes, seconds }) => {
     return (
       <div className="hero">
+        <video autoPlay muted loop className="background-video">
+          <source src="/video/vec.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         <br /> <br />
         <div className="homeText">
           Welcome to Electrowiz 2K25!
