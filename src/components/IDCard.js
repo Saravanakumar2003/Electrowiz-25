@@ -37,15 +37,11 @@ const IDCard = ({ participant }) => {
             <div>
               <div class="m-info-group">
                 <h4 class="info-label">Phone: </h4>
-                <h4 class="info-value">+91 1234567890</h4>
+                <h4 class="info-value">{participant.phone}</h4>
               </div>
               <div class="m-info-group">
                 <h4 class="info-label">Email: </h4>
                 <h4 class="info-value email">{participant.email}</h4>
-              </div>
-              <div class="m-info-group">
-                <h4 class="info-label">Events: </h4>
-                <h4 class="info-value">{participant.events}</h4>
               </div>
               <div class="m-info-group">
                 <h4 class="info-label">Food: </h4>

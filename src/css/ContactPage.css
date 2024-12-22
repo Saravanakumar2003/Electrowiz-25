@@ -100,11 +100,6 @@ h1 {
   width: 50px;
 }
 
-.email {
-	float: right;
-	width: 45%;
-}
-
 input[type='text'], [type='email'], select, textarea {
 	background: none;
   border: none;
@@ -138,10 +133,6 @@ input[type='text']:focus, [type='email']:focus, textarea:focus {
 	float: none;
 }
 
-.name {
-	float: left;
-	width: 45%;
-}
 
 select {
   background: url('https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-arrow-down-32.png') no-repeat right;

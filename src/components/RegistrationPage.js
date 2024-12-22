@@ -315,46 +315,35 @@ const RegistrationPage = () => {
   };
 
   const handlePayment = async () => {
-    try {
-      const orderResponse = await axios.post('/api/payment', { amount: registrationFee });
-      const { amount, id: order_id, currency } = orderResponse.data;
-  
-      const options = {
-        key: process.env.REACT_APP_RAZORPAY_KEY_ID, 
-        amount: amount.toString(),
-        currency: currency,
-        name: 'Electrowiz\'25',
-        description: 'Event Registration Fee',
-        order_id: order_id,
-        handler: handlePaymentSuccess, 
-        prefill: {
-          name: formData.name,
-          email: formData.email,
-          contact: formData.phone
-        },
-        notes: {
-          address: 'Velammal Engineering College, Chennai'
-        },
-        theme: {
-          color: '#F37254'
-        },
-        modal: {
-          animation: true,
-          ondismiss: function () {
-            console.log("Payment modal closed by the user.");
-            alert("Payment process was not completed. Please try again.");
-          }
-        }
-      };
-  
-      const rzp1 = new window.Razorpay(options);
-      rzp1.open(); 
-    } catch (error) {
-      console.error("Payment initiation failed:", error);
-      alert("Something went wrong while initiating payment. Please try again.");
-    }
+    const orderResponse = await axios.post('/api/payment', { amount: registrationFee }); 
+    // const orderResponse = await axios.post('http://localhost:5000/create-order', { amount: registrationFee * 100}); 
+    const { amount, id: order_id, currency } = orderResponse.data;
+
+    const options = {
+      key: process.env.REACT_APP_RAZORPAY_KEY_ID,
+      amount: amount.toString(),
+      currency: currency,
+      name: 'Electrowiz\'25',
+      description: 'Event Registration Fee',
+      order_id: order_id,
+      handler: handlePaymentSuccess,
+      prefill: {
+        name: formData.name,
+        email: formData.email,
+        contact: formData.phone
+      },
+      notes: {
+        address: 'Velammal Engineering College, Chennai'  
+      },
+      theme: {
+        color: '#F37254'
+      }
+    };
+
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+    window.focus();
   };
-  
 
   const calculateRegistrationFee = () => {
     let fee = 0;
