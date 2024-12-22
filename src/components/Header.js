@@ -5,8 +5,12 @@ import "../css/Header.css";
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const toggleMenu = () => {
+    const toggleNavbar = () => {
         setIsOpen(!isOpen);
+    };
+
+    const closeNavbar = () => {
+        setIsOpen(false);
     };
 
     return (
@@ -14,15 +18,15 @@ const Header = () => {
             <nav className="navbar">
                 <img src="/logo192.png" alt="Electrowiz'25" className="navbar-logo" />
                 <Link to="/" className="navbar-brand">Electrowiz'25</Link>
-                <div className={`navbar-links ${isOpen ? "open" : ""}`}>
-                    <Link to="/events" className="navbar-link">Events</Link>
-                    <Link to="/register" className="navbar-link">Register</Link>
-                    <Link to="/contact" className="navbar-link">Contact</Link>
+                <div className={`navbar-links ${isOpen ? 'open' : ''}`}>
+                    <Link to="/events" className="navbar-link" onClick={closeNavbar}>Events</Link>
+                    <Link to="/register" className="navbar-link" onClick={closeNavbar}>Register</Link>
+                    <Link to="/contact" className="navbar-link" onClick={closeNavbar}>Contact</Link>
                 </div>
-                <div className="hamburger" onClick={toggleMenu}>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
+                <div className={`hamburger ${isOpen ? 'open' : ''}`} onClick={toggleNavbar}>
+                    <div className="bar bar1"></div>
+                    <div className="bar bar2"></div>
+                    <div className="bar bar3"></div>
                 </div>
             </nav>
         </header>

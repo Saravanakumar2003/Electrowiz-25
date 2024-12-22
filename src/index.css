@@ -26,7 +26,7 @@ h1, h2 {
 .policy-page {
   background-color: #052139;
   color: white;
-  padding-top: 6rem;
+  padding: 20px;
   border-radius: 10px;
   max-width: 800px;
   margin: 20px auto;
@@ -57,7 +57,7 @@ h1, h2 {
 .terms-page {
   background-color: #052139;
   color: white;
-  padding-top: 6rem;
+  padding: 20px;
   border-radius: 10px;
   max-width: 800px;
   text-align: justify;

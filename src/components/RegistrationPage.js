@@ -66,10 +66,10 @@ const RegistrationPage = () => {
   };
 
   const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
     setFormData({
       ...formData,
-      isVelammalStudent: e.target.checked,
-      isGudelines: e.target.checked
+      [name]: checked
     });
   };
 
@@ -315,7 +315,7 @@ const RegistrationPage = () => {
   };
 
   const handlePayment = async () => {
-    const orderResponse = await axios.post('/api/create-order', { amount: registrationFee * 100 }); 
+    const orderResponse = await axios.post('/api/payment', { amount: registrationFee * 100 }); 
     // const orderResponse = await axios.post('http://localhost:5000/create-order', { amount: registrationFee * 100 }); 
     const { amount, id: order_id, currency } = orderResponse.data;
 
@@ -497,12 +497,17 @@ const RegistrationPage = () => {
             <label></label>
             <br />
             <div class="checkbox">
-            <input id="checkbox-2" class="checkbox-custom"  type="checkbox"
-                name="isGudelines"
-                checked={formData.isGudelines}
-                onChange={handleCheckboxChange}
-            />
-            <label for="checkbox-2" class="checkbox-custom-label">I agree to Guidelines, <a href="https://www.electrowiz.info/privacy-policy">Privacy Policy</a> & <a href="https://www.electrowiz.info/terms-of-use">Terms of Use</a></label>
+            <input
+    id="checkbox-2"
+    className="checkbox-custom"
+    type="checkbox"
+    name="isGudelines"
+    checked={formData.isGudelines}
+    onChange={handleCheckboxChange}
+  />
+  <label htmlFor="checkbox-2" className="checkbox-custom-label">
+    I agree to Guidelines, <a href="https://www.electrowiz.info/privacy-policy">Privacy Policy</a> & <a href="https://www.electrowiz.info/terms-of-use">Terms of Use</a>
+  </label>
             </div>
             <br />
             <input type="button" name="previous" className="previous action-button" value="Previous" onClick={handlePrevious} />
@@ -515,11 +520,17 @@ const RegistrationPage = () => {
             <h3 className="fs-title">Payment Gateway</h3>
             <br />
             <div class="checkbox">
-            <input id="checkbox-1" class="checkbox-custom"  type="checkbox"
-                name="isVelammalStudent"
-                checked={formData.isVelammalStudent}
-                onChange={handleCheckboxChange}/>
-            <label for="checkbox-1" class="checkbox-custom-label">Are you a Velammal Engineering College Student?</label>
+            <input
+      id="checkbox-1"
+      className="checkbox-custom"
+      type="checkbox"
+      name="isVelammalStudent"
+      checked={formData.isVelammalStudent}
+      onChange={handleCheckboxChange}
+    />
+    <label htmlFor="checkbox-1" className="checkbox-custom-label">
+      I am a Velammal Student
+    </label>
             </div>
             <br />
             <h2>Total Registration Fee: ₹{registrationFee}</h2>
