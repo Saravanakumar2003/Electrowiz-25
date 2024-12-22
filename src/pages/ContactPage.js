@@ -9,58 +9,90 @@ const ContactPage = () => {
     };
     window.onload = function () {
         // Reset the form fields when the page loads
-        document.getElementById("form").reset();
+        document.getElementById("contact_form").reset();
     };
 
     return (
         <section className="contact" id="contact">
-            <div className="container">
-                <div className="heading text-center">
-                    <h2>Get In Touch</h2>
-                </div>
-                <div className="contact-info">
-                    <p><strong>Email address:</strong> contact@electrowiz.info</p>
-                    <p><strong>Phone Number:</strong> +831 546 547</p>
-                    <p><strong>Location:</strong> Velammal Engineering College, Surapet</p>
-                </div>
-                <div className="contact-form">
-                    <form action="https://api.web3forms.com/submit" method="POST" id="form">
-                        <input type="hidden" name="apikey" value="17e54402-1af9-4b7e-9ee5-3f12b0fb8b07" />
-                        <input type="text" name="name" placeholder="Your Name" required />
-                        <input type="email" name="email" placeholder="Your Email" required />
-                        <input type="text" name="subject" placeholder="Your Subject" required />
-                        <input type="tel" name="number" placeholder="Phone Number" required />
-                        <textarea name="messgae" placeholder="Your Message" required></textarea>
-                        <button type="submit">Send Message</button>
-                    </form>
-                </div>
-                <div className="faq">
-                    <h3>Frequently Asked Questions</h3>
-                    <div className="accordion">
-                        {faqData.map((item, index) => (
-                            <div key={index} className="accordion-item">
-                                <div className="accordion-title" onClick={() => toggleAccordion(index)}>
-                                    <h4>{item.question}</h4>
-                                    <span>{activeIndex === index ? "-" : "+"}</span>
-                                </div>
-                                {activeIndex === index && <div className="accordion-content">{item.answer}</div>}
-                            </div>
-                        ))}
+            <div id="container">
+                <form action="https://api.web3forms.com/submit" method="POST" id="contact_form">
+                    <div class="name">
+                        <label for="name"></label>
+                        <input type="text" placeholder="My name is" name="name" id="name_input" required />
                     </div>
-                </div>
-                <div className="map">
-                    <h3>Our Location</h3>
-                    <iframe
-                        src=""
-                        width="600"
-                        height="450"
-                        style={{ border: 0 }}
-                        allowFullScreen=""
-                        loading="lazy"
-                    ></iframe>
+                    <div class="email">
+                        <label for="email"></label>
+                        <input type="email" placeholder="My e-mail is" name="email" id="email_input" required />
+                    </div>
+                    <div class="telephone">
+                        <label for="name"></label>
+                        <input type="text" placeholder="My number is" name="telephone" id="telephone_input" required />
+                    </div>
+                    <div class="subject">
+                        <label for="subject"></label>
+                        <select placeholder="Subject line" name="subject" id="subject_input" required>
+                            <option disabled hidden selected>Subject line</option>
+                            <option>I'd like to join a event</option>
+                            <option>I'd like to ask a question</option>
+                            <option>I'd like to sponser</option>
+                        </select>
+                    </div>
+                    <div class="message">
+                        <label for="message"></label>
+                        <textarea name="message" placeholder="I'd like to chat about" id="message_input" cols="30" rows="5" required></textarea>
+                    </div>
+                    <div class="submit">
+                        <input type="submit" value="Send Message" id="form_button" />
+                    </div>
+                </form>
+            </div>
+            <div className="faq">
+                <div>
+                    <details open>
+                        <summary>
+                            How do you create an accordion?
+                        </summary>
+                        <div>
+                            Easy! As long as you don't have to support IE11 or older browsers you could use <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> natively.
+                        </div>
+                    </details>
+                    <details>
+                        <summary>
+                            What if I have to support IE11 or older browsers?
+                        </summary>
+                        <div>
+                            No worries. The fallback for these elements is quite good. They will display as open. You won't get the open/close mechanism, but you won't lose any content either.
+                        </div>
+                    </details>
+                    <details>
+                        <summary>
+                            What type of content can I have inside one of these?
+                        </summary>
+                        <div>
+                            Almost anything you'd like. The <code>&lt;details&gt;</code> element allows all <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#flow_content" target="_blank">flow content</a>, which is basically everything.
+                        </div>
+                    </details>
+                    <details>
+                        <summary>
+                            How does it work?
+                        </summary>
+                        <div>
+                            The <code>&lt;details&gt;</code> element encapsulates the <code>&lt;summary&gt;</code> element. The <code>&lt;summary&gt;</code> becomes the 'label' for the <code>&lt;details&gt;</code> and acts like a button. When clicked, the attribute <code>open</code> is added to the <code>&lt;details&gt;</code> element, making it display. You can therefore style the open and closed states seperately if you'd like.
+                        </div>
+                    </details>
                 </div>
             </div>
-        </section>
+            <div className="map">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.184335925827!2d80.18898687466847!3d13.150769687181315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5264a10c856599%3A0xac3348f41097ba7f!2sVelammal%20Engineering%20College!5e0!3m2!1sen!2sin!4v1734848591365!5m2!1sen!2sin"
+                    width="600"
+                    height="450"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                ></iframe>
+            </div>
+        </section >
     );
 };
 

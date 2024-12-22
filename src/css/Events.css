@@ -1,12 +1,74 @@
-.events-page{
+.events-page {
+    font-family: "Open Sans", sans-serif;
     display: flex;
-    position: fixed;
     flex-direction: column;
+    gap: 2rem;
     justify-content: center;
     align-items: center;
-    top: 80px;
+    padding: 2rem;
+    color: white;
+  }
+  
+  img {
+    display: block;
     width: 100%;
-    margin: auto;
-    color: #fff;
-}
-
+  }
+  
+  h2 {
+    margin: 0;
+    color: white;
+    font-size: 1.4rem;
+  }
+  
+  @media (min-width: 800px) {
+    h2 {
+      font-size: 1.8rem;
+    }
+  }
+  
+  .cta {
+    --shadowColor: 187 60% 40%;
+    display: flex;
+    flex-wrap: wrap;
+    background: #052139;
+    max-width: 70rem;
+    width: 100%;
+    box-shadow: 0.65rem 0.65rem 0 #CCFF00;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    border: 0.5rem solid;
+    flex-direction: column; 
+  }
+  
+  @media (min-width: 600px) {
+    .cta {
+      flex-direction: row; 
+    }
+  }
+  
+  .cta img {
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    flex: 1 1 300px;
+    outline: 0.5rem solid;
+  }
+  
+  .cta__text-column {
+    padding: min(2rem, 5vw) min(2rem, 5vw) min(2.5rem, 5vw);
+    flex: 1 0 50%;
+  }
+  
+  .cta__text-column > * + * {
+    margin: min(1.5rem, 2.5vw) 0 0 0;
+  }
+  
+  .cta a {
+    display: inline-block;
+    color: black;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    background: #CCFF00;
+    border-radius: 0.6rem;
+    font-weight: 700;
+    border: 0.35rem solid;
+  }

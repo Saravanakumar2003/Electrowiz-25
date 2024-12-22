@@ -6,8 +6,7 @@
   position: relative;
   align-self: stretch;
   border: none;
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  height: 700px;
 }
 
 #msform fieldset {
@@ -98,7 +97,6 @@
 #progressbar {
   margin-bottom: 20px;
   overflow: hidden;
-  /*CSS counters to number the steps*/
   counter-reset: step;
 }
 #progressbar li {
