@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../utils/firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import axios from 'axios';
 import QRCode from 'qrcode';
 import '../css/RegistrationPage.css';
-import 'jquery.easing';
 import Select from 'react-select';
 
 const eventOptions = [
@@ -21,7 +20,6 @@ const eventOptions = [
   { value: 'Workshop', label: 'Workshop' }
 ];
 
-
 const RegistrationPage = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -36,14 +34,22 @@ const RegistrationPage = () => {
     events: [],
     passportPic: '',
     signaturePic: '',
+    isGudelines: false,
+    isVelammalStudent: false,
   });
 
   const [uploadingPassport, setUploadingPassport] = useState(false);
   const [uploadingSignature, setUploadingSignature] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
+  const [registrationFee, setRegistrationFee] = useState(0);
+  const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
-  
+
+  useEffect(() => {
+    calculateRegistrationFee();
+  }, [formData.events, formData.isVelammalStudent]);
+
   const handleMultiChange = (selectedOptions) => {
     setFormData({
       ...formData,
@@ -53,10 +59,18 @@ const RegistrationPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-      setFormData({
-        ...formData,
-        [name]: value
-      });
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleCheckboxChange = (e) => {
+    setFormData({
+      ...formData,
+      isVelammalStudent: e.target.checked,
+      isGudelines: e.target.checked
+    });
   };
 
   const handleImageUpload = (e, type) => {
@@ -99,9 +113,38 @@ const RegistrationPage = () => {
         }
       });
   };
-  
+
+  const validateStep = () => {
+    let newErrors = {};
+    if (currentStep === 0) {
+      if (!formData.name) newErrors.name = "Name is required";
+      if (!formData.email) newErrors.email = "Email is required";
+      if (!formData.phone) newErrors.phone = "Phone is required";
+      if (!formData.gender) newErrors.gender = "Gender is required";
+      if (!formData.food) newErrors.food = "Food preference is required";
+      if (!formData.passportPic) newErrors.passportPic = "Passport Pic is required";
+    } else if (currentStep === 1) {
+      if (!formData.collegeName) newErrors.collegeName = "College Name is required";
+      if (!formData.degree) newErrors.degree = "Degree is required";
+      if (!formData.department) newErrors.department = "Department is required";
+      if (!formData.yearOfStudy) newErrors.yearOfStudy = "Year of Study is required";
+      if (!formData.signaturePic) newErrors.signaturePic = "Signature Pic is required";
+    } else if (currentStep === 2) {
+      if (!formData.events || formData.events.length === 0) newErrors.events = "At least one event must be selected";
+      if (!formData.isGudelines) newErrors.isGudelines = "Please agree to the guidelines";
+    }
+
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) {
+      alert(Object.values(newErrors).join('\n'));
+    }
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleNext = () => {
-    setCurrentStep((prevStep) => prevStep + 1);
+    if (validateStep()) {
+      setCurrentStep(currentStep + 1);
+    }
   };
 
   const handlePrevious = () => {
@@ -172,7 +215,7 @@ const RegistrationPage = () => {
             <li>Degree: ${formData.degree}</li>
             <li>Department: ${formData.department}</li>
             <li>Year of Study: ${formData.yearOfStudy}</li>
-            <li>Events: ${formData.events.join(', ')}</li>
+            <li>Events: ${formData.events.map(event => event.label).join(', ')}</li>
           </ul>
           <br>
           <strong>Kindly, read the following instructions:</strong>
@@ -215,7 +258,7 @@ const RegistrationPage = () => {
   const handlePaymentSuccess = async (event) => {
     // Extract the values from the selected event objects
     const events = formData.events.map(event => event.value);
-  
+
     try {
       const docRef = await addDoc(collection(db, "registrations"), {
         ...formData,
@@ -224,20 +267,20 @@ const RegistrationPage = () => {
       console.log('Form data submitted:', formData);
       alert('Registration successful!');
       navigate(`/id-card/${docRef.id}`);
-  
+
       // Get a new access token
       const accessToken = await getAccessToken();
-  
+
       // Send data to Google Sheets
       const spreadsheetId = process.env.REACT_APP_SHEET;
       const range = 'Registrations!A2';
       const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=RAW`;
-  
+
       const headers = {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`
       };
-  
+
       const values = [
         [
           formData.name,
@@ -249,15 +292,15 @@ const RegistrationPage = () => {
           formData.degree,
           formData.department,
           formData.yearOfStudy,
-          events.join(', '), // Join the event values into a string
+          events.join(', '),
           formData.passportPic,
           formData.signaturePic,
         ],
       ];
-  
+
       await axios.post(url, { values }, { headers });
       console.log('Data added to Google Sheets');
-  
+
       // Send confirmation email
       await sendConfirmationEmail(formData.email, formData.name, { ...formData, events });
     } catch (error) {
@@ -272,7 +315,8 @@ const RegistrationPage = () => {
   };
 
   const handlePayment = async () => {
-    const orderResponse = await axios.post('http://localhost:5000/create-order', { amount: 15000 }); // Amount in paise
+    const orderResponse = await axios.post('/api/create-order', { amount: registrationFee * 100 }); 
+    // const orderResponse = await axios.post('http://localhost:5000/create-order', { amount: registrationFee * 100 }); 
     const { amount, id: order_id, currency } = orderResponse.data;
 
     const options = {
@@ -298,6 +342,34 @@ const RegistrationPage = () => {
 
     const rzp1 = new window.Razorpay(options);
     rzp1.open();
+  };
+
+  const calculateRegistrationFee = () => {
+    let fee = 0;
+    let hasWorkshop = false;
+    let hasOtherEvents = false;
+
+    formData.events.forEach(event => {
+      if (event.value === 'Workshop') {
+        hasWorkshop = true;
+      } else {
+        hasOtherEvents = true;
+      }
+    });
+
+    if (hasWorkshop && hasOtherEvents) {
+      fee = 250;
+    } else if (hasWorkshop) {
+      fee = 100;
+    } else if (hasOtherEvents) {
+      fee = 150;
+    }
+
+    if (formData.isVelammalStudent && hasOtherEvents) {
+      fee -= 50;
+    }
+
+    setRegistrationFee(fee);
   };
 
   return (
@@ -343,7 +415,7 @@ const RegistrationPage = () => {
               onChange={(e) => handleImageUpload(e, 'passportPic')}
               required
             />
-            {uploadingPassport && <p>Uploading Passport Picture...</p>}
+            {uploadingPassport && <label>Uploading Passport Picture...</label>}
             <br />
             <input type="button" name="next" className="next action-button" value="Next" onClick={handleNext} />
           </fieldset>
@@ -391,7 +463,7 @@ const RegistrationPage = () => {
               onChange={(e) => handleImageUpload(e, 'signaturePic')}
               required
             />
-            {uploadingSignature && <p>Uploading Signature Picture...</p>}
+            {uploadingSignature && <label>Uploading Signature Picture...</label>}
             <br />
             <input type="button" name="previous" className="previous action-button" value="Previous" onClick={handlePrevious} />
             <input type="button" name="next" className="next action-button" value="Next" onClick={handleNext} />
@@ -411,6 +483,28 @@ const RegistrationPage = () => {
               required
             />
             <br />
+            <h3 ClassName="fs-title">General Guidelins</h3>
+            <label>1. Kindly, refer the event timelines <a href="">here</a> to avoid overlaps.</label>
+            <label>2. Make sure to be present at the venue 30 minutes before the event starts.</label>
+            <label>3. The event will be conducted offline at Velammal Engineering College.</label>
+            <label>4. Students must carry their college ID card and a online copy of the mail received after registration.</label>
+            <label>5. Participants are requested to collect the event tags from the registration desk.</label>
+            <label>6. The jury decision will be final in all matters.</label>
+            <label>7. Dress code should be Formal wear.</label>
+            <label>8. Exciting Prizes will be given to winners and Participation certificates will be provided for all.</label>
+            <label>9. Students should refrain from abusive language, obscene display and a good decorum will be appreciated.</label>
+            <label>10. Smoking and consumption of alcohols and any such substance is strictly prohibited inside the college premises.</label>
+            <label></label>
+            <br />
+            <div class="checkbox">
+            <input id="checkbox-2" class="checkbox-custom"  type="checkbox"
+                name="isGudelines"
+                checked={formData.isGudelines}
+                onChange={handleCheckboxChange}
+            />
+            <label for="checkbox-2" class="checkbox-custom-label">I agree to Guidelines, <a href="https://www.electrowiz.info/privacy-policy">Privacy Policy</a> & <a href="https://www.electrowiz.info/terms-of-use">Terms of Use</a></label>
+            </div>
+            <br />
             <input type="button" name="previous" className="previous action-button" value="Previous" onClick={handlePrevious} />
             <input type="button" name="next" className="next action-button" value="Next" onClick={handleNext} />
           </fieldset>
@@ -419,7 +513,20 @@ const RegistrationPage = () => {
         {currentStep === 3 && (
           <fieldset>
             <h3 className="fs-title">Payment Gateway</h3>
-            <label>Registration Fee: ₹150</label>
+            <br />
+            <div class="checkbox">
+            <input id="checkbox-1" class="checkbox-custom"  type="checkbox"
+                name="isVelammalStudent"
+                checked={formData.isVelammalStudent}
+                onChange={handleCheckboxChange}/>
+            <label for="checkbox-1" class="checkbox-custom-label">Are you a Velammal Engineering College Student?</label>
+            </div>
+            <br />
+            <h2>Total Registration Fee: ₹{registrationFee}</h2>
+            <br />
+            <label>Click on the "Pay Now" button to proceed with the payment.</label>
+            <br />
+            <label><strong>Note:</strong> No refunds will be provided (Refer our <a href="https://www.electrowiz.info/refund-policy">Refund Policy</a>)</label>        
             <br /><br />
             <input type="button" name="previous" className="previous action-button" value="Previous" onClick={handlePrevious} />
             <button type="button" className="submit action-button" onClick={handlePayment}>Pay Now</button>

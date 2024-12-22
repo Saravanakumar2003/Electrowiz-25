@@ -42,10 +42,6 @@
   font-size: 1rem;
 }
 
-.navbar-link:hover {
-  text-decoration: underline;
-}
-
 .navbar-logo {
   width: 95px;
   height: 96px;
@@ -78,13 +74,16 @@
     flex-direction: column;
     position: absolute;
     width: 100%;
-    top: 100%;
+    top: 10%;
     left: 0;
+    gap: 1rem;
+    z-index: 1001;
     background-color: rgb(0, 0, 0.5);
   }
 
   .navbar-links.open {
     display: flex;
+    text-decoration: none;
   }
 
   .navbar-link {

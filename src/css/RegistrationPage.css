@@ -1,12 +1,12 @@
 #msform {
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
   margin: 50px auto;
   text-align: center;
   position: relative;
   align-self: stretch;
   border: none;
-  height: 700px;
+  height: 750px;
 }
 
 #msform fieldset {
@@ -33,10 +33,15 @@
   font-weight: 200;
   line-height: normal;
   letter-spacing: 1.06px;
-  text-align: left;
+  text-align: justify;
   display: block;
   margin-bottom: 5px;
   margin-top: 10px;
+}
+
+#msform a {
+  color: #27AE60;
+  text-decoration: none;
 }
 
 #msform select {
@@ -150,4 +155,50 @@
   #msform fieldset {
     width: 100%;
   }
+}
+
+.checkbox{
+  font-family: 'Poppins', sans-serif;
+}
+
+.checkbox-custom {
+    opacity: 0;
+    position: absolute;   
+}
+
+.checkbox-custom, .checkbox-custom-label, .radio-custom, .radio-custom-label {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.checkbox-custom-label, .radio-custom-label {
+    position: relative;
+}
+
+.checkbox-custom + .checkbox-custom-label:before, .radio-custom + .radio-custom-label:before {
+    content: '';
+    background: #fff;
+    border: 2px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.checkbox-custom:checked + .checkbox-custom-label:before {
+  content: "\2713"; 
+  font-family: Arial, sans-serif; 
+  font-weight: 400;
+  background: rebeccapurple;
+  align-items: center;
+  color: #fff;
+}
+
+.checkbox-custom:focus + .checkbox-custom-label, .radio-custom:focus + .radio-custom-label {
+  outline: 1px solid #ddd; /* focus style */
 }
