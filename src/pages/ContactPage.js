@@ -14,8 +14,12 @@ const ContactPage = () => {
 
     return (
         <section className="contact" id="contact">
+            <h1 className="headings">Contact Us</h1>
             <div id="container">
                 <form action="https://api.web3forms.com/submit" method="POST" id="contact_form">
+                    <input type="hidden" name="access_key" value={process.env.REACT_APP_FORM} />
+                    <input type="hidden" name="subject" value="New submission from Electrowiz'25 website" />
+                    <input type="checkbox" name="botcheck" class="hidden"></input>
                     <div class="name">
                         <label for="name"></label>
                         <input type="text" placeholder="My name is" name="name" id="name_input" required />
@@ -30,12 +34,7 @@ const ContactPage = () => {
                     </div>
                     <div class="subject">
                         <label for="subject"></label>
-                        <select placeholder="Subject line" name="subject" id="subject_input" required>
-                            <option disabled hidden selected>Subject line</option>
-                            <option>I'd like to join a event</option>
-                            <option>I'd like to ask a question</option>
-                            <option>I'd like to sponser</option>
-                        </select>
+                        <input type="text" placeholder="Subject line" name="subject" id="subject_input" required />
                     </div>
                     <div class="message">
                         <label for="message"></label>
@@ -46,6 +45,18 @@ const ContactPage = () => {
                     </div>
                 </form>
             </div>
+            <h1 className="headings">Our Location</h1>
+            <div className="map">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.184335925827!2d80.18898687466847!3d13.150769687181315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5264a10c856599%3A0xac3348f41097ba7f!2sVelammal%20Engineering%20College!5e0!3m2!1sen!2sin!4v1734848591365!5m2!1sen!2sin"
+                    width="768"
+                    height="450"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                ></iframe>
+            </div>
+            <h1 className="headings">Frequently Asked Questions</h1>
             <div className="faq">
                 <div>
                     <details open>
@@ -82,33 +93,8 @@ const ContactPage = () => {
                     </details>
                 </div>
             </div>
-            <div className="map">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.184335925827!2d80.18898687466847!3d13.150769687181315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5264a10c856599%3A0xac3348f41097ba7f!2sVelammal%20Engineering%20College!5e0!3m2!1sen!2sin!4v1734848591365!5m2!1sen!2sin"
-                    width="600"
-                    height="450"
-                    style={{ border: 0 }}
-                    allowFullScreen=""
-                    loading="lazy"
-                ></iframe>
-            </div>
         </section >
     );
 };
-
-const faqData = [
-    {
-        question: "What is Electrowiz?",
-        answer: "Electrowiz is an annual event that showcases the latest in technology and innovation."
-    },
-    {
-        question: "How can I register for the event?",
-        answer: "You can register for the event through our website's registration page."
-    },
-    {
-        question: "Where is the event located?",
-        answer: "The event is located at Cesare Rosaroll, 118 80139 Eventine."
-    }
-];
 
 export default ContactPage;

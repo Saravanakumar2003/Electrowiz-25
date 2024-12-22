@@ -3,6 +3,10 @@
   .faq {
     margin-bottom: 2rem;
   }
+
+  .contact{
+    padding: 2rem;
+  }
   
   .accordion {
     border: 1px solid #ccc;

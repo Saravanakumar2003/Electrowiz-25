@@ -1,12 +1,11 @@
 #msform {
-  width: 100%;
   max-width: 600px;
   margin: 50px auto;
   text-align: center;
   position: relative;
   align-self: stretch;
   border: none;
-  height: 750px;
+  height: 850px;
 }
 
 #msform fieldset {
