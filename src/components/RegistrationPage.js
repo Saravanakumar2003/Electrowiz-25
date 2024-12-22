@@ -320,7 +320,7 @@ const RegistrationPage = () => {
     const { amount, id: order_id, currency } = orderResponse.data;
 
     const options = {
-      key: process.env.REACT_APP_RAZORPAY_KEY_ID,
+      key: process.env.RAZORPAY_KEY_ID,
       amount: amount.toString(),
       currency: currency,
       name: 'Electrowiz\'25',
