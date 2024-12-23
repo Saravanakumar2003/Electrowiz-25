@@ -1,0 +1,49 @@
+.calendar-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .fc-toolbar {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .fc-button {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
+  
+  .fc-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .fc-event {
+    background-color: #378006;
+    border: none;
+    color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+  }
+
+  .homeText {
+    color: #fff;
+    font-family: "Jersey 10";
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 5.28px;
+    margin: 0 auto;
+    max-width: fit-content;
+    padding: 2rem;
+  }
