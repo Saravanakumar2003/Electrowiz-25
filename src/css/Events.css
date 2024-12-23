@@ -7,6 +7,7 @@
     align-items: center;
     padding: 2rem;
     color: white;
+    text-align: justify;
   }
   
   img {
@@ -98,12 +99,19 @@
     max-width: 500px;
     width: 100%;
     animation: slideIn 0.3s ease-in-out;
+    max-height: 80vh;
+    overflow-y: auto;
 
     h2 {
       margin: 0;
       color: black;
       font-size: 1.4rem;
     }
+  }
+  
+  .modal-scroll {
+    max-height: 60vh;
+    overflow-y: auto;
   }
   
   @keyframes fadeIn {
