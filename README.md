@@ -1,70 +1,128 @@
-# Getting Started with Create React App
+# Electrowiz'25
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the Electrowiz'25 project! This project is a web application for the Electrowiz'25 event, providing information about the event, registration, and more.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Electrowiz'25](#electrowiz25)
+  - [Table of Contents](#table-of-contents)
+  - [Getting Started](#getting-started)
+    - [This project automates several key processes to save time and reduce manual effort:](#this-project-automates-several-key-processes-to-save-time-and-reduce-manual-effort)
+    - [Technologies Used](#technologies-used)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+  - [Envirnoment Variables](#envirnoment-variables)
+  - [License](#license)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### This project automates several key processes to save time and reduce manual effort:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Automated Registration:** Participants can register online, eliminating the need for manual data entry.
+- **Automated Payments:** Payments are processed automatically & verified using Razorpay, ensuring quick and secure transactions.
+- **QR Code Generation:** Each participant receives a QR code along with their ID card. This QR code can be scanned at the registration desk.
+- **Automated Attendance:** Scanning the QR code at the registration desk automatically marks the participant as present in a Google Sheet, removing the need for manual verification.
 
-### `npm run build`
+By automating these steps, the project significantly reduces the time and effort required for registration, payment processing, and attendance tracking, making the entire process more efficient.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Technologies Used
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React: A JavaScript library for building user interfaces.
+- Firebase: Used for database.
+- Razorpay: For handling payments.
+- Cloudinary: For image uploads and management.
+- FullCalendar: For displaying event calendars.
+- TailwindCSS: A utility-first CSS framework for styling.
+- Axios: For making HTTP requests.
+- Express: A web application framework for Node.js (Local Testing).
+- Google APIs: For integrating with Google Sheets.
+- Web3Forms: For handling form submissions.
+- Sendinblue: For sending confirmation emails.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
 
-### `npm run eject`
+Make sure you have the following installed on your machine:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Node.js
+- npm (Node Package Manager)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Installation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-username/electrowiz25.git
+   cd electrowiz25
+    ```
+2. Install the required dependencies:
+3. ```sh
+   npm install
+   ```
+4. Start the development server:
+   ```sh
+    npm run start
+    ```
+5. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+6. You're all set! 🚀
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
 
-## Learn More
+Project Structure
+```
+.
+├── api/
+│   ├── payment.js
+│   └── server.js
+├── public/
+│   ├── img/
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
+├── src/
+│   ├── components/
+│   ├── css/
+│   ├── js/
+│   ├── pages/
+│   ├── utils/
+│   ├── App.css
+│   ├── App.js
+│   ├── App.test.js
+│   ├── index.css
+│   ├── index.js
+│   ├── reportWebVitals.js
+│   └── setupTests.js
+├── .gitignore
+├── package.json
+├── README.md
+└── tailwind.config.js
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Envirnoment Variables
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Create a `.env` file in the root directory of the project and add the following environment variables:
 
-### Code Splitting
+```env
+REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
+REACT_APP_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+REACT_APP_FIREBASE_PROJECT_ID=your_firebase_project_id
+REACT_APP_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+REACT_APP_FIREBASE_APP_ID=your_firebase_app_id
+REACT_APP_FIREBASE_MEASUREMENT_ID=your_firebase_measurement_id
+REACT_APP_RAZORPAY_KEY_ID=your_razorpay_key_id
+REACT_APP_RAZORPAY_KEY_SECRET=your_razorpay_key_secret
+REACT_APP_CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+REACT_APP_CLOUDINARY_UPLOAD_PRESET=your_cloudinary_upload_preset
+REACT_APP_CLIENT_ID=your_google_client_id
+REACT_APP_CLIENT_SECRET=your_google_client_secret
+REACT_APP_REFRESH_TOKEN=your_google_refresh_token
+REACT_APP_SHEET=your_google_sheet_id
+REACT_APP_BREVO_API_KEY=your_brevo_api_key
+REACT_APP_FORM=your_web3forms_access_key
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## License
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Distributed under the MIT License. See `LICENSE` for more information.
+```

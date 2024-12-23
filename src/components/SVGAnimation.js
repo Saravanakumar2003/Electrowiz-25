@@ -134,7 +134,7 @@ const SVGAnimation = () => {
                     <path id="text-curve3" d="M 0 150 Q 200 50 500 50 Q 800 50 1000 150 " fill="none" />
                     <text filter="url(#blur)">
                         <textPath href="#text-curve3">
-                            Join us for a day of learning and fun!
+                            Join us for a day of learning and innovation!
                         </textPath>
                     </text>
                 </svg>

@@ -474,7 +474,7 @@ const RegistrationPage = () => {
         {currentStep === 2 && (
           <fieldset>
             <h3 className="fs-title">Event Selection</h3>
-            <label>Select the events you want to participate in: </label>
+            <label>Select all the events you want to participate in: </label>
             <Select
               name="events"
               value={formData.events}
@@ -530,8 +530,9 @@ const RegistrationPage = () => {
       onChange={handleCheckboxChange}
     />
     <label htmlFor="checkbox-1" className="checkbox-custom-label">
-      I am a Velammal Student
+      Are you ECE student of Velammal Engineering College? (Get ₹50 off by checking this box)
     </label>
+    <label><strong>Discount is only for ECE Students of VEC</strong></label>
             </div>
             <br />
             <h2>Total Registration Fee: ₹{registrationFee}</h2>
