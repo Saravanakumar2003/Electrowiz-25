@@ -112,8 +112,8 @@ const eventsData = {
     ],
     coordinators: [
       "Student Coordinator: Name and contact details.",
-      "Pavithran: +916381329220",
-      "Kabilan: +917200606487",
+      "Pavithran: 6381329220",
+      "Kabilan: 7200606487",
       "DHESHVANTH S: 8248988041"    
     ],
     judgingCriteria: []

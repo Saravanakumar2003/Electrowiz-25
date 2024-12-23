@@ -215,7 +215,7 @@ const RegistrationPage = () => {
             <li>Degree: ${formData.degree}</li>
             <li>Department: ${formData.department}</li>
             <li>Year of Study: ${formData.yearOfStudy}</li>
-            <li>Events: ${formData.events.map(event => event.label).join(', ')}</li>
+            <li>Events: ${formData.events && formData.events.map(event => event.label).join(', ')}</li>
           </ul>
           <br>
           <strong>Kindly, read the following instructions:</strong>
@@ -283,6 +283,9 @@ const RegistrationPage = () => {
 
       const values = [
         [
+          new Date().toLocaleString(
+            'en-US', { timeZone: 'Asia/Kolkata' }
+          ).replace(',', ''),
           formData.name,
           formData.email,
           formData.phone,
@@ -295,6 +298,9 @@ const RegistrationPage = () => {
           events.join(', '),
           formData.passportPic,
           formData.signaturePic,
+          formData.isVelammalStudent ? 'Yes' : 'No',
+          registrationFee,
+          docRef.id
         ],
       ];
 
