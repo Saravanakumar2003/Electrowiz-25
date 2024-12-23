@@ -119,15 +119,15 @@ const SVGAnimation = () => {
                     </svg>
                     <div class="grid__item">
                         <span class="grid__item-number">Events</span>
-                        <img class="grid__item-img" src="img/5.jpg" alt="Some image" />
-                        <h3 class="grid__item-title">10 Events</h3>
-                        <p class="grid__item-description">We have planned 10 incredible events for you.</p>
+                        <img class="grid__item-img" src="img/Events.png" alt="Some image" />
+                        <h3 class="grid__item-title">9 Events + 1 Workshop</h3>
+                        <p class="grid__item-description">Electrowiz 2025 is a one-day event that includes 9 events and 1 workshop. The events are designed to test your technical and non-technical skills, while the workshop will give you hands-on experience with a no-code platform for machine learning.</p>
                     </div>
                     <div class="grid__item">
                         <span class="grid__item-number">Workshop</span>
-                        <img class="grid__item-img" src="img/6.jpg" alt="Some image" />
-                        <h3 class="grid__item-title">Workshop Tiile</h3>
-                        <p class="grid__item-description">Workshop Description</p>
+                        <img class="grid__item-img" src="img/Workshop.png" alt="Some image" />
+                        <h3 class="grid__item-title">Hands on KNIME  tool : No code platform for Machine Learning</h3>
+                        <p class="grid__item-description">Gain hands-on experience in data preprocessing, workflow creation, and model evaluation, all through drag-and-drop functionalities. Explore real-world applications of machine learning in various industries and see how KNIME simplifies complex data challenges.</p>
                     </div>
                 </div>
                 <svg class="svgtext svgtext--3" data-filter-type="blur" width="120%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
