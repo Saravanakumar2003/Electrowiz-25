@@ -17,7 +17,7 @@ const Header = () => {
         <header className="transparent-header">
             <nav className="navbar">
                 <img src="/logo192.png" alt="Electrowiz'25" className="navbar-logo" />
-                <Link to="/" className="navbar-brand">Electrowiz'25</Link>
+                <Link to="/" className="navbar-brand">ELECTROWIZ'25</Link>
                 <div className={`navbar-links ${isOpen ? 'open' : ''}`}>
                     <Link to="/events" className="navbar-link" onClick={closeNavbar}>Events</Link>
                     <Link to="/register" className="navbar-link" onClick={closeNavbar}>Register</Link>

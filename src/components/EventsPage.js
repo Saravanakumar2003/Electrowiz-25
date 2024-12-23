@@ -9,9 +9,6 @@ const eventsData = {
       "Rule 3: The decision made by the judging committee will be final and binding.",
     ],
     coordinators: [
-      "Staff Coordinator: Name and contact details.",
-      "1.	Dr.K.Thilagam - 9944610037",
-      "2.	Mrs.Shankari  - 8220641162",
       "Student Coordinator: Name and contact details.",
       "1. B.Tharani    - 8939451469",
       "2. M. Jayashrie - 8015752278",
@@ -33,9 +30,6 @@ const eventsData = {
       "Rule 4: The decision made by the judging committee will be final and binding."
     ],
     coordinators: [
-      "Faculty Coordinator: Name and contact details.",
-      "1. Mrs. S. Sarupriya - 9944610037",
-      "2. Mr. Seshaiah - 8220641162",
       "Student Coordinator: Name and contact details.",
       "1. Sharan V - 8939451469",
       "2. Syed Kaamiluddin Ahmed H - 8015752278"
@@ -58,7 +52,7 @@ const eventsData = {
       "Rule 9: The decisions of the judges & the moderators is final."
     ],
     coordinators: [
-      "Co-Ordinators Contacts",
+      "Student Coordinator: Name and contact details.",
       "Nandhini - 7868933944",
       "Lakshana - 9600318401"
     ],
@@ -76,9 +70,10 @@ const eventsData = {
       "Rule 8: Basic knowledge on Python, C and Java."
     ],
     coordinators: [
-      "Co-Ordinators Contacts",
-      "Nandhini - 7868933944",
-      "Lakshana - 9600318401"
+      "Student Coordinator: Name and contact details.",
+      "Sharmila Devi - 9080969747",
+      "Suba Shobika -  76038 57211",
+      "Dilip kumar - 97042 08881"   
     ],
     judgingCriteria: []
   },
@@ -102,7 +97,7 @@ const eventsData = {
       "4. The student co-ordinators are not responsible for any errors, omissions, or technical difficulties that may occur during the competition."
     ],
     coordinators: [
-      "Student Co-ordinators",
+      "Student Coordinator: Name and contact details.",
       "Arunvel R - 88382 01979",
       "Govardhan S - 6369437174",
       "Harish R - 93427 77194"
@@ -116,9 +111,10 @@ const eventsData = {
       "Rule 3: Give the participants the first clue and encourage them to find the other."
     ],
     coordinators: [
-      "Co-Ordinators Contacts",
-      "Nandhini - 7868933944",
-      "Lakshana - 9600318401"
+      "Student Coordinator: Name and contact details.",
+      "Pavithran: +916381329220",
+      "Kabilan: +917200606487",
+      "DHESHVANTH S: 8248988041"    
     ],
     judgingCriteria: []
   },
@@ -132,7 +128,7 @@ const eventsData = {
       "☑ The decision made by the judging committee will be final and binding."
     ],
     coordinators: [
-      "Contacts",
+      "Student Coordinator: Name and contact details.",
       "Alekhya - 6381614897",
       "Arun - 7200105028"
     ],
@@ -162,10 +158,7 @@ const eventsData = {
       "    • Participants must not refresh or leave the buzzer page once the link is accessed.",
     ],
     coordinators: [
-      "COORDINATORS:",
-      "Dr. S. Manju",
-      "Mrs. P. Renuka",
-      "STUDENT COORDINATORS:",
+      "Student Coordinator: Name and contact details.:",
       "Yeshwanthy A.B",
       "Harshavardhini P.P"
     ],
@@ -181,7 +174,7 @@ const eventsData = {
       "● A participant can be disqualified by the organisers in case they are found to be breaking the event rules and Regulations."
     ],
     coordinators: [
-      "Contacts:",
+      "Student Coordinator: Name and contact details.:",
       "Sashitha Thummagunta: 8248953048",
       "Yuthika.S : 97910 77501"
     ],
@@ -196,7 +189,7 @@ const eventsData = {
       "• Avoid side conversations and keep your phone at bay."
     ],
     coordinators: [
-      "Contact: ",
+      "Student Coordinator: Name and contact details.: ",
       "Nandhini K - 9025014461",
       "Draviya M - 8610010843"
     ],
