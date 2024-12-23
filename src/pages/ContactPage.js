@@ -15,6 +15,34 @@ const ContactPage = () => {
     return (
         <section className="contact" id="contact">
             <h1 className="headings">Contact Us</h1>
+
+            <div className="contact-info">
+                    <div className="contact-info-item">
+                        <h4>Email:</h4>
+                        <p>
+                            <a href="mailto:contact@electrowiz.info">
+                                contact@electrowiz.info
+                            </a>
+                        </p>
+                    </div>
+                    <div className="contact-info-item">
+                        <h4>Phone:</h4>
+                        <p>
+                            <a href="tel:+91">
+                            </a>
+                            Kindly, contact particular event coordinators for queries.
+                        </p>
+                    </div>
+                    <div className="contact-info-item">
+                        <h4>Address:</h4>
+                        <p>
+                            Velammal Engineering College, Chennai, Tamil Nadu, India
+                        </p>
+                    </div>
+                </div>
+            
+            <h1 className="headings">Send Us a Message</h1>
+            
             <div id="container">
                 <form action="https://api.web3forms.com/submit" method="POST" id="contact_form">
                     <input type="hidden" name="access_key" value={process.env.REACT_APP_FORM} />
@@ -45,6 +73,7 @@ const ContactPage = () => {
                     </div>
                 </form>
             </div>
+            
             <h1 className="headings">Our Location</h1>
             <div className="map">
                 <iframe
@@ -61,34 +90,50 @@ const ContactPage = () => {
                 <div>
                     <details open>
                         <summary>
-                            How do you create an accordion?
+                            Is Electrowiz'25 is a free event?
                         </summary>
                         <div>
-                            Easy! As long as you don't have to support IE11 or older browsers you could use <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> natively.
+                            No, Electrowiz'25 is a paid event. The registration fee is ₹150 per participant for entry and participation in all events. Workshop registration fee is ₹100 per participant.
                         </div>
                     </details>
                     <details>
                         <summary>
-                            What if I have to support IE11 or older browsers?
+                            Can I participate in multiple events?
                         </summary>
                         <div>
-                            No worries. The fallback for these elements is quite good. They will display as open. You won't get the open/close mechanism, but you won't lose any content either.
+                            Yes, you can participate in multiple events. However, make sure that the events are not clashing with each other.
                         </div>
                     </details>
                     <details>
                         <summary>
-                            What type of content can I have inside one of these?
+                            Do you provide refunds?
                         </summary>
                         <div>
-                            Almost anything you'd like. The <code>&lt;details&gt;</code> element allows all <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#flow_content" target="_blank">flow content</a>, which is basically everything.
+                            We do not provide refunds. Please make sure you are available for the event before registering.
                         </div>
                     </details>
                     <details>
                         <summary>
-                            How does it work?
+                            Do you provide certificates?
                         </summary>
                         <div>
-                            The <code>&lt;details&gt;</code> element encapsulates the <code>&lt;summary&gt;</code> element. The <code>&lt;summary&gt;</code> becomes the 'label' for the <code>&lt;details&gt;</code> and acts like a button. When clicked, the attribute <code>open</code> is added to the <code>&lt;details&gt;</code> element, making it display. You can therefore style the open and closed states seperately if you'd like.
+                            Yes, we provide participation certificates for all participants. Winners will receive printed certificates and other participants will receive digital certificates.
+                        </div>
+                    </details>
+                    <details>
+                        <summary>
+                            Can I register on the day of the event?
+                        </summary>
+                        <div>
+                            No, registrations will be closed a day before the event. Make sure you register before the deadline. And on-spot registrations will be entertained.
+                        </div>
+                    </details>
+                    <details>
+                        <summary>
+                            Can I participate in the workshop without registering for the event?
+                        </summary>
+                        <div>
+                            Yes, you can participate in the workshop without registering for the event. However, the registration fee for the workshop is ₹100 per participant and vice versa.
                         </div>
                     </details>
                 </div>

@@ -316,3 +316,38 @@ a:hover {
   margin: 60px auto;
   position: relative;
 }
+
+.contact-info {
+  background-color: #052139;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 60px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info-item{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 10px 0;
+  background-color: #CCFF00;
+  color: #000;
+  border-radius: 10px;
+  font-family: Inter;
+}
+
+.headings{
+  color: #fff;
+  text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+  font-family: "Jersey 10";
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 5.28px;
+  align-items: flex-start;
+}

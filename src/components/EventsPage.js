@@ -399,6 +399,14 @@ const EventsPage = () => {
           <div className="cta__text-column">
             <h2>Workshop</h2>
             <ul>
+              <strong>About Workshop:</strong>
+              <br />
+              <li>➼ The workshop will be conducted on the topic "Hands on KNIME tool : No code platform for Machine Learning".</li>
+              <li>➼ Gain insights into the KNIME tool and its applications in Machine Learning.</li>
+              <li>➼ Learn how to use the KNIME tool to create workflows and perform analysis.</li>    
+            </ul>
+              
+            <ul>
               <strong>Resource Person:</strong>
               <br />
               <li>➼ Dr.E. ARUNKUMAR ETHIRAJ (Vice President Retech Solutions Private Ltd.)</li>
