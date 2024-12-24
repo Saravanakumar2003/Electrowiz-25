@@ -215,7 +215,7 @@ const RegistrationPage = () => {
             <li>Degree: ${formData.degree}</li>
             <li>Department: ${formData.department}</li>
             <li>Year of Study: ${formData.yearOfStudy}</li>
-            <li>Events: ${formData.events && formData.events.map(event => event.label).join(', ')}</li>
+            <li>Events: ${formData.events.join(', ')}</li>
           </ul>
           <br>
           <strong>Kindly, read the following instructions:</strong>
@@ -381,6 +381,8 @@ const RegistrationPage = () => {
 
   return (
     <div className="registration-form">
+      <h2 className='Headings'>Event Registration Form</h2>
+      <p className='Headings2'>Dear Participants, the site is still in test mode <br/>and the registration opens from January 2nd, 2025.</p>
       <form id="msform">
         <ul id="progressbar">
           <li className={currentStep >= 0 ? "active" : ""}>Personal <br /> Details</li>

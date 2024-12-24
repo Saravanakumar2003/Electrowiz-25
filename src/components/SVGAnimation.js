@@ -72,7 +72,7 @@ const SVGAnimation = () => {
                         <span class="grid__item-number">About Electrowiz</span>
                         <img class="grid__item-img" src="logo192.png" alt="Some image" />
                         <h3 class="grid__item-title">Electrowiz 2025</h3>
-                        <p class="grid__item-description">We really excited to announce that, The Department of Electronics and Communication Engineering are coming together all set to bring out the hidden talents of the budding engineers. Get ready people as the symposium ELECTROWIZ'25 is down the lane falling on 01-02-2024 (Saturday). We are excited to make the memorable day for you!</p>
+                        <p class="grid__item-description">We really excited to announce that, The Department of Electronics and Communication Engineering are coming together all set to bring out the hidden talents of the budding engineers. Get ready people as the symposium ELECTROWIZ'25 is down the lane falling on 01-02-2025 (Saturday).</p>
                     </div>
                 </div>
                 <svg class="svgtext svgtext--1" data-filter-type="blur" width="120%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
