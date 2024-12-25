@@ -31,8 +31,8 @@ const eventsData = {
     ],
     coordinators: [
       "Student Coordinator: Name and contact details.",
-      "1. Sharan V - 8939451469",
-      "2. Syed Kaamiluddin Ahmed H - 8015752278"
+      "1. Sharan V: 9710310083",
+      "2. Syed Kaamiluddin Ahmed H: 9490839489"
     ],
     judgingCriteria: [
       "Judging Criteria: ",
@@ -53,8 +53,8 @@ const eventsData = {
     ],
     coordinators: [
       "Student Coordinator: Name and contact details.",
-      "Nandhini - 7868933944",
-      "Lakshana - 9600318401"
+      "Nandhini: 7868933944",
+      "Lakshana: 9600318401"
     ],
     judgingCriteria: []
   },
@@ -71,9 +71,9 @@ const eventsData = {
     ],
     coordinators: [
       "Student Coordinator: Name and contact details.",
-      "Sharmila Devi - 9080969747",
-      "Suba Shobika -  76038 57211",
-      "Dilip kumar - 97042 08881"   
+      "Sharmila Devi: 9080969747",
+      "Suba Shobika:  76038 57211",
+      "Dilip kumar: 97042 08881"   
     ],
     judgingCriteria: []
   },
@@ -98,9 +98,9 @@ const eventsData = {
     ],
     coordinators: [
       "Student Coordinator: Name and contact details.",
-      "Arunvel R - 88382 01979",
-      "Govardhan S - 6369437174",
-      "Harish R - 93427 77194"
+      "Arunvel R: 8838201979",
+      "Govardhan S: - 6369437174",
+      "Harish R: - 9342777194"
     ],
     judgingCriteria: []
   },
@@ -159,8 +159,8 @@ const eventsData = {
     ],
     coordinators: [
       "Student Coordinator: Name and contact details.:",
-      "Yeshwanthy A.B",
-      "Harshavardhini P.P"
+      "Yeshwanthy A.B: 7550142563",
+      "Harshavardhini P.P: 7010965469"
     ],
     judgingCriteria: []
   },

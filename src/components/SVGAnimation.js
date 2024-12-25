@@ -91,7 +91,7 @@ const SVGAnimation = () => {
                         </textPath>
                     </text>
                 </svg>
-                <div className="bimg"><img class="bigimg" src="img/EventPoster.png" alt="Some image" /></div>
+                <div className="bimg"><img class="bigimg" src="img/eventbanner2.png" alt="Some image" /></div>
                 <svg class="svgtext svgtext--2" data-filter-type="distortion" width="120%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
                     <path id="text-curve2" d="M 0 50 Q 100 0 200 100 Q 300 200 650 50 C 750 0 750 150 1000 50" fill="none" />
                     <text filter="url(#distortionFilter)">
@@ -113,7 +113,6 @@ const SVGAnimation = () => {
                         <path id="textcircle" d="M 0 0 Q 200 150 500 150 Q 850 150 1000 0 " fill="none" />
                         <text filter="url(#blur)">
                             <textPath href="#textcircle">
-                                Got a question? Contact us! We are here to help.
                             </textPath>
                         </text>
                     </svg>

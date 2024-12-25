@@ -17,8 +17,6 @@ const CountdownTimer = () => {
         </video>
         <br /> <br />
         <div className="homeText">
-          Welcome to Electrowiz 2K25!
-          <br />
           Registration Starts from: 
           <br/>
           2nd January 2025

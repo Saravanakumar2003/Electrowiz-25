@@ -323,7 +323,10 @@ a:focus {
   }
 
 .animation span{
-    font-size: 2rem;
+    font-size: 3rem;
+	justify-content: center;
+	text-align: center;
+	
     text-transform: uppercase;
     margin: 1rem 0;
     font-family: "Jersey 10";
