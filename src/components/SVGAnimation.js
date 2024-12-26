@@ -153,7 +153,8 @@ const SVGAnimation = () => {
                         </textPath>
                     </text>
                 </svg>
-                <div className="bimg"><img class="bigimg" src="img/EventSchedule.png" alt="Some image" /></div>
+                <span class="grid__item-number">Event Schedule</span>
+                <div className="bimg"><img class="bigimg" src="img/eventagenda.png" alt="Some image" /></div>
             </main>
         </div>
     );

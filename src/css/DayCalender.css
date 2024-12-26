@@ -1,11 +1,3 @@
-.calendar-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
   
   .fc-toolbar {
     background-color: #000;
@@ -46,4 +38,39 @@
     margin: 0 auto;
     max-width: fit-content;
     padding: 2rem;
+  }
+
+  .calendar-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .fc .fc-button {
+    background-color: #378006;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .fc .fc-button:hover {
+    background-color: #2e6b05;
+  }
+  
+  .fc .fc-event {
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 0.9rem;
+  }
+  
+  .fc .fc-event .event-icon {
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 0.9rem;
+    padding: 5px;
   }
