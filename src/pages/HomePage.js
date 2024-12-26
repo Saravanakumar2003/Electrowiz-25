@@ -1,11 +1,11 @@
 import React from "react";
 import CountdownTimer from "../components/Hero";
-import SVGAnimation  from "../components/SVGAnimation";
+import SVGAnimation from "../components/SVGAnimation";
 import "../css/HomePage.css";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
-  
+
 
   return (
     <div className="homepage">
@@ -15,7 +15,14 @@ const HomePage = () => {
       <section className="svg-animation">
         <SVGAnimation />
       </section>
-      
+
+      <section className="Instagram">
+        <h2>Connect with us</h2>
+        <span>Our Latest Instagram Post</span>
+        <iframe src='https://widgets.sociablekit.com/instagram-feed/iframe/25502717' frameborder='0' width='100%' height='800'></iframe>
+      </section>
+
+
       <section className="sponsors">
         <h2>Our Sponsors</h2>
         <div class="logo-slider">
@@ -30,7 +37,7 @@ const HomePage = () => {
               <img src="/img/Sponser1.jpeg" alt="Sponsor 1" className="sponsor-logo" />
             </div>
             <div className="slide">
-               <img src="/img/Vec.png" alt="Sponsor 2" className="sponsor-logo" />
+              <img src="/img/Vec.png" alt="Sponsor 2" className="sponsor-logo" />
             </div>
             <div className="slide">
               <img src="/img/Sponser1.jpeg" alt="Sponsor 1" className="sponsor-logo" />
