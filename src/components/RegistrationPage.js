@@ -562,7 +562,7 @@ const RegistrationPage = () => {
     <label htmlFor="checkbox-1" className="checkbox-custom-label">
       Are you ECE student of Velammal Engineering College? (Get ₹50 off by checking this box)
     </label>
-    <label><strong>Discount is only for ECE Students of VEC</strong></label>
+    <label><strong>Discount is only Events (Not Workshop) for ECE Students of VEC</strong></label>
             </div>
             <br />
             <h2>Total Registration Fee: ₹{registrationFee}</h2>

@@ -1,12 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import "../css/ContactPage.css";
 
 const ContactPage = () => {
-    const [activeIndex, setActiveIndex] = useState(null);
 
-    const toggleAccordion = (index) => {
-        setActiveIndex(activeIndex === index ? null : index);
-    };
     window.onload = function () {
         // Reset the form fields when the page loads
         document.getElementById("contact_form").reset();
@@ -83,6 +79,8 @@ const ContactPage = () => {
                     style={{ border: 0 }}
                     allowFullScreen=""
                     loading="lazy"
+                    property="iframe"
+                    title="map"
                 ></iframe>
             </div>
             <h1 className="headings">Frequently Asked Questions</h1>
