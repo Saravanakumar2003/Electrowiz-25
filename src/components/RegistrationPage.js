@@ -6,6 +6,9 @@ import axios from 'axios';
 import QRCode from 'qrcode';
 import '../css/RegistrationPage.css';
 import Select from 'react-select';
+import DOMPurify from 'dompurify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const eventOptions = [
   { value: 'Idea ignition', label: 'Idea ignition' },
@@ -51,42 +54,59 @@ const RegistrationPage = () => {
   }, [formData.events, formData.isVelammalStudent]);
 
   const handleMultiChange = (selectedOptions) => {
+    const sanitizedOptions = selectedOptions.map(option => ({
+      value: DOMPurify.sanitize(option.value),
+      label: DOMPurify.sanitize(option.label)
+    }));
     setFormData({
       ...formData,
-      events: selectedOptions
+      events: sanitizedOptions
     });
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    const sanitizedValue = DOMPurify.sanitize(value);
     setFormData({
       ...formData,
-      [name]: value
+      [name]: sanitizedValue
     });
   };
 
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
+    const sanitizedChecked = DOMPurify.sanitize(checked.toString()) === 'true';
     setFormData({
       ...formData,
-      [name]: checked
+      [name]: sanitizedChecked
     });
   };
 
   const handleImageUpload = (e, type) => {
     const file = e.target.files[0];
     if (!file) return;
-
+  
+    // Validate file size (max 1MB) and format (only images)
+    const validFormats = ['image/jpeg', 'image/png', 'image/gif'];
+    if (file.size > 1048576) {
+      toast.error('File size should be less than 1MB');
+      return;
+    }
+    if (!validFormats.includes(file.type)) {
+      toast.error('Invalid file format. Only JPEG, PNG, and GIF are allowed.');
+      return;
+    }
+  
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
-
+  
     if (type === 'passportPic') {
       setUploadingPassport(true);
     } else {
       setUploadingSignature(true);
     }
-
+  
     fetch(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`, {
       method: 'POST',
       body: formData
@@ -106,6 +126,7 @@ const RegistrationPage = () => {
       })
       .catch(err => {
         console.error('Upload failed:', err);
+        toast.error('Upload failed. Please try again.');
         if (type === 'passportPic') {
           setUploadingPassport(false);
         } else {
@@ -133,10 +154,10 @@ const RegistrationPage = () => {
       if (!formData.events || formData.events.length === 0) newErrors.events = "At least one event must be selected";
       if (!formData.isGudelines) newErrors.isGudelines = "Please agree to the guidelines";
     }
-
+  
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) {
-      alert(Object.values(newErrors).join('\n'));
+      Object.values(newErrors).forEach(error => toast.error(error));
     }
     return Object.keys(newErrors).length === 0;
   };
@@ -246,9 +267,9 @@ const RegistrationPage = () => {
       };
 
       const response = await axios.post('https://api.brevo.com/v3/smtp/email', data, { headers });
-      console.log('Confirmation email sent successfully:', response.data);
+      toast.log('Confirmation email sent successfully:', response.data);
     } catch (error) {
-      console.error('Error sending confirmation email:', error);
+      toast.error('Error sending confirmation email, Kindly contact the team');
       if (error.response) {
         console.error('Error response data:', error.response.data);
       }
@@ -381,6 +402,7 @@ const RegistrationPage = () => {
 
   return (
     <div className="registration-form">
+      <ToastContainer />
       <h2 className='Headings'>Event Registration Form</h2>
       <p className='Headings2'>Dear Participants, the site is still in test mode <br/>and the registration opens from January 2nd, 2025.</p>
       <form id="msform">
@@ -390,7 +412,7 @@ const RegistrationPage = () => {
           <li className={currentStep >= 2 ? "active" : ""}>Event <br />Selection</li>
           <li className={currentStep >= 3 ? "active" : ""}>Payment</li>
         </ul>
-
+  
         {currentStep === 0 && (
           <fieldset>
             <h3 className="fs-title">Personal Details</h3>
@@ -429,7 +451,7 @@ const RegistrationPage = () => {
             <input type="button" name="next" className="next action-button" value="Next" onClick={handleNext} />
           </fieldset>
         )}
-
+  
         {currentStep === 1 && (
           <fieldset>
             <h3 className="fs-title">Academic Details</h3>
@@ -478,7 +500,7 @@ const RegistrationPage = () => {
             <input type="button" name="next" className="next action-button" value="Next" onClick={handleNext} />
           </fieldset>
         )}
-
+  
         {currentStep === 2 && (
           <fieldset>
             <h3 className="fs-title">Event Selection</h3>
@@ -523,7 +545,7 @@ const RegistrationPage = () => {
             <input type="button" name="next" className="next action-button" value="Next" onClick={handleNext} />
           </fieldset>
         )}
-
+  
         {currentStep === 3 && (
           <fieldset>
             <h3 className="fs-title">Payment Gateway</h3>
@@ -556,6 +578,6 @@ const RegistrationPage = () => {
       </form>
     </div>
   );
-};
+}
 
 export default RegistrationPage;

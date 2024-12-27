@@ -50,23 +50,23 @@ const ContactPage = () => {
                     <input type="checkbox" name="botcheck" class="hidden"></input>
                     <div class="name">
                         <label for="name"></label>
-                        <input type="text" placeholder="My name is" name="name" id="name_input" required />
+                        <input type="text" placeholder="My name is" name="name" id="name_input" minLength="2" maxLength="50" required />
                     </div>
                     <div class="email">
                         <label for="email"></label>
-                        <input type="email" placeholder="My e-mail is" name="email" id="email_input" required />
+                        <input type="email" placeholder="My e-mail is" name="email" id="email_input" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
                     </div>
                     <div class="telephone">
                         <label for="name"></label>
-                        <input type="text" placeholder="My number is" name="telephone" id="telephone_input" required />
+                        <input type="text" placeholder="My number is" name="telephone" id="telephone_input" required pattern="[0-9]{10}"/>
                     </div>
                     <div class="subject">
                         <label for="subject"></label>
-                        <input type="text" placeholder="Subject line" name="subject" id="subject_input" required />
+                        <input type="text" placeholder="Subject line" name="subject" id="subject_input" required maxLength="100"/>
                     </div>
                     <div class="message">
                         <label for="message"></label>
-                        <textarea name="message" placeholder="I'd like to chat about" id="message_input" cols="30" rows="5" required></textarea>
+                        <textarea name="message" placeholder="I'd like to chat about" id="message_input" cols="30" rows="5" required maxLength="500"></textarea>
                     </div>
                     <div class="submit">
                         <input type="submit" value="Send Message" id="form_button" />
