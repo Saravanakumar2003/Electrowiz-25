@@ -277,7 +277,7 @@ const EventsPage = () => {
         </article><article className="cta">
           <img src='https://placehold.co/750x800' alt='Bluetit' />
           <div className="cta__text-column">
-            <h2>Photography Competition</h2>
+            <h2>Pixel Perfect (Photography)</h2>
             <ul>
               <strong>Event Rules:</strong>
               <br />

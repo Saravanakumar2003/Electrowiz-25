@@ -23,7 +23,7 @@ const PrivacyPolicy = () => {
       </p>
       <ul>
         <li>Process your payments</li>
-        <li>Send you confirmation emails and receipts</li>
+        <li>Send you confirmation emails and receipts</li>x
         <li>Provide customer support</li>
         <li>Improve our services</li>
       </ul>

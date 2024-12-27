@@ -91,12 +91,12 @@ const SVGAnimation = () => {
                         </textPath>
                     </text>
                 </svg>
-                <div className="bimg"><img class="bigimg" src="img/eventbanner2.png" alt="Some image" /></div>
+                <div className="bimg"><img class="bigimg" src="img/eventbanner2.PNG" alt="Some image" /></div>
                 <svg class="svgtext svgtext--2" data-filter-type="distortion" width="120%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
                     <path id="text-curve2" d="M 0 50 Q 100 0 200 100 Q 300 200 650 50 C 750 0 750 150 1000 50" fill="none" />
                     <text filter="url(#distortionFilter)">
                         <textPath href="#text-curve2">
-                            The Event is going to be held on 01-02-2024 (Saturday)
+                            The Event is going to be held on 01-02-2025 (Saturday)
                         </textPath>
                     </text>
                 </svg>
