@@ -1,5 +1,7 @@
 /* src/components/CookiesNotification.css */
 .cookies-notification {
+    display: flex;
+    flex-direction: row;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -15,6 +17,9 @@
     padding: 0.5rem;
   }
   
+  .cookies-notification a{
+    color: #48FFD5;
+  }
   .cookies-notification button {
     background-color: #6200ea;
     color: #fff;

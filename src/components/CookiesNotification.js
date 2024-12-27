@@ -15,9 +15,9 @@ const CookiesNotification = () => {
   return (
     <div className="cookies-notification">
       <p>
-        We use cookies to ensure you get the best experience on our website. By continuing to use our site, you accept our use of cookies.
+        We use cookies to ensure you get the best experience on our website. By continuing to use our site, you agree to our <a href="/privacy-policy">Privacy Policy</a>.
       </p>
-      <button onClick={handleAccept}>Accept</button>
+      <button onClick={handleAccept}>Okay</button>
     </div>
   );
 };

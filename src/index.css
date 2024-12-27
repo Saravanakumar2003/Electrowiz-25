@@ -1,6 +1,9 @@
+/* index.css */
 body {
   background-color: #052139;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 h1, h2 {
@@ -85,4 +88,9 @@ h1, h2 {
 
 .terms-page a:hover {
   color: #36bfa3;
+}
+
+#tawkchat-container {
+  max-width: 100%;
+  overflow-x: hidden;
 }

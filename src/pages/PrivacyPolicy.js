@@ -23,7 +23,7 @@ const PrivacyPolicy = () => {
       </p>
       <ul>
         <li>Process your payments</li>
-        <li>Send you confirmation emails and receipts</li>x
+        <li>Send you confirmation emails and receipts</li>
         <li>Provide customer support</li>
         <li>Improve our services</li>
       </ul>
@@ -33,6 +33,11 @@ const PrivacyPolicy = () => {
       </p>
       <ul>
         <li>Razorpay, to process your payments</li>
+        <li>Firebase, for database management</li>
+        <li>Cloudinary, for image uploads and management</li>
+        <li>Google APIs, for integrating with Google Sheets</li>
+        <li>Sendinblue, for sending confirmation emails</li>
+        <li>Web3Forms, for handling form submissions</li>
         <li>Service providers who assist us in providing our services</li>
         <li>Law enforcement or regulatory authorities if required by law</li>
       </ul>
