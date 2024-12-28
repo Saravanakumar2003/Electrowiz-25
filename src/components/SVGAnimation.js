@@ -75,7 +75,7 @@ const SVGAnimation = () => {
                         <p class="grid__item-description">We really excited to announce that, The Department of Electronics and Communication Engineering are coming together all set to bring out the hidden talents of the budding engineers. Get ready people as the symposium ELECTROWIZ'25 is down the lane falling on 01-02-2025 (Saturday).</p>
                     </div>
                 </div>
-                <svg class="svgtext svgtext--1" data-filter-type="blur" width="120%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
+                <svg class="svgtext svgtext--1" data-filter-type="blur" width="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
                     <path id="text-curve1" d="M 0 100 Q 250 200 500 100 Q 750 0 1000 100" fill="none" />
                     <text filter="url(#blur)">
                         <textPath href="#text-curve1">
@@ -83,7 +83,7 @@ const SVGAnimation = () => {
                         </textPath>
                     </text>
                 </svg>
-                <svg class="svgtext" data-filter-type="blur" width="120%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
+                <svg class="svgtext" data-filter-type="blur" width="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
                     <path id="text-curve11" d="M 0 100 Q 250 0 500 100 Q 750 200 1000 100" fill="none" />
                     <text filter="url(#blur2)">
                         <textPath href="#text-curve11">
@@ -92,7 +92,7 @@ const SVGAnimation = () => {
                     </text>
                 </svg>
                 <div className="bimg"><img class="bigimg" src="img/eventbanner2.PNG" alt="Some image" /></div>
-                <svg class="svgtext svgtext--2" data-filter-type="distortion" width="120%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
+                <svg class="svgtext svgtext--2" data-filter-type="distortion" width="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
                     <path id="text-curve2" d="M 0 50 Q 100 0 200 100 Q 300 200 650 50 C 750 0 750 150 1000 50" fill="none" />
                     <text filter="url(#distortionFilter)">
                         <textPath href="#text-curve2">
@@ -100,7 +100,7 @@ const SVGAnimation = () => {
                         </textPath>
                     </text>
                 </svg>
-                <svg class="svgtext" data-filter-type="distortion" width="120%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 300">
+                <svg class="svgtext" data-filter-type="distortion" width="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 300">
                     <path id="text-curve22" d="M 0 200 Q 150 300 300 200 Q 700 0 1000 150" fill="none" />
                     <text filter="url(#distortionFilter2)">
                         <textPath href="#text-curve22">
@@ -109,7 +109,7 @@ const SVGAnimation = () => {
                     </text>
                 </svg>
                 <div class="grid">
-                    <svg class="svgtext svgtext--4" data-filter-type="blur" width="120%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
+                    <svg class="svgtext svgtext--4" data-filter-type="blur" width="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
                         <path id="textcircle" d="M 0 0 Q 200 150 500 150 Q 850 150 1000 0 " fill="none" />
                         <text filter="url(#blur)">
                             <textPath href="#textcircle">
@@ -129,7 +129,7 @@ const SVGAnimation = () => {
                         <p class="grid__item-description">Gain hands-on experience in data preprocessing, workflow creation, and model evaluation, all through drag-and-drop functionalities. Explore real-world applications of machine learning in various industries and see how KNIME simplifies complex data challenges.</p>
                     </div>
                 </div>
-                <svg class="svgtext svgtext--3" data-filter-type="blur" width="120%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
+                <svg class="svgtext svgtext--3" data-filter-type="blur" width="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
                     <path id="text-curve3" d="M 0 150 Q 200 50 500 50 Q 800 50 1000 150 " fill="none" />
                     <text filter="url(#blur)">
                         <textPath href="#text-curve3">
@@ -137,7 +137,7 @@ const SVGAnimation = () => {
                         </textPath>
                     </text>
                 </svg>
-                <svg class="svgtext svgtext--3" data-filter-type="blur" width="120%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
+                <svg class="svgtext svgtext--3" data-filter-type="blur" width="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
                     <path id="text-curve4" d="M 0 150 Q 200 50 500 50 Q 800 50 1000 150 " fill="none" />
                     <text filter="url(#blur)">
                         <textPath href="#text-curve4">
@@ -145,7 +145,7 @@ const SVGAnimation = () => {
                         </textPath>
                     </text>
                 </svg>
-                <svg class="svgtext svgtext--3" data-filter-type="blur" width="120%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
+                <svg class="svgtext svgtext--3" data-filter-type="blur" width="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
                     <path id="text-curve5" d="M 0 150 Q 200 50 500 50 Q 800 50 1000 150 " fill="none" />
                     <text filter="url(#blur)">
                         <textPath href="#text-curve5">

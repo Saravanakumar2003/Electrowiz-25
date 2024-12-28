@@ -1,11 +1,11 @@
 /* src/components/CookiesNotification.css */
 .cookies-notification {
-    display: flex;
-    flex-direction: row;
     position: fixed;
     bottom: 0;
+    right: 0;
+    left: 0;    
     width: 100%;
-    background-color: #000;
+    background-color: #00000079;
     color: #fff;
     text-align: center;
     padding: 1rem;
@@ -15,16 +15,19 @@
   .cookies-notification p {
     margin: 0;
     padding: 0.5rem;
+    text-align: justify;
   }
   
   .cookies-notification a{
     color: #48FFD5;
   }
   .cookies-notification button {
-    background-color: #6200ea;
-    color: #fff;
+    background-color: #CCFF00;
+    color: #000;
+    font-weight: 500;
     border: none;
-    padding: 0.5rem 1rem;
+    padding: 0.3rem 0.3rem;
+    margin-left: 30px;
     cursor: pointer;
     border-radius: 5px;
   }

@@ -1,8 +1,10 @@
   .slider{
     position: fixed;
-    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     top: 0;
     left: 0;
+    right: 0;
     z-index: 1000;
     background-color: #CCFF00;
   }

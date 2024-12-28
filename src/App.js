@@ -12,13 +12,14 @@ import RefundPolicy from "./pages/RefundPolicy";
 import Header from "./components/Header";
 import Slider from "./components/Slider";
 import Footer from "./components/Footer";
+import LoadTawkTo from "./components/loadTawkTo";
 import CookiesNotification from "./components/CookiesNotification";
 import "./index.css";
 
 function App() {
   return (
     <Router>
-      <CookiesNotification />
+      {/* <CookiesNotification /> */}
       <Slider />
       <Header />
       <Routes>
@@ -31,6 +32,7 @@ function App() {
         <Route path="/terms-of-use" element={<TermsOfUse />} />
         <Route path="/refund-policy" element={<RefundPolicy />} />
       </Routes>
+      <LoadTawkTo />
       <Footer />
       <Analytics />
     </Router>
