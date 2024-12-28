@@ -11,8 +11,6 @@ Welcome to the Electrowiz'25 project! This project is a web application for the 
     - [Technologies Used](#technologies-used)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
-  - [Envirnoment Variables](#envirnoment-variables)
-  - [License](#license)
 
 
 
@@ -66,10 +64,8 @@ Make sure you have the following installed on your machine:
 5. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 6. You're all set! 🚀
 
-```
 
-Project Structure
-```
+## Project Structure
 .
 ├── api/
 │   ├── payment.js
@@ -96,7 +92,7 @@ Project Structure
 ├── package.json
 ├── README.md
 └── tailwind.config.js
-```
+
 
 ## Envirnoment Variables
 
@@ -120,9 +116,4 @@ REACT_APP_REFRESH_TOKEN=your_google_refresh_token
 REACT_APP_SHEET=your_google_sheet_id
 REACT_APP_BREVO_API_KEY=your_brevo_api_key
 REACT_APP_FORM=your_web3forms_access_key
-```
-
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
 ```

@@ -85,7 +85,7 @@ const RegistrationPage = () => {
   const handleImageUpload = (e, type) => {
     const file = e.target.files[0];
     if (!file) return;
-  
+
     // Validate file size (max 1MB) and format (only images)
     const validFormats = ['image/jpeg', 'image/png', 'image/gif'];
     if (file.size > 1048576) {
@@ -96,17 +96,17 @@ const RegistrationPage = () => {
       toast.error('Invalid file format. Only JPEG, PNG, and GIF are allowed.');
       return;
     }
-  
+
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
-  
+
     if (type === 'passportPic') {
       setUploadingPassport(true);
     } else {
       setUploadingSignature(true);
     }
-  
+
     fetch(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`, {
       method: 'POST',
       body: formData
@@ -154,7 +154,7 @@ const RegistrationPage = () => {
       if (!formData.events || formData.events.length === 0) newErrors.events = "At least one event must be selected";
       if (!formData.isGudelines) newErrors.isGudelines = "Please agree to the guidelines";
     }
-  
+
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) {
       Object.values(newErrors).forEach(error => toast.error(error));
@@ -342,7 +342,7 @@ const RegistrationPage = () => {
   };
 
   const handlePayment = async () => {
-    const orderResponse = await axios.post('/api/payment', { amount: registrationFee }); 
+    const orderResponse = await axios.post('/api/payment', { amount: registrationFee });
     // const orderResponse = await axios.post('http://localhost:5000/create-order', { amount: registrationFee * 100}); 
     const { amount, id: order_id, currency } = orderResponse.data;
 
@@ -360,7 +360,7 @@ const RegistrationPage = () => {
         contact: formData.phone
       },
       notes: {
-        address: 'Velammal Engineering College, Chennai'  
+        address: 'Velammal Engineering College, Chennai'
       },
       theme: {
         color: '#F37254'
@@ -404,7 +404,7 @@ const RegistrationPage = () => {
     <div className="registration-form">
       <ToastContainer />
       <h2 className='Headings'>Event Registration Form</h2>
-      <p className='Headings2'>Dear Participants, the site is still in test mode <br/>and the registration opens from January 2nd, 2025.</p>
+      <p className='Headings2'>Dear Participants, the site is still in test mode <br />and the registration opens from January 2nd, 2025.</p>
       <form id="msform">
         <ul id="progressbar">
           <li className={currentStep >= 0 ? "active" : ""}>Personal <br /> Details</li>
@@ -412,7 +412,7 @@ const RegistrationPage = () => {
           <li className={currentStep >= 2 ? "active" : ""}>Event <br />Selection</li>
           <li className={currentStep >= 3 ? "active" : ""}>Payment</li>
         </ul>
-  
+
         {currentStep === 0 && (
           <fieldset>
             <h3 className="fs-title">Personal Details</h3>
@@ -451,7 +451,7 @@ const RegistrationPage = () => {
             <input type="button" name="next" className="next action-button" value="Next" onClick={handleNext} />
           </fieldset>
         )}
-  
+
         {currentStep === 1 && (
           <fieldset>
             <h3 className="fs-title">Academic Details</h3>
@@ -500,7 +500,7 @@ const RegistrationPage = () => {
             <input type="button" name="next" className="next action-button" value="Next" onClick={handleNext} />
           </fieldset>
         )}
-  
+
         {currentStep === 2 && (
           <fieldset>
             <h3 className="fs-title">Event Selection</h3>
@@ -515,7 +515,7 @@ const RegistrationPage = () => {
             />
             <br />
             <h3 ClassName="fs-title">General Guidelins</h3>
-            <label>1. Kindly, refer the event timelines <a href="">here</a> to avoid overlaps.</label>
+            <label>1. You can register to any numbers of events you want.</label>
             <label>2. Make sure to be present at the venue 30 minutes before the event starts.</label>
             <label>3. The event will be conducted offline at Velammal Engineering College.</label>
             <label>4. Students must carry their college ID card and a online copy of the mail received after registration.</label>
@@ -528,48 +528,48 @@ const RegistrationPage = () => {
             <label></label>
             <br />
             <div class="checkbox">
-            <input
-    id="checkbox-2"
-    className="checkbox-custom"
-    type="checkbox"
-    name="isGudelines"
-    checked={formData.isGudelines}
-    onChange={handleCheckboxChange}
-  />
-  <label htmlFor="checkbox-2" className="checkbox-custom-label">
-    I agree to Guidelines, <a href="https://www.electrowiz.info/privacy-policy">Privacy Policy</a> & <a href="https://www.electrowiz.info/terms-of-use">Terms of Use</a>
-  </label>
+              <input
+                id="checkbox-2"
+                className="checkbox-custom"
+                type="checkbox"
+                name="isGudelines"
+                checked={formData.isGudelines}
+                onChange={handleCheckboxChange}
+              />
+              <label htmlFor="checkbox-2" className="checkbox-custom-label">
+                I agree to Guidelines, <a href="https://www.electrowiz.info/privacy-policy">Privacy Policy</a> & <a href="https://www.electrowiz.info/terms-of-use">Terms of Use</a>
+              </label>
             </div>
             <br />
             <input type="button" name="previous" className="previous action-button" value="Previous" onClick={handlePrevious} />
             <input type="button" name="next" className="next action-button" value="Next" onClick={handleNext} />
           </fieldset>
         )}
-  
+
         {currentStep === 3 && (
           <fieldset>
             <h3 className="fs-title">Payment Gateway</h3>
             <br />
             <div class="checkbox">
-            <input
-      id="checkbox-1"
-      className="checkbox-custom"
-      type="checkbox"
-      name="isVelammalStudent"
-      checked={formData.isVelammalStudent}
-      onChange={handleCheckboxChange}
-    />
-    <label htmlFor="checkbox-1" className="checkbox-custom-label">
-      Are you ECE student of Velammal Engineering College? (Get ₹50 off by checking this box)
-    </label>
-    <label><strong>Discount is only Events (Not Workshop) for ECE Students of VEC</strong></label>
+              <input
+                id="checkbox-1"
+                className="checkbox-custom"
+                type="checkbox"
+                name="isVelammalStudent"
+                checked={formData.isVelammalStudent}
+                onChange={handleCheckboxChange}
+              />
+              <label htmlFor="checkbox-1" className="checkbox-custom-label">
+                Are you ECE student of Velammal Engineering College? (Get ₹50 off by checking this box)
+              </label>
+              <label><strong>Discount is only Events (Not Workshop) for ECE Students of VEC</strong></label>
             </div>
             <br />
             <h2>Total Registration Fee: ₹{registrationFee}</h2>
             <br />
             <label>Click on the "Pay Now" button to proceed with the payment.</label>
             <br />
-            <label><strong>Note:</strong> No refunds will be provided (Refer our <a href="https://www.electrowiz.info/refund-policy">Refund Policy</a>)</label>        
+            <label><strong>Note:</strong> No refunds will be provided (Refer our <a href="https://www.electrowiz.info/refund-policy">Refund Policy</a>)</label>
             <br /><br />
             <input type="button" name="previous" className="previous action-button" value="Previous" onClick={handlePrevious} />
             <button type="button" className="submit action-button" onClick={handlePayment}>Pay Now</button>
