@@ -24,7 +24,7 @@ const IDCard = ({ participant }) => {
   };
 
   return (
-    <div>
+    <div class="id">
       <div class="id-card" ref={cardRef}>
         <div class="id-header">
           <img src="https://i.postimg.cc/L8XvbmQ5/Vec.png" class="id-logo" alt="logo" />

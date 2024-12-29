@@ -39,10 +39,12 @@ const RegistrationPage = () => {
     signaturePic: '',
     isGudelines: false,
     isVelammalStudent: false,
+    reciptPic: '',
   });
 
   const [uploadingPassport, setUploadingPassport] = useState(false);
   const [uploadingSignature, setUploadingSignature] = useState(false);
+  const [uploadingRecipt, setUploadingRecipt] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [registrationFee, setRegistrationFee] = useState(0);
   const [errors, setErrors] = useState({});
@@ -87,13 +89,13 @@ const RegistrationPage = () => {
     if (!file) return;
 
     // Validate file size (max 1MB) and format (only images)
-    const validFormats = ['image/jpeg', 'image/png', 'image/gif'];
+    const validFormats = ['image/jpeg', 'image/png', 'image/jpg'];
     if (file.size > 1048576) {
       toast.error('File size should be less than 1MB');
       return;
     }
     if (!validFormats.includes(file.type)) {
-      toast.error('Invalid file format. Only JPEG, PNG, and GIF are allowed.');
+      toast.error('Invalid file format. Only JPEG, PNG, and JPG are allowed.');
       return;
     }
 
@@ -103,9 +105,13 @@ const RegistrationPage = () => {
 
     if (type === 'passportPic') {
       setUploadingPassport(true);
-    } else {
-      setUploadingSignature(true);
-    }
+    } else
+      if (type === 'reciptPic') {
+        setUploadingRecipt(true);
+      }
+      else {
+        setUploadingSignature(true);
+      }
 
     fetch(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`, {
       method: 'POST',
@@ -120,16 +126,24 @@ const RegistrationPage = () => {
         }));
         if (type === 'passportPic') {
           setUploadingPassport(false);
-        } else {
-          setUploadingSignature(false);
-        }
+        } else
+          if (type === 'reciptPic') {
+            setUploadingRecipt(false);
+          }
+          else {
+            setUploadingSignature(false);
+          }
       })
       .catch(err => {
         console.error('Upload failed:', err);
         toast.error('Upload failed. Please try again.');
         if (type === 'passportPic') {
           setUploadingPassport(false);
-        } else {
+        }
+        else if (type === 'reciptPic') {
+          setUploadingRecipt(false);
+        } 
+        else {
           setUploadingSignature(false);
         }
       });
@@ -154,6 +168,9 @@ const RegistrationPage = () => {
       if (!formData.events || formData.events.length === 0) newErrors.events = "At least one event must be selected";
       if (!formData.isGudelines) newErrors.isGudelines = "Please agree to the guidelines";
     }
+    //else if (currentStep === 3) {
+    //   if (!formData.reciptPic) newErrors.reciptPic = "Recipt Pic is required";
+    // }
 
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) {
@@ -277,7 +294,6 @@ const RegistrationPage = () => {
   };
 
   const handlePaymentSuccess = async (event) => {
-    // Extract the values from the selected event objects
     const events = formData.events.map(event => event.value);
 
     try {
@@ -321,6 +337,7 @@ const RegistrationPage = () => {
           formData.signaturePic,
           formData.isVelammalStudent ? 'Yes' : 'No',
           registrationFee,
+          formData.reciptPic,
           docRef.id
         ],
       ];
@@ -435,8 +452,8 @@ const RegistrationPage = () => {
             <label>Food Preference:</label>
             <select name="food" value={formData.food} onChange={handleChange} required>
               <option value="">Select Food</option>
-              <option value="veg">Veg</option>
-              <option value="non-veg">Non-Veg</option>
+              <option value="Veg">Veg</option>
+              <option value="Non-Veg">Non-Veg</option>
             </select>
             <br />
             <label>Passport Size Pic (Max 1MB):</label>
@@ -468,14 +485,15 @@ const RegistrationPage = () => {
             <label>Department: </label>
             <select type="text" name="department" value={formData.department} onChange={handleChange} required>
               <option value="">Select Department</option>
-              <option value="ece">ECE</option>
-              <option value="cse">CSE</option>
-              <option value="eee">EEE</option>
-              <option value="mech">Mech</option>
-              <option value="civil">Civil</option>
-              <option value="it">IT</option>
-              <option value="ai&ds">AI&DS</option>
-              <option value="other">Other</option>
+              <option value="ECE">ECE</option>
+              <option value="CSE">CSE</option>
+              <option value="EEE">EEE</option>
+              <option value="MECH">Mech</option>
+              <option value="CIVIL">Civil</option>
+              <option value="IT">IT</option>
+              <option value="AI&DS">AI&DS</option>
+              <option value="EIE">EIE</option>
+              <option value="OTHER">Other</option>
             </select>
             <br />
             <label>Year of Study: </label>
@@ -562,17 +580,35 @@ const RegistrationPage = () => {
               <label htmlFor="checkbox-1" className="checkbox-custom-label">
                 Are you ECE student of Velammal Engineering College? (Get ₹50 off by checking this box)
               </label>
-              <label><strong>Discount is only Events (Not Workshop) for ECE Students of VEC</strong></label>
+              <label><strong>Discount is only on Events (Not Workshop) for ECE Students of VEC</strong></label>
             </div>
             <br />
             <h2>Total Registration Fee: ₹{registrationFee}</h2>
             <br />
+            {/* <img className="qr" src="/img/site_qr.png" alt="Payment" />
+            <br />
+            <p className='accountdetails'>Bank Details: <br />
+              Name: J.S.Leena Jasmine <br />
+              Bank Name : State Bank of India<br />
+              Branch Name : Tondiarpet<br />
+              Acc no : 10239319624<br />
+              IFSC Code :SBIN0003306</p>
+            <br />
+            <label>Payment Recipt (Max 1MB):</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleImageUpload(e, 'reciptPic')}
+              required
+            />
+            {uploadingRecipt && <label>Uploading Recipt Picture...</label>} */}
             <label>Click on the "Pay Now" button to proceed with the payment.</label>
             <br />
             <label><strong>Note:</strong> No refunds will be provided (Refer our <a href="https://www.electrowiz.info/refund-policy">Refund Policy</a>)</label>
             <br /><br />
             <input type="button" name="previous" className="previous action-button" value="Previous" onClick={handlePrevious} />
             <button type="button" className="submit action-button" onClick={handlePayment}>Pay Now</button>
+            {/* <button type="button" className="submit action-button" onClick={handlePaymentSuccess}>Submit</button> */}
           </fieldset>
         )}
       </form>
