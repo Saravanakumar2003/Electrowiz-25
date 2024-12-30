@@ -157,13 +157,13 @@ const RegistrationPage = () => {
       if (!formData.phone) newErrors.phone = "Phone is required";
       if (!formData.gender) newErrors.gender = "Gender is required";
       if (!formData.food) newErrors.food = "Food preference is required";
-      if (!formData.passportPic) newErrors.passportPic = "Passport Pic is required";
+      // if (!formData.passportPic) newErrors.passportPic = "Passport Pic is required";
     } else if (currentStep === 1) {
       if (!formData.collegeName) newErrors.collegeName = "College Name is required";
       if (!formData.degree) newErrors.degree = "Degree is required";
       if (!formData.department) newErrors.department = "Department is required";
       if (!formData.yearOfStudy) newErrors.yearOfStudy = "Year of Study is required";
-      if (!formData.signaturePic) newErrors.signaturePic = "Signature Pic is required";
+      // if (!formData.signaturePic) newErrors.signaturePic = "Signature Pic is required";
     } else if (currentStep === 2) {
       if (!formData.events || formData.events.length === 0) newErrors.events = "At least one event must be selected";
       if (!formData.isGudelines) newErrors.isGudelines = "Please agree to the guidelines";
@@ -255,6 +255,8 @@ const RegistrationPage = () => {
             <li>Year of Study: ${formData.yearOfStudy}</li>
             <li>Events: ${formData.events.join(', ')}</li>
           </ul>
+          <br>
+          <p>Kindly, Join this Whatsapp group for further notification: <a href="https://chat.whatsapp.com/ESbkNQsEQezAroe1nct8Uf">Click Here To Join</a></p>
           <br>
           <strong>Kindly, read the following instructions:</strong>
           <p>1. Make sure to carry your ID card and this email to the event.</p>
@@ -359,8 +361,8 @@ const RegistrationPage = () => {
   };
 
   const handlePayment = async () => {
-    const orderResponse = await axios.post('/api/payment', { amount: registrationFee });
-    // const orderResponse = await axios.post('http://localhost:5000/create-order', { amount: registrationFee * 100}); 
+    // const orderResponse = await axios.post('/api/payment', { amount: registrationFee });
+    const orderResponse = await axios.post('http://localhost:5000/create-order', { amount: registrationFee * 100}); 
     const { amount, id: order_id, currency } = orderResponse.data;
 
     const options = {
@@ -461,7 +463,7 @@ const RegistrationPage = () => {
               type="file"
               accept="image/*"
               onChange={(e) => handleImageUpload(e, 'passportPic')}
-              required
+              
             />
             {uploadingPassport && <label>Uploading Passport Picture...</label>}
             <br />
@@ -510,7 +512,7 @@ const RegistrationPage = () => {
               type="file"
               accept="image/*"
               onChange={(e) => handleImageUpload(e, 'signaturePic')}
-              required
+              
             />
             {uploadingSignature && <label>Uploading Signature Picture...</label>}
             <br />
@@ -566,7 +568,7 @@ const RegistrationPage = () => {
 
         {currentStep === 3 && (
           <fieldset>
-            <h3 className="fs-title">Payment Gateway</h3>
+            <h3 className="fs-title">Payment</h3>
             <br />
             <div class="checkbox">
               <input
@@ -585,14 +587,17 @@ const RegistrationPage = () => {
             <br />
             <h2>Total Registration Fee: ₹{registrationFee}</h2>
             <br />
-            {/* <img className="qr" src="/img/site_qr.png" alt="Payment" />
+            <img className="qr" src="/img/QR.jpg" alt="Payment" />
             <br />
+            <div class="accountbox">
             <p className='accountdetails'>Bank Details: <br />
+              UPI: leenavictorece-2@okaxis <br />
               Name: J.S.Leena Jasmine <br />
               Bank Name : State Bank of India<br />
               Branch Name : Tondiarpet<br />
               Acc no : 10239319624<br />
               IFSC Code :SBIN0003306</p>
+            </div>
             <br />
             <label>Payment Recipt (Max 1MB):</label>
             <input
@@ -601,14 +606,15 @@ const RegistrationPage = () => {
               onChange={(e) => handleImageUpload(e, 'reciptPic')}
               required
             />
-            {uploadingRecipt && <label>Uploading Recipt Picture...</label>} */}
-            <label>Click on the "Pay Now" button to proceed with the payment.</label>
+            {uploadingRecipt && <label>Uploading Recipt Picture...</label>}
+            {/* <label>Click on the "Pay Now" button to proceed with the payment.</label> */}
             <br />
             <label><strong>Note:</strong> No refunds will be provided (Refer our <a href="https://www.electrowiz.info/refund-policy">Refund Policy</a>)</label>
-            <br /><br />
+            {/* <label>Kindly, Join this Whatsapp group for further notification: <a href="https://chat.whatsapp.com/ESbkNQsEQezAroe1nct8Uf">Click Here To Join</a></label> */}
+            <br />
             <input type="button" name="previous" className="previous action-button" value="Previous" onClick={handlePrevious} />
-            <button type="button" className="submit action-button" onClick={handlePayment}>Pay Now</button>
-            {/* <button type="button" className="submit action-button" onClick={handlePaymentSuccess}>Submit</button> */}
+            {/* <button type="button" className="submit action-button" onClick={handlePayment}>Pay Now</button> */}
+            <button type="button" className="submit action-button" onClick={handlePaymentSuccess}>Submit</button>
           </fieldset>
         )}
       </form>

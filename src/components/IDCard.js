@@ -25,6 +25,7 @@ const IDCard = ({ participant }) => {
 
   return (
     <div class="id">
+      <p className="t1">Kindly, Join this Whatsapp group for further notification: <a href="https://chat.whatsapp.com/ESbkNQsEQezAroe1nct8Uf">Click Here</a></p>
       <div class="id-card" ref={cardRef}>
         <div class="id-header">
           <img src="https://i.postimg.cc/L8XvbmQ5/Vec.png" class="id-logo" alt="logo" />

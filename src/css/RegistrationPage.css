@@ -238,13 +238,16 @@
 
 .accountdetails{
   color: #fff;
-  font-family: "Jersey 10";
-  font-size: 20px;
+  font-family: "Inter";
+  font-size: 13px;
   font-style: normal;
-  font-weight: 400;
   line-height: normal;
-  letter-spacing: 2.12px;
+  letter-spacing: 2px;
   text-align: center;
   border: #FFF;
   box-shadow: #000;
+}
+
+.accountbox{
+  border: 2px solid #ddd;
 }
