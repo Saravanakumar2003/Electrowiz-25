@@ -9,6 +9,7 @@ import Select from 'react-select';
 import DOMPurify from 'dompurify';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { sendConfirmationEmail } from '../utils/sendEmail'
 
 const eventOptions = [
   { value: 'Idea ignition', label: 'Idea ignition' },
@@ -24,22 +25,25 @@ const eventOptions = [
 ];
 
 const RegistrationPage = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    gender: '',
-    food: '',
-    collegeName: '',
-    degree: '',
-    department: '',
-    yearOfStudy: '',
-    events: [],
-    passportPic: '',
-    signaturePic: '',
-    isGudelines: false,
-    isVelammalStudent: false,
-    reciptPic: '',
+  const [formData, setFormData] = useState(() => {
+    const savedData = localStorage.getItem('registrationFormData');
+    return savedData ? JSON.parse(savedData) : {
+      name: '',
+      email: '',
+      phone: '',
+      gender: '',
+      food: '',
+      collegeName: '',
+      degree: '',
+      department: '',
+      yearOfStudy: '',
+      events: [],
+      passportPic: '',
+      signaturePic: '',
+      reciptPic: '',
+      isGudelines: false,
+      isVelammalStudent: false,
+    };
   });
 
   const [uploadingPassport, setUploadingPassport] = useState(false);
@@ -50,6 +54,34 @@ const RegistrationPage = () => {
   const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    //Use localStorage for data that should persist across browser sessions.
+    //Use sessionStorage for data that should only persist during the current browser session.
+    localStorage.setItem('registrationFormData', JSON.stringify(formData));
+  }, [formData]);
+
+  const clearFormData = () => {
+    localStorage.removeItem('registrationFormData');
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      gender: '',
+      food: '',
+      collegeName: '',
+      degree: '',
+      department: '',
+      yearOfStudy: '',
+      events: [],
+      passportPic: '',
+      signaturePic: '',
+      reciptPic: '',
+      isGudelines: false,
+      isVelammalStudent: false,
+    });
+  };
+  
 
   useEffect(() => {
     calculateRegistrationFee();
@@ -89,61 +121,56 @@ const RegistrationPage = () => {
     if (!file) return;
 
     // Validate file size (max 1MB) and format (only images)
-    const validFormats = ['image/jpeg', 'image/png', 'image/jpg'];
+    const validFormats = ["image/jpeg", "image/png", "image/jpg"];
     if (file.size > 1048576) {
-      toast.error('File size should be less than 1MB');
+      toast.error("File size should be less than 1MB");
       return;
     }
     if (!validFormats.includes(file.type)) {
-      toast.error('Invalid file format. Only JPEG, PNG, and JPG are allowed.');
+      toast.error("Invalid file format. Only JPEG, PNG, and JPG are allowed.");
       return;
     }
 
     const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
+    formData.append("file", file);
+    formData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
 
-    if (type === 'passportPic') {
+    if (type === "passportPic") {
       setUploadingPassport(true);
-    } else
-      if (type === 'reciptPic') {
-        setUploadingRecipt(true);
-      }
-      else {
-        setUploadingSignature(true);
-      }
+    } else if (type === "reciptPic") {
+      setUploadingRecipt(true);
+    } else {
+      setUploadingSignature(true);
+    }
 
     fetch(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`, {
-      method: 'POST',
-      body: formData
+      method: "POST",
+      body: formData,
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         const url = data.secure_url;
-        setFormData(prevFormData => ({
+        setFormData((prevFormData) => ({
           ...prevFormData,
-          [type]: url
+          [type]: url,
         }));
-        if (type === 'passportPic') {
+        if (type === "passportPic") {
           setUploadingPassport(false);
-        } else
-          if (type === 'reciptPic') {
-            setUploadingRecipt(false);
-          }
-          else {
-            setUploadingSignature(false);
-          }
-      })
-      .catch(err => {
-        console.error('Upload failed:', err);
-        toast.error('Upload failed. Please try again.');
-        if (type === 'passportPic') {
-          setUploadingPassport(false);
-        }
-        else if (type === 'reciptPic') {
+        } else if (type === "reciptPic") {
           setUploadingRecipt(false);
-        } 
-        else {
+        } else {
+          setUploadingSignature(false);
+        }
+        toast.success("File uploaded successfully!");
+      })
+      .catch((err) => {
+        console.error("Upload failed:", err);
+        toast.error("Upload failed. Please try again.");
+        if (type === "passportPic") {
+          setUploadingPassport(false);
+        } else if (type === "reciptPic") {
+          setUploadingRecipt(false);
+        } else {
           setUploadingSignature(false);
         }
       });
@@ -157,20 +184,20 @@ const RegistrationPage = () => {
       if (!formData.phone) newErrors.phone = "Phone is required";
       if (!formData.gender) newErrors.gender = "Gender is required";
       if (!formData.food) newErrors.food = "Food preference is required";
-      // if (!formData.passportPic) newErrors.passportPic = "Passport Pic is required";
+      if (!formData.passportPic) newErrors.passportPic = "Passport Pic is required";
     } else if (currentStep === 1) {
       if (!formData.collegeName) newErrors.collegeName = "College Name is required";
       if (!formData.degree) newErrors.degree = "Degree is required";
       if (!formData.department) newErrors.department = "Department is required";
       if (!formData.yearOfStudy) newErrors.yearOfStudy = "Year of Study is required";
-      // if (!formData.signaturePic) newErrors.signaturePic = "Signature Pic is required";
+      if (!formData.signaturePic) newErrors.signaturePic = "Signature Pic is required";
     } else if (currentStep === 2) {
       if (!formData.events || formData.events.length === 0) newErrors.events = "At least one event must be selected";
       if (!formData.isGudelines) newErrors.isGudelines = "Please agree to the guidelines";
     }
-    //else if (currentStep === 3) {
-    //   if (!formData.reciptPic) newErrors.reciptPic = "Recipt Pic is required";
-    // }
+    else if (currentStep === 3) {
+      if (!formData.reciptPic) newErrors.reciptPic = "Recipt Pic is required";
+    }
 
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) {
@@ -201,97 +228,6 @@ const RegistrationPage = () => {
     } catch (error) {
       console.error('Error refreshing access token:', error);
       throw error;
-    }
-  };
-
-  const generateQRCodeURL = async (participant) => {
-    const qrCodeURL = await QRCode.toDataURL(JSON.stringify(participant));
-    return qrCodeURL;
-  };
-
-  const dataURLtoFile = (dataurl, filename) => {
-    const arr = dataurl.split(',');
-    const mime = arr[0].match(/:(.*?);/)[1];
-    const bstr = atob(arr[1]);
-    let n = bstr.length;
-    const u8arr = new Uint8Array(n);
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new File([u8arr], filename, { type: mime });
-  };
-
-  const sendConfirmationEmail = async (email, name, formData) => {
-    try {
-      const qrCodeURL = await generateQRCodeURL(formData);
-      const qrCodeFile = dataURLtoFile(qrCodeURL, 'qrcode.png');
-      const qrCodeBase64 = qrCodeURL.split(',')[1]; // Extract base64 content
-
-      const data = {
-        sender: {
-          name: "Electrowiz'25 Team",
-          email: "team@electrowiz.info"
-        },
-        to: [
-          {
-            email: email,
-            name: name
-          }
-        ],
-        subject: "Registration Confirmation - Electrowiz'25",
-        htmlContent: `
-          <h1>Registration Confirmation</h1>
-          <p>Dear ${name},</p>
-          <p>Thank you for registering for the Electrowiz'25. Here are your details:</p>
-          <ul>
-            <li>Name: ${formData.name}</li>
-            <li>Email: ${formData.email}</li>
-            <li>Phone: ${formData.phone}</li>
-            <li>Gender: ${formData.gender}</li>
-            <li>Food Preference: ${formData.food}</li>
-            <li>College Name: ${formData.collegeName}</li>
-            <li>Degree: ${formData.degree}</li>
-            <li>Department: ${formData.department}</li>
-            <li>Year of Study: ${formData.yearOfStudy}</li>
-            <li>Events: ${formData.events.join(', ')}</li>
-          </ul>
-          <br>
-          <p>Kindly, Join this Whatsapp group for further notification: <a href="https://chat.whatsapp.com/ESbkNQsEQezAroe1nct8Uf">Click Here To Join</a></p>
-          <br>
-          <strong>Kindly, read the following instructions:</strong>
-          <p>1. Make sure to carry your ID card and this email to the event.</p>
-          <p>2. The event will start at 9:00 AM on 1st Feburary 2025.</p>
-          <p>3. The venue is Velammal Engineering College, Chennai.</p>
-          <br>
-          <p>We look forward to seeing you at the event!</p>
-          <br>
-          <p>Best regards,</p>
-          <p>Electrowiz'25 Team</p>
-          <br>
-          <p><strong>Note:</strong> If you lose this email, you cannot participate in the event. Please keep this email safe.</p><p>Attached is your QR Code for the event.</p>
-        `,
-        attachment: [
-          {
-            content: qrCodeBase64,
-            name: 'qrcode.png',
-            type: 'image/png'
-          }
-        ]
-      };
-
-      const headers = {
-        'accept': 'application/json',
-        'api-key': process.env.REACT_APP_BREVO_API_KEY,
-        'content-type': 'application/json'
-      };
-
-      const response = await axios.post('https://api.brevo.com/v3/smtp/email', data, { headers });
-      toast.log('Confirmation email sent successfully:', response.data);
-    } catch (error) {
-      toast.error('Error sending confirmation email, Kindly contact the team');
-      if (error.response) {
-        console.error('Error response data:', error.response.data);
-      }
     }
   };
 
@@ -349,6 +285,7 @@ const RegistrationPage = () => {
 
       // Send confirmation email
       await sendConfirmationEmail(formData.email, formData.name, { ...formData, events });
+      clearFormData();
     } catch (error) {
       console.error('Error adding document: ', error);
       if (error.response) {
@@ -360,36 +297,36 @@ const RegistrationPage = () => {
     }
   };
 
-  const handlePayment = async () => {
-    // const orderResponse = await axios.post('/api/payment', { amount: registrationFee });
-    const orderResponse = await axios.post('http://localhost:5000/create-order', { amount: registrationFee * 100}); 
-    const { amount, id: order_id, currency } = orderResponse.data;
+  // const handlePayment = async () => {
+  // const orderResponse = await axios.post('/api/payment', { amount: registrationFee });
+  //   const orderResponse = await axios.post('http://localhost:5000/create-order', { amount: registrationFee * 100}); 
+  //   const { amount, id: order_id, currency } = orderResponse.data;
 
-    const options = {
-      key: process.env.REACT_APP_RAZORPAY_KEY_ID,
-      amount: amount.toString(),
-      currency: currency,
-      name: 'Electrowiz\'25',
-      description: 'Event Registration Fee',
-      order_id: order_id,
-      handler: handlePaymentSuccess,
-      prefill: {
-        name: formData.name,
-        email: formData.email,
-        contact: formData.phone
-      },
-      notes: {
-        address: 'Velammal Engineering College, Chennai'
-      },
-      theme: {
-        color: '#F37254'
-      }
-    };
+  //   const options = {
+  //     key: process.env.REACT_APP_RAZORPAY_KEY_ID,
+  //     amount: amount.toString(),
+  //     currency: currency,
+  //     name: 'Electrowiz\'25',
+  //     description: 'Event Registration Fee',
+  //     order_id: order_id,
+  //     handler: handlePaymentSuccess,
+  //     prefill: {
+  //       name: formData.name,
+  //       email: formData.email,
+  //       contact: formData.phone
+  //     },
+  //     notes: {
+  //       address: 'Velammal Engineering College, Chennai'
+  //     },
+  //     theme: {
+  //       color: '#F37254'
+  //     }
+  //   };
 
-    const rzp1 = new window.Razorpay(options);
-    rzp1.open();
-    window.focus();
-  };
+  //   const rzp1 = new window.Razorpay(options);
+  //   rzp1.open();
+  //   window.focus();
+  // };
 
   const calculateRegistrationFee = () => {
     let fee = 0;
@@ -463,9 +400,20 @@ const RegistrationPage = () => {
               type="file"
               accept="image/*"
               onChange={(e) => handleImageUpload(e, 'passportPic')}
-              
+              required
             />
-            {uploadingPassport && <label>Uploading Passport Picture...</label>}
+            {uploadingPassport ? <label>Uploading...</label> : formData.passportPic && (
+              <label>
+                File Uploaded:{" "}
+                <a
+                  href={formData.passportPic}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Passport Photo
+                </a>
+              </label>
+            )}
             <br />
             <input type="button" name="next" className="next action-button" value="Next" onClick={handleNext} />
           </fieldset>
@@ -512,9 +460,21 @@ const RegistrationPage = () => {
               type="file"
               accept="image/*"
               onChange={(e) => handleImageUpload(e, 'signaturePic')}
-              
+              required
             />
-            {uploadingSignature && <label>Uploading Signature Picture...</label>}
+            {uploadingSignature ? <label>Uploading...</label> : formData.signaturePic && (
+              <label>
+                File Uploaded:{" "}
+                <a
+                  href={formData.signaturePic}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Signature
+                </a>
+              </label>
+            )}
+
             <br />
             <input type="button" name="previous" className="previous action-button" value="Previous" onClick={handlePrevious} />
             <input type="button" name="next" className="next action-button" value="Next" onClick={handleNext} />
@@ -590,13 +550,13 @@ const RegistrationPage = () => {
             <img className="qr" src="/img/QR.jpg" alt="Payment" />
             <br />
             <div class="accountbox">
-            <p className='accountdetails'>Bank Details: <br />
-              UPI: leenavictorece-2@okaxis <br />
-              Name: J.S.Leena Jasmine <br />
-              Bank Name : State Bank of India<br />
-              Branch Name : Tondiarpet<br />
-              Acc no : 10239319624<br />
-              IFSC Code :SBIN0003306</p>
+              <p className='accountdetails'>Bank Details: <br />
+                UPI: leenavictorece-2@okaxis <br />
+                Name: J.S.Leena Jasmine <br />
+                Bank Name : State Bank of India<br />
+                Branch Name : Tondiarpet<br />
+                Acc no : 10239319624<br />
+                IFSC Code :SBIN0003306</p>
             </div>
             <br />
             <label>Payment Recipt (Max 1MB):</label>
@@ -606,7 +566,18 @@ const RegistrationPage = () => {
               onChange={(e) => handleImageUpload(e, 'reciptPic')}
               required
             />
-            {uploadingRecipt && <label>Uploading Recipt Picture...</label>}
+            {uploadingRecipt ? <label>Uploading...</label> : formData.reciptPic && (
+              <label>
+                File Uploaded:{" "}
+                <a
+                  href={formData.reciptPic}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Receipt
+                </a>
+              </label>
+            )}
             {/* <label>Click on the "Pay Now" button to proceed with the payment.</label> */}
             <br />
             <label><strong>Note:</strong> No refunds will be provided (Refer our <a href="https://www.electrowiz.info/refund-policy">Refund Policy</a>)</label>

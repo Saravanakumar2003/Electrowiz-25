@@ -25,7 +25,10 @@ const IDCard = ({ participant }) => {
 
   return (
     <div class="id">
+      <p className="t1">Note: You will recieve an email with an QR (keep that safe) or this ID card. Without this your entry will be denied.</p>
       <p className="t1">Kindly, Join this Whatsapp group for further notification: <a href="https://chat.whatsapp.com/ESbkNQsEQezAroe1nct8Uf">Click Here</a></p>
+      <button className="downloadbtn" onClick={handleDownload}>Download ID Card</button>
+      <br />
       <div class="id-card" ref={cardRef}>
         <div class="id-header">
           <img src="https://i.postimg.cc/L8XvbmQ5/Vec.png" class="id-logo" alt="logo" />
@@ -58,11 +61,7 @@ const IDCard = ({ participant }) => {
           www.electrowiz.info
         </div>
       </div>
-      <br />
-      <button className="downloadbtn" onClick={handleDownload}>Download ID Card</button>
-      <br />
-      <p className="t1">Note: You will recieve an email with an QR (keep that safe) or this ID card. Without this your entry will be denied.</p>
-    </div >
+     </div >
   );
 };
 
