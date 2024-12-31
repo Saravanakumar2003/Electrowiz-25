@@ -28,31 +28,43 @@ const HomePage = () => {
         <div class="logo-slider">
           <div class="logo-slide-track">
             <div className="slide">
-              <img src="/img/Sponser1.jpeg" alt="Sponsor 1" className="sponsor-logo" />
+              <img src="/img/Sponser2.jpeg" alt="Sponsor 1" className="sponsor-logo" />
             </div>
             <div className="slide">
               <img src="/img/Vec.png" alt="Sponsor 2" className="sponsor-logo" />
             </div>
             <div className="slide">
-              <img src="/img/Sponser1.jpeg" alt="Sponsor 1" className="sponsor-logo" />
+              <img src="/img/Sponser2.jpeg" alt="Sponsor 1" className="sponsor-logo" />
             </div>
             <div className="slide">
               <img src="/img/Vec.png" alt="Sponsor 2" className="sponsor-logo" />
             </div>
             <div className="slide">
-              <img src="/img/Sponser1.jpeg" alt="Sponsor 1" className="sponsor-logo" />
+              <img src="/img/Sponser2.jpeg" alt="Sponsor 1" className="sponsor-logo" />
             </div>
             <div className="slide">
               <img src="/img/Vec.png" alt="Sponsor 2" className="sponsor-logo" />
             </div>
             <div className="slide">
-              <img src="/img/Sponser1.jpeg" alt="Sponsor 1" className="sponsor-logo" />
+              <img src="/img/Sponser2.jpeg" alt="Sponsor 1" className="sponsor-logo" />
             </div>
             <div className="slide">
               <img src="/img/Vec.png" alt="Sponsor 2" className="sponsor-logo" />
             </div>
             <div className="slide">
-              <img src="/img/Sponser1.jpeg" alt="Sponsor 1" className="sponsor-logo" />
+              <img src="/img/Sponser2.jpeg" alt="Sponsor 1" className="sponsor-logo" />
+            </div>
+            <div className="slide">
+              <img src="/img/Vec.png" alt="Sponsor 2" className="sponsor-logo" />
+            </div>
+            <div className="slide">
+              <img src="/img/Sponser2.jpeg" alt="Sponsor 1" className="sponsor-logo" />
+            </div>
+            <div className="slide">
+              <img src="/img/Vec.png" alt="Sponsor 2" className="sponsor-logo" />
+            </div>
+            <div className="slide">
+              <img src="/img/Sponser2.jpeg" alt="Sponsor 1" className="sponsor-logo" />
             </div>
             <div className="slide">
               <img src="/img/Vec.png" alt="Sponsor 2" className="sponsor-logo" />

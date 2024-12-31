@@ -14,7 +14,6 @@ const eventsData = {
       "2. M. Jayashrie - 8015752278",
     ],
     judgingCriteria: [
-      "Judging Criteria: ",
       "Presentation: 10",
       "Technical Content: 10",
       "Novelty: 15",
@@ -222,7 +221,7 @@ const EventsPage = () => {
     <div className="events-page">
       <img src="/img/eventbanner.png" alt="Banner" className="banner" />
       <><article className="cta">
-        <img src='https://placehold.co/750x800' alt='Bluetit' />
+        <img src='/img/events/Imagine.png' alt='Bluetit' />
         <div className="cta__text-column">
           <h2>Imaginarium (Project Display)</h2>
           <p><strong>Team Description:</strong> A team can have a maximum of 4 Members.</p>
@@ -240,7 +239,7 @@ const EventsPage = () => {
           <button className="btn" onClick={() => openModal("event1", "judgingCriteria")}>Judging Criteria</button>
         </div>
       </article><article className="cta">
-          <img src='https://placehold.co/750x800' alt='Bluetit' />
+          <img src='/img/events/Infinity.PNG' alt='Bluetit' />
           <div className="cta__text-column">
             <h2>INFINITY SQUAD (DUMBCHARADES)</h2>
             <p><strong>Team Description:</strong> Each team will consist of 2 to 3 members.</p>
@@ -259,7 +258,7 @@ const EventsPage = () => {
             <button className="btn" onClick={() => openModal("event2", "judgingCriteria")}>Judging Criteria</button>
           </div>
         </article><article className="cta">
-          <img src='https://placehold.co/750x800' alt='Bluetit' />
+          <img src='/img/events/Idea.PNG' alt='Bluetit' />
           <div className="cta__text-column">
             <h2>Idea Ignition</h2>
             <p><strong>Team Description:</strong> A team can have 3-4 participants.</p>
@@ -275,7 +274,7 @@ const EventsPage = () => {
             <button className="btn" onClick={() => openModal("event3", "coordinators")}>Coordinators</button>
           </div>
         </article><article className="cta">
-          <img src='https://placehold.co/750x800' alt='Bluetit' />
+          <img src='/img/events/Pixel.PNG' alt='Bluetit' />
           <div className="cta__text-column">
             <h2>Pixel Perfect (Photography)</h2>
             <ul>
@@ -292,7 +291,7 @@ const EventsPage = () => {
             <button className="btn" onClick={() => openModal("event5", "coordinators")}>Coordinators</button>
           </div>
         </article><article className="cta">
-          <img src='https://placehold.co/750x800' alt='Bluetit' />
+          <img src='/img/events/Code.png' alt='Bluetit' />
           <div className="cta__text-column">
             <h2>BYTE AND BREAK THROUGH</h2>
             <ul>
@@ -309,9 +308,9 @@ const EventsPage = () => {
             <button className="btn" onClick={() => openModal("event4", "coordinators")}>Coordinators</button>
           </div>
         </article><article className="cta">
-          <img src='https://placehold.co/750x800' alt='Bluetit' />
+          <img src='/img/events/Mystery.PNG' alt='Bluetit' />
           <div className="cta__text-column">
-            <h2>TREASURE AND HUNT</h2>
+            <h2>Mystery Matters (Treasure Hunt)</h2>
             <ul>
               <strong>Team Description:</strong>A team can have Permitted a maximum 3 members permitted.
             </ul>
@@ -328,7 +327,7 @@ const EventsPage = () => {
             <button className="btn" onClick={() => openModal("event6", "coordinators")}>Coordinators</button>
           </div>
         </article><article className="cta">
-          <img src='https://placehold.co/750x800' alt='Bluetit' />
+          <img src='/img/events/Melody.PNG' alt='Bluetit' />
           <div className="cta__text-column">
             <h2>Melody Madness</h2>
             <ul>
@@ -343,14 +342,13 @@ const EventsPage = () => {
               <li>➼ It’s an elimination round where each team is questioned and expected to answer within a given time limit.</li>
               <li>➼ Round 3: MUSICAL LINKUP (90’s songs)</li>
               <li>➼ Participant's should analyze pictures to decipher song lyrics. The first to correctly identify the most lyrics wins the game.</li>
-              <li>➼ Note: Tiebreaker rounds will be conducted if necessary.</li>
             </ul>
 
             <button className="btn" onClick={() => openModal("event7", "rules")}>Event Rules</button>
             <button className="btn" onClick={() => openModal("event7", "coordinators")}>Coordinators</button>
           </div>
         </article><article className="cta">
-          <img src='https://placehold.co/750x800' alt='Bluetit' />
+          <img src='/img/events/Linked.PNG' alt='Bluetit' />
           <div className="cta__text-column">
             <h2>LINKED UP (CONNECTIONS)</h2>
             <ul>
@@ -370,9 +368,9 @@ const EventsPage = () => {
             <button className="btn" onClick={() => openModal("event8", "coordinators")}>Coordinators</button>
           </div>
         </article><article className="cta">
-          <img src='https://placehold.co/750x800' alt='Bluetit' />
+          <img src='/img/events/Quiz.PNG' alt='Bluetit' />
           <div className="cta__text-column">
-            <h2>Technical Quiz</h2>
+            <h2>Quiztronics</h2>
             <ul>
               <strong>Team Description:</strong>A team Can have a maximum of 3 members permitted.
             </ul>
@@ -388,7 +386,7 @@ const EventsPage = () => {
             <button className="btn" onClick={() => openModal("event9", "coordinators")}>Coordinators</button>
           </div>
         </article><article className="cta">
-          <img src='https://placehold.co/750x800' alt='Bluetit' />
+          <img src='/img/events/Workshop.png' alt='Bluetit' />
           <div className="cta__text-column">
             <h2>Workshop</h2>
             <ul>

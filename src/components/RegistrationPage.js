@@ -40,7 +40,7 @@ const RegistrationPage = () => {
       events: [],
       passportPic: '',
       signaturePic: '',
-      reciptPic: '',
+      receiptPic: '',
       isGudelines: false,
       isVelammalStudent: false,
     };
@@ -48,7 +48,7 @@ const RegistrationPage = () => {
 
   const [uploadingPassport, setUploadingPassport] = useState(false);
   const [uploadingSignature, setUploadingSignature] = useState(false);
-  const [uploadingRecipt, setUploadingRecipt] = useState(false);
+  const [uploadingReceipt, setUploadingReceipt] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [registrationFee, setRegistrationFee] = useState(0);
   const [errors, setErrors] = useState({});
@@ -76,7 +76,7 @@ const RegistrationPage = () => {
       events: [],
       passportPic: '',
       signaturePic: '',
-      reciptPic: '',
+      receiptPic: '',
       isGudelines: false,
       isVelammalStudent: false,
     });
@@ -116,7 +116,7 @@ const RegistrationPage = () => {
     });
   };
 
-  const handleImageUpload = (e, type) => {
+const handleImageUpload = (e, type) => {
     const file = e.target.files[0];
     if (!file) return;
 
@@ -137,8 +137,8 @@ const RegistrationPage = () => {
 
     if (type === "passportPic") {
       setUploadingPassport(true);
-    } else if (type === "reciptPic") {
-      setUploadingRecipt(true);
+    } else if (type === "receiptPic") {
+      setUploadingReceipt(true);
     } else {
       setUploadingSignature(true);
     }
@@ -156,8 +156,8 @@ const RegistrationPage = () => {
         }));
         if (type === "passportPic") {
           setUploadingPassport(false);
-        } else if (type === "reciptPic") {
-          setUploadingRecipt(false);
+        } else if (type === "receiptPic") {
+          setUploadingReceipt(false);
         } else {
           setUploadingSignature(false);
         }
@@ -168,8 +168,8 @@ const RegistrationPage = () => {
         toast.error("Upload failed. Please try again.");
         if (type === "passportPic") {
           setUploadingPassport(false);
-        } else if (type === "reciptPic") {
-          setUploadingRecipt(false);
+        } else if (type === "receiptPic") {
+          setUploadingReceipt(false);
         } else {
           setUploadingSignature(false);
         }
@@ -184,19 +184,19 @@ const RegistrationPage = () => {
       if (!formData.phone) newErrors.phone = "Phone is required";
       if (!formData.gender) newErrors.gender = "Gender is required";
       if (!formData.food) newErrors.food = "Food preference is required";
-      if (!formData.passportPic) newErrors.passportPic = "Passport Pic is required";
+      if (!formData.passportPic) newErrors.passportPic = "Passport Picture is required";
     } else if (currentStep === 1) {
       if (!formData.collegeName) newErrors.collegeName = "College Name is required";
       if (!formData.degree) newErrors.degree = "Degree is required";
       if (!formData.department) newErrors.department = "Department is required";
       if (!formData.yearOfStudy) newErrors.yearOfStudy = "Year of Study is required";
-      if (!formData.signaturePic) newErrors.signaturePic = "Signature Pic is required";
+      if (!formData.signaturePic) newErrors.signaturePic = "Signature Picture is required";
     } else if (currentStep === 2) {
       if (!formData.events || formData.events.length === 0) newErrors.events = "At least one event must be selected";
       if (!formData.isGudelines) newErrors.isGudelines = "Please agree to the guidelines";
     }
     else if (currentStep === 3) {
-      if (!formData.reciptPic) newErrors.reciptPic = "Recipt Pic is required";
+      if (!formData.receiptPic) newErrors.receiptPic = "Receipt Picture is required";
     }
 
     setErrors(newErrors);
@@ -232,6 +232,11 @@ const RegistrationPage = () => {
   };
 
   const handlePaymentSuccess = async (event) => {
+    if (!formData.receiptPic) {
+      toast.error("Receipt Picture is required");
+      return;
+    }
+
     const events = formData.events.map(event => event.value);
 
     try {
@@ -259,7 +264,7 @@ const RegistrationPage = () => {
       const values = [
         [
           new Date().toLocaleString(
-            'en-US', { timeZone: 'Asia/Kolkata' }
+            'en-IN', { timeZone: 'Asia/Kolkata' }
           ).replace(',', ''),
           formData.name,
           formData.email,
@@ -275,7 +280,7 @@ const RegistrationPage = () => {
           formData.signaturePic,
           formData.isVelammalStudent ? 'Yes' : 'No',
           registrationFee,
-          formData.reciptPic,
+          formData.receiptPic,
           docRef.id
         ],
       ];
@@ -360,7 +365,6 @@ const RegistrationPage = () => {
     <div className="registration-form">
       <ToastContainer />
       <h2 className='Headings'>Event Registration Form</h2>
-      <p className='Headings2'>Dear Participants, the site is still in test mode <br />and the registration opens from January 2nd, 2025.</p>
       <form id="msform">
         <ul id="progressbar">
           <li className={currentStep >= 0 ? "active" : ""}>Personal <br /> Details</li>
@@ -563,14 +567,14 @@ const RegistrationPage = () => {
             <input
               type="file"
               accept="image/*"
-              onChange={(e) => handleImageUpload(e, 'reciptPic')}
+              onChange={(e) => handleImageUpload(e, 'receiptPic')}
               required
             />
-            {uploadingRecipt ? <label>Uploading...</label> : formData.reciptPic && (
+            {uploadingReceipt ? <label>Uploading...</label> : formData.receiptPic && (
               <label>
                 File Uploaded:{" "}
                 <a
-                  href={formData.reciptPic}
+                  href={formData.receiptPic}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

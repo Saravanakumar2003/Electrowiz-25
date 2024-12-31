@@ -11,65 +11,30 @@ const ContactPage = () => {
     return (
         <section className="contact-main" id="contact">
             <h1 className="headings">Contact Us</h1>
-
             <div className="contact-info">
-                    <div className="contact-info-item">
-                        <h4>Email:</h4>
-                        <p>
-                            <a href="mailto:contact@electrowiz.info">
-                                contact@electrowiz.info
-                            </a>
-                        </p>
-                    </div>
-                    <div className="contact-info-item">
-                        <h4>Phone:</h4>
-                        <p>
-                            <a href="tel:+91">
-                            </a>
-                            Kindly, contact particular event coordinators for queries.
-                        </p>
-                    </div>
-                    <div className="contact-info-item">
-                        <h4>Address:</h4>
-                        <p>
-                            Velammal Engineering College, Chennai, Tamil Nadu, India
-                        </p>
-                    </div>
+                <div className="contact-info-item">
+                    <h4>Email:</h4>
+                    <p>
+                        <a href="mailto:contact@electrowiz.info">
+                            contact@electrowiz.info
+                        </a>
+                    </p>
                 </div>
-            
-            <h1 className="headings">Send Us a Message</h1>
-            
-            <div id="container">
-                <form action="https://api.web3forms.com/submit" method="POST" id="contact_form">
-                    <input type="hidden" name="access_key" value={process.env.REACT_APP_FORM} />
-                    <input type="hidden" name="subject" value="New submission from Electrowiz'25 website" />
-                    <input type="checkbox" name="botcheck" class="hidden"></input>
-                    <div class="name">
-                        <label for="name"></label>
-                        <input type="text" placeholder="My name is" name="name" id="name_input" minLength="2" maxLength="50" required />
-                    </div>
-                    <div class="email">
-                        <label for="email"></label>
-                        <input type="email" placeholder="My e-mail is" name="email" id="email_input" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
-                    </div>
-                    <div class="telephone">
-                        <label for="name"></label>
-                        <input type="text" placeholder="My number is" name="telephone" id="telephone_input" required pattern="[0-9]{10}"/>
-                    </div>
-                    <div class="subject">
-                        <label for="subject"></label>
-                        <input type="text" placeholder="Subject line" name="subject" id="subject_input" required maxLength="100"/>
-                    </div>
-                    <div class="message">
-                        <label for="message"></label>
-                        <textarea name="message" placeholder="I'd like to chat about" id="message_input" cols="30" rows="5" required maxLength="500"></textarea>
-                    </div>
-                    <div class="submit">
-                        <input type="submit" value="Send Message" id="form_button" />
-                    </div>
-                </form>
+                <div className="contact-info-item">
+                    <h4>Phone:</h4>
+                    <p>
+                        <a href="tel:+91">
+                        </a>
+                        Kindly, contact particular event coordinators for queries.
+                    </p>
+                </div>
+                <div className="contact-info-item">
+                    <h4>Address:</h4>
+                    <p>
+                        Velammal Engineering College, Chennai, Tamil Nadu, India
+                    </p>
+                </div>
             </div>
-            
             <h1 className="headings">Our Location</h1>
             <div className="map">
                 <iframe
@@ -135,6 +100,37 @@ const ContactPage = () => {
                         </div>
                     </details>
                 </div>
+            </div>
+            <h1 className="headings">Send Us a Message</h1>
+            <div id="container">
+                <form action="https://api.web3forms.com/submit" method="POST" id="contact_form">
+                    <input type="hidden" name="access_key" value={process.env.REACT_APP_FORM} />
+                    <input type="hidden" name="subject" value="New submission from Electrowiz'25 website" />
+                    <input type="checkbox" name="botcheck" class="hidden"></input>
+                    <div class="name">
+                        <label for="name"></label>
+                        <input type="text" placeholder="My name is" name="name" id="name_input" minLength="2" maxLength="50" required />
+                    </div>
+                    <div class="email">
+                        <label for="email"></label>
+                        <input type="email" placeholder="My e-mail is" name="email" id="email_input" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
+                    </div>
+                    <div class="telephone">
+                        <label for="name"></label>
+                        <input type="text" placeholder="My number is" name="telephone" id="telephone_input" required pattern="[0-9]{10}" />
+                    </div>
+                    <div class="subject">
+                        <label for="subject"></label>
+                        <input type="text" placeholder="Subject line" name="subject" id="subject_input" required maxLength="100" />
+                    </div>
+                    <div class="message">
+                        <label for="message"></label>
+                        <textarea name="message" placeholder="I'd like to chat about" id="message_input" cols="30" rows="5" required maxLength="500"></textarea>
+                    </div>
+                    <div class="submit">
+                        <input type="submit" value="Send Message" id="form_button" />
+                    </div>
+                </form>
             </div>
         </section >
     );

@@ -6,7 +6,7 @@ const Slider2 = () => {
         <div class="slider">
             <div class="scroll">
                 <div class="scroll text">
-                    Electrowiz'25  <span> Registration</span>  Starts From  <span> 2nd January, 2025</span>
+                    Register Now!  <span> Before it is </span> too Late - <span> Ends on </span> 30th January, 2025
                 </div>
             </div>
         </div>

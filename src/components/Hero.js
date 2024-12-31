@@ -17,9 +17,9 @@ const CountdownTimer = () => {
         </video>
         <br /> <br />
         <div className="homeText">
-          Registration Starts from: 
+          Registration Ends On: 
           <br/>
-          2nd January 2025
+          30th January 2025
         </div>
         <div className="countdown-timer">
           <div className="countdown-item">
