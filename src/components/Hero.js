@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const CountdownTimer = () => {
   // Target date for countdown
-  const targetDate = new Date("2025-02-1T09:00:00");
+  const targetDate = new Date("2025-02-01T09:00:00");
 
   // Renderer for the countdown timer
   const renderer = ({ days, hours, minutes, seconds }) => {
