@@ -265,11 +265,12 @@ const EventsPage = () => {
             <ul>
               <strong>Event Rules:</strong>
               <br />
-              <li>➼ The list of shortlisted candidates will be informed by e-mail or phone.</li>
+              <li>➼ Participants are requested to send their papers with the following details: Team members name, College Name, Contact Number, Mail ID to ideaignition.vec@gmail.com before 22nd Jan.</li>
               <li>➼ The Shortlisted teams should bring a softcopy of the PPT and hardcopy of the paper on the day of event(01.02.2025).</li>
               <li>➼ Teams will be given 8 minutes to present their paper followed by 2 minute QnA session. The paper must be the original work of the author(s).</li>
-              <li>➼ Participants are requested to send their papers with the following details: Team members name, College Name, Contact Number, Mail ID to ideaignition.vec@gmail.com before 30.01.2025.</li>
             </ul>
+            <br />
+            <strong>Last Date to Register:</strong> 22nd Jan 2025 <br /> 
             <button className="btn" onClick={() => openModal("event3", "rules")}>Event Rules</button>
             <button className="btn" onClick={() => openModal("event3", "coordinators")}>Coordinators</button>
           </div>
@@ -372,15 +373,14 @@ const EventsPage = () => {
           <div className="cta__text-column">
             <h2>Quiztronics</h2>
             <ul>
-              <strong>Team Description:</strong>A team Can have a maximum of 3 members permitted.
+              <strong>Team Description:</strong>A team Can have a maximum of 3 members permitted. (Individual participation is not allowed)
             </ul>
             <ul>
               <strong>Conduction Procedure:</strong>
               <br />
-              <li>➼ Round 1: PAPYRUS PUZZLE</li>
-              <li>➼ This preliminary round is an elimination round. It is a pen and paper round where each team is provided with 25 questions. It is expected to finish within the 20 minutes time limit.</li>
-              <li>➼ Round 2: FAST FRENZY</li>
-              <li>➼ Each team will designate one member to use their mobile phone to join the game with a unique PIN, respond to MCQs displayed on the screen, and witness your answers and scores update in real-time on the same screen, with the top performers showcased on the leaderboard.</li>
+              <li>➼ Round 1: PAPYRUS PUZZLE -- This preliminary round is an elimination round. It is a pen and paper round where each team is provided with 25 questions. It is expected to finish within the 20 minutes time limit.</li>
+              <li>➼ Round 2: FAST FRENZY -- Each team will face 5 questions, and they must answer them within 2 minutes. Speed and accuracy are critical in this round.</li>
+              <li>➼ Round 3: Break the Buzzer -- Teams must buzz in quickly to answer questions. There is no passing of questions if a team provides an incorrect answers</li>
             </ul>
             <button className="btn" onClick={() => openModal("event9", "rules")}>Event Rules</button>
             <button className="btn" onClick={() => openModal("event9", "coordinators")}>Coordinators</button>

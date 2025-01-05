@@ -22,11 +22,13 @@ const Header = () => {
                     <Link to="/events" className="navbar-link" onClick={closeNavbar}>Events</Link>
                     <Link to="/register" className="navbar-link" onClick={closeNavbar}>Register</Link>
                     <Link to="/contact" className="navbar-link" onClick={closeNavbar}>Contact</Link>
+                    <Link to="/credits" className="navbar-link" onClick={closeNavbar}>Credits</Link>
                 </div>
                 <div className={`hamburger ${isOpen ? 'open' : ''}`} onClick={toggleNavbar}>
                     <div className="bar bar1"></div>
                     <div className="bar bar2"></div>
                     <div className="bar bar3"></div>
+                    <div className="bar bar4"></div>
                 </div>
             </nav>
         </header>

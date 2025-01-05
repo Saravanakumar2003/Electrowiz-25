@@ -13,6 +13,7 @@ import Header from "./components/Header";
 import Slider from "./components/Slider";
 import Footer from "./components/Footer";
 import LoadTawkTo from "./components/loadTawkTo";
+import Credits from "./pages/Credits";
 import CookiesNotification from "./components/CookiesNotification";
 import "./index.css";
 
@@ -31,6 +32,7 @@ function App() {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-of-use" element={<TermsOfUse />} />
         <Route path="/refund-policy" element={<RefundPolicy />} />
+        <Route path="/credits" element={<Credits />} />
       </Routes>
       <LoadTawkTo />
       <Footer />
