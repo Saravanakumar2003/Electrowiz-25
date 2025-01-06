@@ -175,7 +175,7 @@ const eventsData = {
     coordinators: [
       "Student Coordinator: Name and contact details.:",
       "Sashitha Thummagunta: 8248953048",
-      "Yuthika.S : 97910 77501"
+      "Yuthikaa S : 9791077501"
     ],
     judgingCriteria: []
   },

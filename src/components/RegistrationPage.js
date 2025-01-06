@@ -43,6 +43,7 @@ const RegistrationPage = () => {
       receiptPic: '',
       isGudelines: false,
       isVelammalStudent: false,
+      referral:'',
     };
   });
 
@@ -79,6 +80,7 @@ const RegistrationPage = () => {
       receiptPic: '',
       isGudelines: false,
       isVelammalStudent: false,
+      referral:'',
     });
   };
   
@@ -185,6 +187,7 @@ const handleImageUpload = (e, type) => {
       if (!formData.gender) newErrors.gender = "Gender is required";
       if (!formData.food) newErrors.food = "Food preference is required";
       if (!formData.passportPic) newErrors.passportPic = "Passport Picture is required";
+      if (!formData.referral) newErrors.referral = "Referral is required";
     } else if (currentStep === 1) {
       if (!formData.collegeName) newErrors.collegeName = "College Name is required";
       if (!formData.degree) newErrors.degree = "Degree is required";
@@ -281,7 +284,8 @@ const handleImageUpload = (e, type) => {
           formData.isVelammalStudent ? 'Yes' : 'No',
           registrationFee,
           formData.receiptPic,
-          docRef.id
+          docRef.id,
+          formData.referral
         ],
       ];
 
@@ -398,6 +402,9 @@ const handleImageUpload = (e, type) => {
               <option value="Veg">Veg</option>
               <option value="Non-Veg">Non-Veg</option>
             </select>
+            <br />
+            <label>Referred by: (If none, mention NA) </label>
+            <input type="text" name="referral" value={formData.referral} onChange={handleChange} required />
             <br />
             <label>Passport Size Pic (Max 1MB):</label>
             <input
