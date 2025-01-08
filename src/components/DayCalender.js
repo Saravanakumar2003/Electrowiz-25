@@ -34,9 +34,9 @@ const Calendar = () => {
           initialDate="2025-02-01"
           events={events}
           headerToolbar={{
-            left: 'prev,next today',
+            left: '',
             center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay',
+            right: '',
           }}
           buttonText={{
             today: 'Today',
@@ -44,13 +44,13 @@ const Calendar = () => {
             week: 'Week',
             day: 'Day',
           }}
-          eventColor="#378006" // Default event color
+          eventColor="#378006"
           height="auto"
           slotMinTime="09:30:00"
           slotMaxTime="16:10:00"
           slotDuration="00:05:00"
           eventOverlap={false}
-          eventContent={renderEventContent} // Custom render function
+          eventContent={renderEventContent} 
         />
       </div>
     </div>

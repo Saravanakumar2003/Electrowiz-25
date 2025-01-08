@@ -105,7 +105,7 @@ a:focus {
   grid-template-columns: repeat(auto-fit, minmax(200px, calc(390px + 3rem)));
   justify-content: center;
   grid-gap: 10vw;
-  margin: 15rem auto;
+  margin: 20rem auto;
 }
 
 .grid__item {
@@ -143,7 +143,6 @@ a:focus {
   display: block;
   width: 100%;
   max-width: calc(1025px - 3rem);
-  margin: 25vh auto;
 }
 
 .svgtext {
@@ -234,7 +233,6 @@ a:focus {
     min-height: 100vh;
   }
   .grid__item:nth-child(even) {
-    margin-top: 35vh;
     text-align: right;
   }
   .grid__item:nth-child(even) .grid__item-description {
@@ -292,10 +290,12 @@ img:hover {
   font-family: "Jersey 10";
 }
 
-.animation p {
+.text_2 {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  margin: 1rem 0;
-  text-align: justify;
+  text-align: center;
+  font-family: Inter;
+  margin: 10px auto;
+
 }

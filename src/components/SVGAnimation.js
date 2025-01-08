@@ -155,6 +155,7 @@ const SVGAnimation = () => {
                 </svg>
                 <span class="grid__item-number">Event Schedule</span>
                 <div className="bimg"><img class="bigimg" src="img/eventagenda.png" alt="Some image" /></div>
+                <p class="text_2">Event Schedule is subject to change. <br />These timing are provided from Electrowiz'23 Event</p>
             </main>
         </div>
     );
