@@ -71,8 +71,8 @@ const eventsData = {
     coordinators: [
       "Student Coordinator: Name and contact details.",
       "Sharmila Devi: 9080969747",
-      "Suba Shobika:  76038 57211",
-      "Dilip kumar: 97042 08881"   
+      "Suba Shobika:  7603857211",
+      "Dilip kumar: 9704208881"   
     ],
     judgingCriteria: []
   },
@@ -98,8 +98,8 @@ const eventsData = {
     coordinators: [
       "Student Coordinator: Name and contact details.",
       "Arunvel R: 8838201979",
-      "Govardhan S: - 6369437174",
-      "Harish R: - 9342777194"
+      "Govardhan S: 6369437174",
+      "Harish R: 9342777194"
     ],
     judgingCriteria: []
   },
@@ -120,11 +120,11 @@ const eventsData = {
   event7: {
     rules: [
       "Game Contract: ",
-      "☑ Each team should find the answer in the stipulated time.",
-      "☑ Each team will be given chance based on the buzzer.",
-      "☑ Mobile phones and all other devices of communication or IoT devices are restricted.",
-      "☑ The organizing committee has every right to amend the existing rules or introduce new rules at any time before/during/after the contest. Any such rules would be communicated to the participants beforehand, and all the participants must follow them.",
-      "☑ The decision made by the judging committee will be final and binding."
+      "Each team should find the answer in the stipulated time.",
+      "Each team will be given chance based on the buzzer.",
+      "Mobile phones and all other devices of communication or IoT devices are restricted.",
+      "The organizing committee has every right to amend the existing rules or introduce new rules at any time before/during/after the contest. Any such rules would be communicated to the participants beforehand, and all the participants must follow them.",
+      "The decision made by the judging committee will be final and binding."
     ],
     coordinators: [
       "Student Coordinator: Name and contact details.",
