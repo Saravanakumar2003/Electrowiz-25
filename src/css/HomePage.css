@@ -2,7 +2,6 @@
   padding: 3rem;
   text-align: center;
   border-radius: 10px;
-  box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.125);
 }
 
 .Instagram h2 {
@@ -15,18 +14,7 @@
   line-height: normal;
   letter-spacing: 5.28px;
   align-items: flex-start;
-}
-
-.Instagram span {
-  color: #fff;
-  text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
-  font-family: "Jersey 10";
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: 5.28px;
-  margin-bottom: 2rem;
+  padding: 2rem;
 }
 
  .sponsors h2 {

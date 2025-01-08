@@ -137,6 +137,7 @@ a:focus {
   font-family: news-gothic-std, sans-serif;
   line-height: 1.5;
   padding-right: 1rem;
+  text-align: justify;
 }
 
 .bigimg {
