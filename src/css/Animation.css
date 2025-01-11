@@ -149,7 +149,6 @@ a:focus {
 .svgtext {
   flex: none;
   position: relative;
-  left: -10%;
 }
 
 .svgtext text {

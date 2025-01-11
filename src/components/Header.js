@@ -19,6 +19,7 @@ const Header = () => {
                 <img src="/logo192.png" alt="Electrowiz'25" className="navbar-logo" />
                 <Link to="/" className="navbar-brand">ELECTROWIZ'25</Link>
                 <div className={`navbar-links ${isOpen ? 'open' : ''}`}>
+                    <Link to="/" className="navbar-link" onClick={closeNavbar}>Home</Link>
                     <Link to="/events" className="navbar-link" onClick={closeNavbar}>Events</Link>
                     <Link to="/register" className="navbar-link" onClick={closeNavbar}>Register</Link>
                     <Link to="/contact" className="navbar-link" onClick={closeNavbar}>Contact</Link>
@@ -28,7 +29,6 @@ const Header = () => {
                     <div className="bar bar1"></div>
                     <div className="bar bar2"></div>
                     <div className="bar bar3"></div>
-                    <div className="bar bar4"></div>
                 </div>
             </nav>
         </header>

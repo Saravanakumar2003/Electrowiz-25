@@ -2,9 +2,10 @@
     max-width: 1000px;
     margin: 20px auto;
     padding: 20px;
+    animation: fadeIn 2s ease-in-out;
 }
 
-.credits h1{
+.credits h1 {
     color: #fff;
     text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
     font-family: "Jersey 10";
@@ -13,12 +14,105 @@
     font-weight: 400;
     line-height: normal;
     letter-spacing: 5.28px;
+    animation: slideIn 1s ease-in-out;
 }
 
-.credits p{
+.credits h2 {
+    color: #fff;
+    text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+    font-family: "Jersey 10";
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 5.28px;
+    margin-top: 10px;
+    animation: slideIn 1.2s ease-in-out;
+}
+
+.credits p {
     line-height: 1.6;
     color: #fff;
     text-align: justify;
     margin: 10px 0;
-    font-size: 20px;    
+    font-size: 20px;
+    animation: fadeInUp 1.5s ease-in-out;
+}
+
+.credit_box {
+    display: flex;
+    gap: 30px;
+    margin: 30px auto;
+    flex-wrap: wrap;
+    flex-direction: row;
+    max-width: 800px;
+    justify-content: center;
+    text-align: center;
+    animation: fadeInUp 1.8s ease-in-out;
+}
+
+.credits span {
+    color: #fff;
+    margin: 10px auto;
+    font-family: Inter;
+    animation: fadeInUp 2s ease-in-out;
+}
+
+.credits h3 {
+    color: #fff;
+    font-family: Inter;
+    animation: fadeInUp 2.2s ease-in-out;
+}
+
+.credit_inner_box {
+    padding: 15px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    color: var(--Input-Color, #FFF);
+    border: 1px solid var(--Glass-Stroke, rgba(255, 255, 255, 0.20));
+    background: var(--Glass-Fill, linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, rgba(255, 255, 255, 0.06) 100%), rgba(255, 255, 255, 0.01));
+    /* Glass */
+    box-shadow: 0px 5px 9px 0px rgba(255, 255, 255, 0.08) inset;
+    backdrop-filter: blur(60px);
+    font-size: 13px;
+    text-transform: none;
+    animation: fadeInUp 2.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.credit_social_links{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
 }
