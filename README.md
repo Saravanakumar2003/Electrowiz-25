@@ -90,7 +90,7 @@ The project consists of several key components, each of which plays a crucial ro
 
 <div style="text-align: center;">
 
-![Project Flow](public\img\readme\flow.png)
+![Project Flow](https://i.postimg.cc/rpfNYqJL/flow.png)
 
 </div>
 
