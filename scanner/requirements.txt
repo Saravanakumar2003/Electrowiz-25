@@ -1,0 +1,7 @@
+opencv-python
+pandas
+pyzbar
+Pillow
+requests
+gspread
+oauth2client
