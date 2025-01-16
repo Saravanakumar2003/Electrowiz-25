@@ -94,6 +94,23 @@ The project consists of several key components, each of which plays a crucial ro
 
 </div>
 
+## Security Features
+
+The project includes several security features to ensure the safety and privacy of participant data:
+
+- **Input Validation:** User inputs are sanitized and validated to prevent injection attacks.
+- **OAuth 2.0**: OAuth 2.0 is used for secure authentication and authorization when accessing Google Sheets.
+- **Environment Variables**: Sensitive information such as API keys and secrets are stored in environment variables to prevent exposure in the codebase.
+- **HTTPS**: The application uses HTTPS to ensure secure communication between the client and server.
+- **Data Encryption**: Sensitive data such as payment information is encrypted during transmission to ensure it is secure.
+
+The site undergoes regular security audits and testing to identify and address any vulnerabilities that may arise.
+
+## Testing and Performance
+
+The project has undergone extensive testing to ensure it meets the highest standards of quality and performance. The site is tested on various devices and browsers to ensure compatibility and responsiveness. Performance testing is conducted to optimize loading times and ensure a smooth user experience.
+
+The project is continuously monitored and updated to address any issues that may arise and to ensure it remains secure and performant.
 
 ## Electrowiz Scanner
 
@@ -115,6 +132,9 @@ To use the Electrowiz Scanner, follow these steps:
    python main.py
    ```
 5. You're all set! 🚀
+
+
+For a detailed guide on how to use the Electrowiz Scanner, refer to the [Scanner Documentation](scanner/Readme.md)
 
 
 ### Google Sheets Integration

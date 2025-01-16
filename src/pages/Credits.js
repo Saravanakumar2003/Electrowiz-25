@@ -105,7 +105,7 @@ function Credits() {
                     <span>Infinity Squad</span>
                 </div>  
                 <div className="credit_inner_box">
-                    <h3>Alekyha</h3>
+                    <h3>Alekhya</h3>
                     <span>Melody Madness</span>
                 </div>  
                 <div className="credit_inner_box">
@@ -298,7 +298,7 @@ function Credits() {
                 </div>
             </div>
 
-            <h2>Buget</h2>
+            <h2>Budget</h2>
             <div className="credit_box">
                 <div className="credit_inner_box">
                     <h3></h3>
