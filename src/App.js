@@ -20,7 +20,7 @@ import "./index.css";
 function App() {
   return (
     <Router>
-      {/* <CookiesNotification /> */}
+      <CookiesNotification />
       <Slider />
       <Header />
       <Routes>

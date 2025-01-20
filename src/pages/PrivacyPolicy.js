@@ -4,40 +4,42 @@ const PrivacyPolicy = () => {
   return (
     <div className="policy-page">
       <h1>Privacy Policy</h1>
+      <h2>Last Updated on: 20/01/2025 </h2>
       <p>
-        At Electrowiz'25, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and disclose your personal information when you use our services, including payments made through Razorpay.
+        At Electrowiz'25, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and disclose your personal information when you use our services.
       </p>
       <h2>Information We Collect</h2>
       <p>
-        When you make a payment through Razorpay, we may collect the following information:
+        We collect personal and academic details such as:
       </p>
       <ul>
         <li>Name</li>
         <li>Email address</li>
         <li>Phone number</li>
-        <li>Payment information (e.g., credit card details, billing address)</li>
+        <li>Photo & Signature</li>
+        <li>College, Department, Year of Study</li>
       </ul>
       <h2>How We Use Your Information</h2>
       <p>
         We use the information we collect to:
       </p>
       <ul>
-        <li>Process your payments</li>
+        <li>Process your registration</li>
         <li>Send you confirmation emails and receipts</li>
         <li>Provide customer support</li>
-        <li>Improve our services</li>
+        <li>Manage records for further college use</li>
       </ul>
       <h2>How We Share Your Information</h2>
       <p>
         We do not sell or rent your personal information to third parties. We may share your information with:
       </p>
       <ul>
-        <li>Razorpay, to process your payments</li>
+        {/* <li>Razorpay, to process your payments</li> */}
         <li>Firebase, for database management</li>
         <li>Cloudinary, for image uploads and management</li>
         <li>Google APIs, for integrating with Google Sheets</li>
         <li>Sendinblue, for sending confirmation emails</li>
-        <li>Web3Forms, for handling form submissions</li>
+        <li>Web3Forms, for handling queries submissions</li>
         <li>Service providers who assist us in providing our services</li>
         <li>Law enforcement or regulatory authorities if required by law</li>
       </ul>

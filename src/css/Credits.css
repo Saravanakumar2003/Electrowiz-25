@@ -56,12 +56,20 @@
     margin: 10px auto;
     font-family: Inter;
     animation: fadeInUp 2s ease-in-out;
+    text-align: justify;
+    margin: 10px 0;
 }
 
 .credits h3 {
     color: #fff;
     font-family: Inter;
     animation: fadeInUp 2.2s ease-in-out;
+    text-align: center;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    margin: 10px 0;
+    font-size: 15px;
+    font-weight: 500;
 }
 
 .credit_inner_box {

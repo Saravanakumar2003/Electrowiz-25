@@ -510,7 +510,7 @@ const handleImageUpload = (e, type) => {
             <label>2. Make sure to be present at the venue 30 minutes before the event starts.</label>
             <label>3. The event will be conducted offline at Velammal Engineering College.</label>
             <label>4. Students must carry their college ID card and a online copy of the mail received after registration.</label>
-            <label>5. Participants are requested to collect the event tags from the registration desk.</label>
+            <label>5. Participants are requested to collect the food bands from the registration desk.</label>
             <label>6. The jury decision will be final in all matters.</label>
             <label>7. Dress code should be Formal wear.</label>
             <label>8. Exciting Prizes will be given to winners and Participation certificates will be provided for all.</label>
@@ -551,7 +551,7 @@ const handleImageUpload = (e, type) => {
                 onChange={handleCheckboxChange}
               />
               <label htmlFor="checkbox-1" className="checkbox-custom-label">
-                Are you ECE student of Velammal Engineering College? (Get ₹50 off by checking this box)
+                Are you a ECE student of Velammal Engineering College? (Get ₹50 off by checking this box)
               </label>
               <label><strong>Discount is only on Events (Not Workshop) for ECE Students of VEC</strong></label>
             </div>

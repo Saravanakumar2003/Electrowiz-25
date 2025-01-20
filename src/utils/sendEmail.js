@@ -51,10 +51,23 @@ export const sendConfirmationEmail = async (email, name, formData) => {
           <li>Degree: ${formData.degree}</li>
           <li>Department: ${formData.department}</li>
           <li>Year of Study: ${formData.yearOfStudy}</li>
-          <li>Events: ${formData.events.join(', ')}</li>
+          <li>Events Registered: ${formData.events.join(', ')}</li>
         </ul>
+        <p>If you have any changes to make or have any discrepancies, please contact us to this <a href="mailto:contact@electrowiz.info">email address</a>.</p>
         <p>We look forward to seeing you at the event!</p>
         <br>
+
+        <strong>Important Instructions:</strong>
+        <ul>
+          <li>Please carry a valid college ID card.</li>
+          <li>Make sure to reach the venue on 9 AM.</li>
+          <li>Carry a copy of this email (soft or hard copy).</li>
+        </ul>
+
+        <p>For any queries, please contact us at
+          
+        </p>
+
         <p>Best regards,</p>
         <p>Electrowiz'25 Team</p>
         <br>
