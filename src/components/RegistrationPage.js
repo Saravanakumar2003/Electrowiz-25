@@ -554,6 +554,7 @@ const handleImageUpload = (e, type) => {
                 Are you a ECE student of Velammal Engineering College? (Get ₹50 off by checking this box)
               </label>
               <label><strong>Discount is only on Events (Not Workshop) for ECE Students of VEC</strong></label>
+              <label><strong>1st years of Velammal Engineering College is not allowed to register</strong></label>
             </div>
             <br />
             <h2>Total Registration Fee: ₹{registrationFee}</h2>

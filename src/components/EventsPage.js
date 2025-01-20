@@ -400,6 +400,7 @@ const EventsPage = () => {
             <ul>
               <strong>About Workshop:</strong>
               <br />
+              <p>➼ Laptop is not required.</p>    
               <p>➼ The workshop will be conducted on the topic "Hands on KNIME tool : No code platform for Machine Learning".</p>
               <p>➼ Gain insights into the KNIME tool and its applications in Machine Learning.</p>
               <p>➼ Learn how to use the KNIME tool to create workflows and perform analysis.</p>    
