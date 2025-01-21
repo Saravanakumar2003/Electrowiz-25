@@ -233,7 +233,7 @@ const EventsPage = () => {
             <p>➼ The project can be hardware/software related to science and technology.</p>
             <p>➼ Each team can present their work in the chart containing objectives, descriptions, and outcomes.</p>
             <p>➼ Teams will be given a space of 30x30 inch space to set up their model at the venue for the exhibition.</p>
-            <p>➼ Registered participants are requested to send the abstract, objectives, novelty, outcomes, and prototype photos of the project to the mail id given below before the event.</p>
+            <p>➼ Registered participants are requested to send the abstract, objectives, novelty, outcomes, and prototype photos of the project to submission@electrowiz.info</p>
           </ul>
           <button className="btn" onClick={() => openModal("event1", "rules")}>Event Rules</button>
           <button className="btn" onClick={() => openModal("event1", "coordinators")}>Coordinators</button>
