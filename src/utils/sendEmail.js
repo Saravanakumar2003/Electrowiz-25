@@ -64,9 +64,7 @@ export const sendConfirmationEmail = async (email, name, formData) => {
           <li>Carry a copy of this email (soft or hard copy).</li>
         </ul>
 
-        <p>For any queries, please contact us at
-          
-        </p>
+        <p>This is a auto-generated email. Please do not reply to this email.</p>
 
         <p>Best regards,</p>
         <p>Electrowiz'25 Team</p>

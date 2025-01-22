@@ -46,7 +46,7 @@ const eventsData = {
       "Rule 4: The list of shortlisted candidates will be informed by e-mail or phone.",
       "Rule 5: The Shortlisted teams should bring a softcopy of the PPT and hardcopy of the paper on the day of event(01.02.2025)",
       "Rule 6: Teams will be given 8 minutes to present their paper followed by 2 minute QnA session. The paper must be the original work of the author(s).",
-      "Rule 7: Participants are requested to send their papers with the following details: Team members name, College Name, Contact Number, Mail ID to mailto:ideaignition.vec@gmail.com before 30.01.2025",
+      "Rule 7: Participants are requested to send their papers with the following details: Team members name, College Name, Contact Number, Mail ID to mailto:ideaignition.vec@gmail.com before 25.01.2025",
       "Rule 8: Participants must report before 8:30Am on the day of event(01.02.2025)",
       "Rule 9: The decisions of the judges & the moderators is final."
     ],
@@ -182,7 +182,6 @@ const eventsData = {
   event10: {
     rules: [
       "• We request all the candidates maintain their decorum while attending the session at VEC.",
-      "• Take notes and carry the laptops during the workshop. Refer to these notes during and after the workshop.",
       "• Formal dress code is necessary.",
       "• The candidature of the participant will be cancelled by the organisers immediately in case they are found to be breaking the event rule/s, the code of conduct or other unsavoury behaviour.",
       "• Avoid side conversations and keep your phone at bay."
@@ -233,7 +232,7 @@ const EventsPage = () => {
             <p>➼ The project can be hardware/software related to science and technology.</p>
             <p>➼ Each team can present their work in the chart containing objectives, descriptions, and outcomes.</p>
             <p>➼ Teams will be given a space of 30x30 inch space to set up their model at the venue for the exhibition.</p>
-            <p>➼ Registered participants are requested to send the abstract, objectives, novelty, outcomes, and prototype photos of the project to submission@electrowiz.info</p>
+            <p>➼ Registered participants are requested to send the abstract, objectives, novelty, outcomes, and prototype photos of the project to submission@electrowiz.info before 25/01/2025</p>
           </ul>
           <button className="btn" onClick={() => openModal("event1", "rules")}>Event Rules</button>
           <button className="btn" onClick={() => openModal("event1", "coordinators")}>Coordinators</button>
@@ -267,7 +266,7 @@ const EventsPage = () => {
               <strong>Event Rules:</strong>
               <br />
               <br />
-              <p>➼ Participants are requested to send their papers with the following details: Team members name, College Name, Contact Number, Mail ID to ideaignition.vec@gmail.com before 22nd Jan.</p>
+              <p>➼ Participants are requested to send their papers with the following details: Team members name, College Name, Contact Number, Mail ID to ideaignition.vec@gmail.com before 25th Jan.</p>
               <p>➼ The Shortlisted teams should bring a softcopy of the PPT and hardcopy of the paper on the day of event(01.02.2025).</p>
               <p>➼ Teams will be given 8 minutes to present their paper followed by 2 minute QnA session. The paper must be the original work of the author(s).</p>
             </ul>
