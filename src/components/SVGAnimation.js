@@ -64,7 +64,7 @@ const SVGAnimation = () => {
                 <div class="grid">
                     <div class="grid__item">
                         <span class="grid__item-number">About VEC</span>
-                        <img class="grid__item-img" src="img/college.png" alt="Some image" />
+                        <img class="grid__item-img" src="https://i.postimg.cc/CLydbhzv/college.png" alt="Some image" />
                         <h3 class="grid__item-title">Velammal Engineering College</h3>
                         <p class="grid__item-description">Velammal Engineering College was established in the year 1995-96 to impart quality education. It is a self financing non-minority institution, affiliated to Anna University and approved by All India Council for Technical Education (AICTE) and also an ISO certified institution.</p>
                     </div>
@@ -91,7 +91,7 @@ const SVGAnimation = () => {
                         </textPath>
                     </text>
                 </svg>
-                <div className="bimg"><img class="bigimg" src="img/eventbanner2.PNG" alt="Some image" /></div>
+                <div className="bimg"><img class="bigimg" src="https://i.postimg.cc/gcx6vt40/Event-Poster.png" alt="Some image" /></div>
                 <svg class="svgtext svgtext--2" data-filter-type="distortion" width="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 200">
                     <path id="text-curve2" d="M 0 50 Q 100 0 200 100 Q 300 200 650 50 C 750 0 750 150 1000 50" fill="none" />
                     <text filter="url(#distortionFilter)">

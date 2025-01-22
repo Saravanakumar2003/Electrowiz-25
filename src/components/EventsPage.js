@@ -218,9 +218,9 @@ const EventsPage = () => {
 
   return (
     <div className="events-page">
-      <img src="/img/eventbanner.png" alt="Banner" className="banner" />
+      <img src="https://i.postimg.cc/nV9Csjcj/eventbanner.png" alt="Banner" className="banner" />
       <><article className="cta">
-        <img src='/img/events/Imagine.png' alt='Bluetit' />
+        <img src='https://i.postimg.cc/nrKx4tP5/Imagine.png' alt='Bluetit' />
         <div className="cta__text-column">
           <h2>Imaginarium (Project Display)</h2>
           <p><strong>Team Description:</strong> A team can have a maximum of 4 Members.</p>
@@ -239,7 +239,7 @@ const EventsPage = () => {
           <button className="btn" onClick={() => openModal("event1", "judgingCriteria")}>Judging Criteria</button>
         </div>
       </article><article className="cta">
-          <img src='/img/events/Infinity.png' alt='Bluetit' />
+          <img src='https://i.postimg.cc/vHMbQc1d/Infinity.png' alt='Bluetit' />
           <div className="cta__text-column">
             <h2>INFINITY SQUAD (DUMBCHARADES)</h2>
             <p><strong>Team Description:</strong> Each team will consist of 2 to 3 members.</p>
@@ -258,7 +258,7 @@ const EventsPage = () => {
             <button className="btn" onClick={() => openModal("event2", "judgingCriteria")}>Judging Criteria</button>
           </div>
         </article><article className="cta">
-          <img src='/img/events/Idea.png' alt='Bluetit' />
+          <img src='https://i.postimg.cc/yYPBWs93/Idea.png' alt='Bluetit' />
           <div className="cta__text-column">
             <h2>Idea Ignition</h2>
             <p><strong>Team Description:</strong> A team can have 3-4 participants.</p>
@@ -276,7 +276,7 @@ const EventsPage = () => {
             <button className="btn" onClick={() => openModal("event3", "coordinators")}>Coordinators</button>
           </div>
         </article><article className="cta">
-          <img src='/img/events/Pixel.png' alt='Bluetit' />
+          <img src='https://i.postimg.cc/FR3Xv4NR/Pixel.png' alt='Bluetit' />
           <div className="cta__text-column">
             <h2>Pixel Perfect (Photography)</h2>
             <ul>
@@ -294,7 +294,7 @@ const EventsPage = () => {
             <button className="btn" onClick={() => openModal("event5", "coordinators")}>Coordinators</button>
           </div>
         </article><article className="cta">
-          <img src='/img/events/Byte.png' alt='Bluetit' />
+          <img src='https://i.postimg.cc/RCwv5cZR/Byte.png' alt='Bluetit' />
           <div className="cta__text-column">
             <h2>BYTE AND BREAK THROUGH</h2>
             <ul>
@@ -312,7 +312,7 @@ const EventsPage = () => {
             <button className="btn" onClick={() => openModal("event4", "coordinators")}>Coordinators</button>
           </div>
         </article><article className="cta">
-          <img src='/img/events/Mystery.png' alt='Bluetit' />
+          <img src='https://i.postimg.cc/g0fb1J9Q/Mystery.png' alt='Bluetit' />
           <div className="cta__text-column">
             <h2>Mystery Matters (Treasure Hunt)</h2>
             <ul>
@@ -332,7 +332,7 @@ const EventsPage = () => {
             <button className="btn" onClick={() => openModal("event6", "coordinators")}>Coordinators</button>
           </div>
         </article><article className="cta">
-          <img src='/img/events/Melody.png' alt='Bluetit' />
+          <img src='https://i.postimg.cc/xdkSsmZL/Melody.png' alt='Bluetit' />
           <div className="cta__text-column">
             <h2>Melody Madness</h2>
             <ul>
@@ -355,7 +355,7 @@ const EventsPage = () => {
             <button className="btn" onClick={() => openModal("event7", "coordinators")}>Coordinators</button>
           </div>
         </article><article className="cta">
-          <img src='/img/events/Linked.png' alt='Bluetit' />
+          <img src='https://i.postimg.cc/sggzhq96/Linked.png' alt='Bluetit' />
           <div className="cta__text-column">
             <h2>LINKED UP (CONNECTIONS)</h2>
             <ul>
@@ -375,7 +375,7 @@ const EventsPage = () => {
             <button className="btn" onClick={() => openModal("event8", "coordinators")}>Coordinators</button>
           </div>
         </article><article className="cta">
-          <img src='/img/events/Quiz.png' alt='Bluetit' />
+          <img src='https://i.postimg.cc/WzVLbH17/Quiz.png' alt='Bluetit' />
           <div className="cta__text-column">
             <h2>Quiztronics</h2>
             <ul>
@@ -393,7 +393,7 @@ const EventsPage = () => {
             <button className="btn" onClick={() => openModal("event9", "coordinators")}>Coordinators</button>
           </div>
         </article><article className="cta">
-          <img src='/img/events/Workshop.png' alt='Bluetit' />
+          <img src='https://i.postimg.cc/MZ0Jrq93/Workshop.png' alt='Bluetit' />
           <div className="cta__text-column">
             <h2>Workshop</h2>
             <ul>

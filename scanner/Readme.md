@@ -28,18 +28,24 @@ The QR code must be in the following JSON format for successful scanning:
 ```json
 {
   "food": "veg",
-  "phone": "+1 (123) 456-7890",
   "department": "Computer Science",
   "events": ["Paper presentation", "Workshop"],
-  "paymentReceipt": "https://example.com/payment-receipt.jpg",
   "degree": "Bachelor of Technology",
   "name": "John Doe",
-  "gender": "Male",
-  "paymentQRCode": "https://example.com/payment-qr-code.jpg",
   "email": "johndoe@example.com",
-  "signaturePic": "https://example.com/signature.jpg",
   "collegeName": "XYZ University",
-  "yearOfStudy": "4",
   "passportPic": "https://example.com/passport.jpg"
 }
-``
+```
+This structure is essential for the application to display user details correctly. Since all the fields are mandatory, the QR code must contain all the specified keys. 
+
+## Building the Application
+
+1. Use pyinstaller to build the application.
+1. You need the dll files for decoding the QR code. You can find them in the `dll_files` folder.
+2. Run the following command to build the application:
+
+```bash
+pyinstaller --noconfirm --onefile --windowed --icon "{location_to_icon}" --add-data "(location_to_credentials);." --add-binary "{location_to_libconv.dll};." --add-binary "{location_to_libzbar-64.dll};."  "{location_to_main.py}"
+```
+
