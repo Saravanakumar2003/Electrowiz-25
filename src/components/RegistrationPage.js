@@ -441,6 +441,9 @@ const handleImageUpload = (e, type) => {
               <option value="">Select Degree</option>
               <option value="B.E">B.E</option>
               <option value="BTech">BTech</option>
+              <option value="Arts">Arts & Science</option>
+              <option value="Diploma">Diploma</option>
+              <option value="Other">Other</option>
             </select>
             <br />
             <label>Department: </label>

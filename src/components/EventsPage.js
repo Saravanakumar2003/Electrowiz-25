@@ -78,9 +78,9 @@ const eventsData = {
   },
   event5: {
     rules: [
-      "Round 1: College Remembering Theme",
+      "Round 1: Greener in VEC Theme",
       "- Participants must submit a photograph that captures a memorable moment or aspect of college life.",
-      "- The photograph must be taken on the theme of 'College Remembering'.",
+      "- The photograph must be taken on the theme of 'Greener in VEC'.",
       "Round 2: Product Photography",
       "- Shortlisted participants from Round 1 will be required to take an advertisement photograph of any random object.",
       "- The object will be given by co-ordinators, and participants are encouraged to be creative with their composition and concept.",
