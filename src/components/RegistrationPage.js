@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { db } from '../utils/firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import axios from 'axios';
-import QRCode from 'qrcode';
 import '../css/RegistrationPage.css';
 import Select from 'react-select';
 import DOMPurify from 'dompurify';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { sendConfirmationEmail } from '../utils/sendEmail'
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
 
 const eventOptions = [
   { value: 'Idea ignition', label: 'Idea ignition' },
@@ -25,6 +26,9 @@ const eventOptions = [
 ];
 
 const RegistrationPage = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const openModal = () => setModalIsOpen(true);
+  const closeModal = () => setModalIsOpen(false);
   const [formData, setFormData] = useState(() => {
     const savedData = localStorage.getItem('registrationFormData');
     return savedData ? JSON.parse(savedData) : {
@@ -43,7 +47,7 @@ const RegistrationPage = () => {
       receiptPic: '',
       isGudelines: false,
       isVelammalStudent: false,
-      referral:'',
+      referral: '',
     };
   });
 
@@ -80,10 +84,10 @@ const RegistrationPage = () => {
       receiptPic: '',
       isGudelines: false,
       isVelammalStudent: false,
-      referral:'',
+      referral: '',
     });
   };
-  
+
 
   useEffect(() => {
     calculateRegistrationFee();
@@ -118,7 +122,7 @@ const RegistrationPage = () => {
     });
   };
 
-const handleImageUpload = (e, type) => {
+  const handleImageUpload = (e, type) => {
     const file = e.target.files[0];
     if (!file) return;
 
@@ -574,6 +578,28 @@ const handleImageUpload = (e, type) => {
                 IFSC Code :SBIN0003306</p>
             </div>
             <br />
+            <label>Payment not working or having issues,</label>
+            <button className="action-button" onClick={openModal}>Click Here!</button>
+            <Modal
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+              contentLabel="Alternative Payment Details"
+              className="modal"
+              overlayClassName="overlay"
+            >
+              <h2>Alternative Payment Details</h2>
+              <img className="qr" src="/img/QR2.png" alt="Alternative Payment" />
+              <div className="accountbox">
+                <p className='accountdetails'>Bank Details: <br />
+                  UPI: lavanya201180-3@okicici <br />
+                  Name: K.Lavanya <br />
+                  Bank Name : Indusind Bank<br />
+                  Branch Name : Branch East Mogappair<br />
+                  Acc no : 159841373600<br />
+                  IFSC Code :INDB0000567</p>
+              </div>
+              <button className="action-button" onClick={closeModal}>Close</button>
+            </Modal>
             <label>Payment Recipt (Max 1MB):</label>
             <input
               type="file"
