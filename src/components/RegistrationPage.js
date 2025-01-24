@@ -200,12 +200,14 @@ const RegistrationPage = () => {
       if (!formData.signaturePic) newErrors.signaturePic = "Signature Picture is required";
     } else if (currentStep === 2) {
       if (!formData.events || formData.events.length === 0) newErrors.events = "At least one event must be selected";
+      if (formData.events.some(event => event.value === 'Workshop') && formData.events.length === 1) {
+        newErrors.events = "You cannot register for the workshop alone. Please select at least one other event.";
+      }
       if (!formData.isGudelines) newErrors.isGudelines = "Please agree to the guidelines";
-    }
-    else if (currentStep === 3) {
+    } else if (currentStep === 3) {
       if (!formData.receiptPic) newErrors.receiptPic = "Receipt Picture is required";
     }
-
+  
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) {
       Object.values(newErrors).forEach(error => toast.error(error));
