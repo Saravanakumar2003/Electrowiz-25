@@ -591,7 +591,7 @@ const RegistrationPage = () => {
               overlayClassName="overlay"
             >
               <h2>Alternative Payment Details</h2>
-              <img className="qr" src="/img/QR2.png" alt="Alternative Payment" />
+              <img className="qr" src="/img/QR3.png" alt="Alternative Payment" />
               <div className="accountbox">
                 <p className='accountdetails'>Bank Details: <br />
                   UPI: lavanya201180-3@okicici <br />
