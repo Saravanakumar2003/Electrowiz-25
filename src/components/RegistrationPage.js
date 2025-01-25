@@ -473,6 +473,7 @@ const RegistrationPage = () => {
               <option value="2">2nd</option>
               <option value="3">3rd</option>
               <option value="4">4th</option>
+              <option value="5">5th</option>
             </select>
             <br />
             <label>Signature Pic (Max 1MB):</label>
