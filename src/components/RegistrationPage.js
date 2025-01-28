@@ -200,8 +200,8 @@ const RegistrationPage = () => {
       if (!formData.signaturePic) newErrors.signaturePic = "Signature Picture is required";
     } else if (currentStep === 2) {
       if (!formData.events || formData.events.length === 0) newErrors.events = "At least one event must be selected";
-      if (formData.events.some(event => ['Workshop', 'Imaginarium', 'Byte and breakthrough', 'Mystery matters'].includes(event.value))) {
-        newErrors.events = "Registration for Workshop, Imaginarium, Byte and breakthrough, and Mystery matters is closed as the participant limit has been reached.";
+      if (formData.events.some(event => ['Workshop', 'Imaginarium', 'Byte and breakthrough', 'Mystery matters', 'Linked up'].includes(event.value))) {
+        newErrors.events = "Registration for Workshop, Imaginarium, Byte and breakthrough, Linked up and Mystery matters is closed.";
       }
       if (!formData.isGudelines) newErrors.isGudelines = "Please agree to the guidelines";
     } else if (currentStep === 3) {
