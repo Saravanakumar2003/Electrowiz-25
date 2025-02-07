@@ -14,7 +14,9 @@ To address these challenges, we have developed a web application that automates 
   - [Problem Statement](#problem-statement)
   - [Table of Contents](#table-of-contents)
   - [Getting Started](#getting-started)
-    - [This project automates several key processes to save time and reduce manual effort:](#this-project-automates-several-key-processes-to-save-time-and-reduce-manual-effort)
+    - [Test the site](#test-the-site)
+    - [View the Data](#view-the-data)
+    - [Automation](#automation)
     - [Technologies Used](#technologies-used)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
@@ -25,8 +27,28 @@ To address these challenges, we have developed a web application that automates 
 
 
 ## Getting Started
+ 
+ ### Test the site
 
-### This project automates several key processes to save time and reduce manual effort:
+You can test the site by visiting the [Electrowiz'25](https://electrowiz.vercel.app/) website. The site provides information about the event, allows participants to register, make payments, and view the event calendar.
+
+To test the registration process, follow these steps:
+- Click on the "Register" button on the home page.
+- Fill in the registration form with your details.
+- Click Pay Now to proceed to the payment page. This is dummy payment and you can use the following details:
+  - Select UPI as the payment method.
+  - Enter the UPI ID as `test@ybl`.
+  - Click on the "Pay" button.
+  - You will be redirected to the ID-Card page once the payment is successful.
+  - You can download the ID card and view the QR code.
+  - You will also receive a confirmation email with all the details.
+
+### View the Data
+
+The project uses Google Sheets to store participant data and mark attendance. The Google Sheet is updated automatically when a participant registers or scans their QR code. You can view the Google Sheet [here](https://docs.google.com/spreadsheets/d/1SiAbKXZhYryfzCWTpNTucB1PhESLCNeSoHieDCvY41Y/edit?gid=0#gid=0). 
+
+### Automation
+This project automates several key processes to save time and reduce manual effort:
 
 - **Automated Registration:** Participants can register online, eliminating the need for manual data entry.
 - **Automated Payments:** Payments are processed automatically & verified using Razorpay, ensuring quick and secure transactions.
