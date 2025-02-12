@@ -23,6 +23,7 @@ To address these challenges, we have developed a web application that automates 
     - [Google Sheets Integration](#google-sheets-integration)
   - [Scanner Application](#scanner-application)
   - [Acknowledgements](#acknowledgements)
+  - [Conclusion](#conclusion)
 
 
 
@@ -134,6 +135,14 @@ The project has undergone extensive testing to ensure it meets the highest stand
 
 The project is continuously monitored and updated to address any issues that may arise and to ensure it remains secure and performant.
 
+## Design Files
+
+The project design files are available in the `design` directory. The design files include the Figma prototype, UI/UX designs, and other design assets used in the project. The design files are available in the [Electrowiz Design](desgin\Electrowiz25.pdf) directory.
+
+The designs are created using Figma, a collaborative interface design tool. Figma allows designers to create, test, and share designs with team members and stakeholders, making it easy to collaborate and iterate on designs. 
+
+<strong>Note:</strong> The design files are for reference purposes only and may not reflect the final implementation of the project. 
+
 ## Electrowiz Scanner
 
 The Electrowiz Scanner is a desktop application that allows event organizers to scan participants' QR codes and mark their attendance. The scanner app is built using python and OpenCV, and it uses the webcam to scan QR codes. Once a QR code is scanned, the app automatically marks the participant as present in a Google Sheet, eliminating the need for manual verification.
@@ -186,3 +195,10 @@ We would like to thank the following individuals and organizations for their con
 - [Electrowiz'25 Team](https://www.electrowiz.info/credits/) for their support throughout the project.
 - [Codrops](https://tympanus.net/codrops/) for the inspiration and resources.
 
+## Conclusion
+
+The Electrowiz'25 project is a comprehensive web application that automates several key processes involved in event management. By automating registration, payment processing, and attendance tracking, the project significantly reduces the time and effort required to manage the event, making the entire process more efficient and reliable.
+
+The project was a grand success and received positive feedback from participants and organizers. The project team worked tirelessly to ensure the project met the highest standards of quality and performance, and the results speak for themselves.
+
+We are proud of what we have accomplished with the Electrowiz'25 project and look forward to future opportunities to apply our skills and expertise to create innovative solutions that make a difference.
