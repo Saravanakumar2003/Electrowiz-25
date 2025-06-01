@@ -12,7 +12,7 @@ const CountdownTimer = () => {
     return (
       <div className="hero">
         <video autoPlay muted loop className="background-video">
-        <source src="https://media-hosting.imagekit.io//ed8aa8ace2244980/vec.mp4?Expires=1831446257&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=ZyOPbwtyWHNym2x4YILt0MwACMTn4MZZWYb4YNLFacGuOuCDvjLfm0~MZB4emKKK8nL3Gi~Xa1GTy2OKowHlor1IAlACVxZGOP-FZjLbWgPzby2kz9x2cpABxJWKkKo-3AZizI8-bgBzWAYhTemDKES9dzptgrBOTKSBNLHHZ9zIN8vaULlY431GTRSNnWz8fWoHFxp4wKHwcdoGYw0Q8-gG8UD3BnUcLim2kI5DfJ1qwG6jz1uQ5XZDrNM93x~jPkBMgbYRFR90aGTc06fMeqKG-Dkqm05RKsGt0fYHSHP8hFkP5m1XEjPusZgDt~~~Ot7h0DhJ1oT1f1qChs7mYw__" type="video/mp4" />
+        <source src="https://ik.imagekit.io/xd1ryjh3j/vec.mp4?updatedAt=1748781454190" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <br /> <br />

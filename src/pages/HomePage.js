@@ -16,7 +16,7 @@ const HomePage = () => {
 
       <section className="Instagram">
         <h2>Connect with US</h2>
-        <iframe src='https://widgets.sociablekit.com/instagram-feed/iframe/25502717' frameborder='0' width='100%' height='800'></iframe>
+        <iframe src='https://widgets.sociablekit.com/instagram-feed/iframe/25502717' frameborder='0' width='100%' height='500px'></iframe>
       </section>
 
       <section className="sponsors">
