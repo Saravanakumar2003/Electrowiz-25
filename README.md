@@ -25,7 +25,11 @@ To address these challenges, we have developed a web application that automates 
   - [Acknowledgements](#acknowledgements)
   - [Conclusion](#conclusion)
 
+---
+  
+[<img src="https://img.youtube.com/vi/XIH0iKOHCcM/hqdefault.jpg" width="600" height="300"/>](https://www.youtube.com/embed/XIH0iKOHCcM)
 
+---
 
 ## Getting Started
  
