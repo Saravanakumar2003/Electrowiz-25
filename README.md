@@ -26,8 +26,9 @@ To address these challenges, we have developed a web application that automates 
   - [Conclusion](#conclusion)
 
 ---
-  
-[<img src="https://img.youtube.com/vi/XIH0iKOHCcM/hqdefault.jpg" width="600" height="300"/>](https://www.youtube.com/embed/XIH0iKOHCcM)
+## Demo Video
+
+https://github.com/user-attachments/assets/080d1158-dbf3-44d7-9be7-ed3bd8ee74ff
 
 ---
 
